@@ -41,7 +41,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:backgroundTint="#8239DF"
-        android:text="Get Started" />
+        android:text="Get Started"
+        app:cornerRadius="15dp" />
 
 </RelativeLayout>
 
