@@ -9,11 +9,12 @@
         <entry key="app/src/main/res/drawable/username_background.xml" value="0.296" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.5463541666666667" />
         <entry key="app/src/main/res/layout/activity_loginactivity.xml" value="0.67" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.6265560165975104" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.21418534467700318" />
         <entry key="app/src/main/res/layout/activity_signupactivity.xml" value="0.7017543859649122" />
         <entry key="app/src/main/res/layout/activity_starting.xml" value="0.446875" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.509375" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.5421875" />
+        <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.27090909090909093" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.4673076923076923" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.5421875" />
         <entry key="app/src/main/res/layout/getstarted.xml" value="0.4734375" />
         <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.5234375" />
