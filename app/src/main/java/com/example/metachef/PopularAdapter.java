@@ -16,12 +16,12 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
+public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHolder>{
 
     Context context;
     List<Items> allItems;
 
-    public ItemsAdapter(Context context, List<Items> items) {
+    public PopularAdapter(Context context, List<Items> items) {
         this.context = context;
         this.allItems = items;
     }
@@ -29,7 +29,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemsView = LayoutInflater.from(context).inflate(R.layout.item_view, parent, false);
+        View itemsView = LayoutInflater.from(context).inflate(R.layout.popular_view, parent, false);
         return new ViewHolder(itemsView);
     }
 
@@ -45,21 +45,21 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvtitle;
-        ImageView ivitem;
+        TextView tvpopular;
+        ImageView ivpopular;
 //        RelativeLayout mainLayout;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvtitle = itemView.findViewById(R.id.tvtitle);
-            ivitem = itemView.findViewById(R.id.ivitem);
+            tvpopular = itemView.findViewById(R.id.tvtitle);
+            ivpopular = itemView.findViewById(R.id.ivitem);
 //            mainLayout = itemView.findViewById(R.id.mainLayout);
         }
 
         public void bind(Items items) {
-            tvtitle.setText(items.getTitle());
-            Glide.with(context).load(items.getImage()).into(ivitem);
+            tvpopular.setText(items.getTitle());
+            Glide.with(context).load(items.getImage()).into(ivpopular);
         }
     }
 }

@@ -18,11 +18,11 @@ public class Items {
         title = jsonObject.getString("title");
     }
     public static List<Items> fromJsonArray(JSONArray itemsJsonArray) throws JSONException {
-        List<Items> items = new ArrayList<>();
+        List<Items> allItems = new ArrayList<>();
         for (int i = 0; i < itemsJsonArray.length(); i++) {
-            items.add(new Items(itemsJsonArray.getJSONObject(i)));
+            allItems.add(new Items(itemsJsonArray.getJSONObject(i)));
         }
-        return items;
+        return allItems;
     }
 
     public String getTitle() {
