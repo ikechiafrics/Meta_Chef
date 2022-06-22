@@ -29,10 +29,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginactivity);
 
-        //condition not to go back to the login screen after user has already logged in before
-//        if(ParseUser.getCurrentUser() != null){
-//            goMainActivity();
-//        }
+//        condition not to go back to the login screen after user has already logged in before
+        if(ParseUser.getCurrentUser() != null){
+            goMainActivity();
+        }
 
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);

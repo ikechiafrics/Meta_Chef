@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.6235" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.4165" />
+        <entry key="app/src/main/res/drawable/promtions_background.xml" value="0.486" />
         <entry key="app/src/main/res/drawable/search_background.xml" value="0.485" />
         <entry key="app/src/main/res/drawable/username_background.xml" value="0.296" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.5463541666666667" />
