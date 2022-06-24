@@ -1,18 +1,21 @@
 package com.example.metachef;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -45,8 +48,9 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvtitle;
-        ImageView ivitem;
+        private TextView tvtitle;
+        private ImageView ivitem;
+        private ImageView ivProfilePic;
 //        RelativeLayout mainLayout;
 
 
@@ -54,6 +58,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
             super(itemView);
             tvtitle = itemView.findViewById(R.id.tvtitle);
             ivitem = itemView.findViewById(R.id.ivitem);
+            ivProfilePic = itemView.findViewById(R.id.ivProfilePic);
+
 //            mainLayout = itemView.findViewById(R.id.mainLayout);
         }
 

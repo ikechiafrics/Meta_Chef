@@ -3,16 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.6235" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.4165" />
-        <entry key="app/src/main/res/drawable/item_background.xml" value="0.595" />
+        <entry key="app/src/main/res/drawable/item_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/promtions_background.xml" value="0.486" />
         <entry key="app/src/main/res/drawable/search_background.xml" value="0.485" />
         <entry key="app/src/main/res/drawable/username_background.xml" value="0.296" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.5463541666666667" />
         <entry key="app/src/main/res/layout/activity_loginactivity.xml" value="0.67" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21418534467700318" />
-        <entry key="app/src/main/res/layout/activity_signupactivity.xml" value="0.7017543859649122" />
+        <entry key="app/src/main/res/layout/activity_show_detail.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_signupactivity.xml" value="0.41475409836065574" />
         <entry key="app/src/main/res/layout/activity_starting.xml" value="0.446875" />
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.27090909090909093" />

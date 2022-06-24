@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -47,19 +48,24 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView tvpopular;
         ImageView ivpopular;
+        TextView tvprice;
+        ImageView btnAdd;
 //        RelativeLayout mainLayout;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvpopular = itemView.findViewById(R.id.tvtitle);
-            ivpopular = itemView.findViewById(R.id.ivitem);
+            tvpopular = itemView.findViewById(R.id.tvpopular);
+            ivpopular = itemView.findViewById(R.id.ivpopular);
+            tvprice = itemView.findViewById(R.id.tvprice);
+            btnAdd = itemView.findViewById(R.id.BtnAdd);
 //            mainLayout = itemView.findViewById(R.id.mainLayout);
         }
 
         public void bind(Items items) {
             tvpopular.setText(items.getTitle());
             Glide.with(context).load(items.getImage()).into(ivpopular);
+//            tvprice.setText(items.getPrice());
         }
     }
 }

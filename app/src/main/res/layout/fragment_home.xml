@@ -39,12 +39,13 @@
 
                 <ImageView
                     android:id="@+id/ivProfilePic"
-                    android:layout_width="117dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="86dp"
                     android:layout_marginEnd="4dp"
                     app:layout_constraintBottom_toBottomOf="@+id/tvMenu"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <EditText
@@ -170,6 +171,10 @@
                     android:id="@+id/rvPopular"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    app:layout_constraintEnd_toEndOf="@+id/rvItems"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvPopular" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
