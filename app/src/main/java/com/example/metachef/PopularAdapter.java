@@ -57,7 +57,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
             super(itemView);
             tvpopular = itemView.findViewById(R.id.tvpopular);
             ivpopular = itemView.findViewById(R.id.ivpopular);
-            tvprice = itemView.findViewById(R.id.tvprice);
+//            tvprice = itemView.findViewById(R.id.tvprice);
             btnAdd = itemView.findViewById(R.id.BtnAdd);
 //            mainLayout = itemView.findViewById(R.id.mainLayout);
         }

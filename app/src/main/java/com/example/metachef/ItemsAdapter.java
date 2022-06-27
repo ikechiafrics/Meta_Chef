@@ -1,6 +1,7 @@
 package com.example.metachef;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -47,10 +50,11 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
         return allItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
         private TextView tvtitle;
         private ImageView ivitem;
-        private ImageView ivProfilePic;
+        private ImageView ivProfileImg;
 //        RelativeLayout mainLayout;
 
 
@@ -58,14 +62,37 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
             super(itemView);
             tvtitle = itemView.findViewById(R.id.tvtitle);
             ivitem = itemView.findViewById(R.id.ivitem);
-            ivProfilePic = itemView.findViewById(R.id.ivProfilePic);
-
+            ivProfileImg = itemView.findViewById(R.id.ivProfileImg);
+            itemView.setOnClickListener(this);
 //            mainLayout = itemView.findViewById(R.id.mainLayout);
         }
 
         public void bind(Items items) {
+            ParseUser userparse = ParseUser.getCurrentUser();
             tvtitle.setText(items.getTitle());
             Glide.with(context).load(items.getImage()).into(ivitem);
+            ParseFile profilePic = userparse.getParseFile("profile_picture");
+            Log.i("Adpater",profilePic.getUrl());
+            if (ivProfileImg != null) {
+                Glide.with(context).load(profilePic.getUrl()).transform(new RoundedCorners(90)).into(ivProfileImg);
+            }
+//            User user = new User();
+//            ParseFile image = user.getPicture();
+//            if (image != null) {
+//                Glide.with(context).load(image.getUrl()).transform(new RoundedCorners(90)).into(ivProfilePic);
+//            }
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+
+            if(position != RecyclerView.NO_POSITION){
+                Items items = allItems.get(position);
+                Intent intent = new Intent(context, ShowDetailActivity.class);
+                intent.putExtra(Items.class.getSimpleName(), Parcels.wrap(items));
+                context.startActivity(intent);
+            }
         }
     }
 }

@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.parse.ParseUser;
+
 public class StartingActivity extends AppCompatActivity {
 
     private TextView tvMain;
@@ -17,6 +19,11 @@ public class StartingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(ParseUser.getCurrentUser() != null){
+            goMainActivity();
+        }
+
         setContentView(R.layout.activity_starting);
 
         tvMain = findViewById(R.id.tvMain);
@@ -39,4 +46,11 @@ public class StartingActivity extends AppCompatActivity {
         Intent intent = new Intent(StartingActivity.this, LoginActivity.class);
         startActivity(intent);
     }
+
+    private void goMainActivity() {
+        Intent i = new Intent(StartingActivity.this, MainActivity.class);
+        startActivity(i);
+        finish();
+    }
 }
+

@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
         popular_adapter = new PopularAdapter(getContext(), allItems);
         //set adapter on recyclerview
         rvItems.setAdapter(adapter);
-        rvPopular.setAdapter(adapter);
+        rvPopular.setAdapter(popular_adapter);
         rvItems.setLayoutManager(linearLayoutManager);
         rvPopular.setLayoutManager(LayoutManager);
 
