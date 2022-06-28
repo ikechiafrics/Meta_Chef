@@ -1,0 +1,65 @@
+package com.example.metachef.Adapters;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.example.metachef.Interface.ChangeNumberItemsListener;
+import com.example.metachef.Items;
+import com.example.metachef.R;
+
+import java.util.List;
+
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
+    Context context;
+    List<Items> allItems;
+    private ChangeNumberItemsListener changeNumberItemsListener;
+
+    public CartAdapter(Context context, List<Items> allItems, ChangeNumberItemsListener changeNumberItemsListener) {
+        this.context = context;
+        this.allItems = allItems;
+        this.changeNumberItemsListener = changeNumberItemsListener;
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemsView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_view, parent, false);
+        return new ViewHolder(itemsView);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Items items = allItems.get(position);
+        holder.bind(items);
+    }
+
+    @Override
+    public int getItemCount() {
+        return allItems.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        TextView tvCartTitle,feeEachItem;
+        ImageView ivItemPic,btnPlusItem, btnMinusItem;
+        TextView totalEachItem, tvCartnum;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvCartTitle = itemView.findViewById(R.id.tvCartItem);
+            ivItemPic = itemView.findViewById(R.id.ivItemPic);
+        }
+
+        public void bind(Items items) {
+            tvCartTitle.setText(items.getTitle());
+            Glide.with(context).load(items.getImage()).into(ivItemPic);
+        }
+    }
+}

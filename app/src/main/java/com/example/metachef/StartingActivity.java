@@ -33,10 +33,6 @@ public class StartingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                ProgressDialog mDialog = new ProgressDialog(StartingActivity.this);
-//                mDialog.setMessage("Please waiting...");
-//                mDialog.show();
-
                 goToLoginActivity();
             }
         });

@@ -1,4 +1,4 @@
-package com.example.metachef;
+package com.example.metachef.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.example.metachef.Items;
+import com.example.metachef.R;
+import com.example.metachef.ShowDetailActivity;
 import com.parse.ParseFile;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import org.parceler.Parcels;
@@ -55,7 +57,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
         private TextView tvtitle;
         private ImageView ivitem;
         private ImageView ivProfileImg;
-//        RelativeLayout mainLayout;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -64,7 +65,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
             ivitem = itemView.findViewById(R.id.ivitem);
             ivProfileImg = itemView.findViewById(R.id.ivProfileImg);
             itemView.setOnClickListener(this);
-//            mainLayout = itemView.findViewById(R.id.mainLayout);
         }
 
         public void bind(Items items) {
@@ -72,7 +72,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
             tvtitle.setText(items.getTitle());
             Glide.with(context).load(items.getImage()).into(ivitem);
             ParseFile profilePic = userparse.getParseFile("profile_picture");
-            Log.i("Adpater",profilePic.getUrl());
+            Log.i("Adapter",profilePic.getUrl());
             if (ivProfileImg != null) {
                 Glide.with(context).load(profilePic.getUrl()).transform(new RoundedCorners(90)).into(ivProfileImg);
             }

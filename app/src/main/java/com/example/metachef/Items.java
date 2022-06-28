@@ -21,6 +21,7 @@ public class Items{
 
     public String  title;
     public String image;
+    public double price;
 //    public String price;
 
     public Items(){}
@@ -29,7 +30,7 @@ public class Items{
     public Items(JSONObject jsonObject) throws JSONException {
         image = jsonObject.getString("image");
         title = jsonObject.getString("title");
-//        price = jsonObject.getString("price");
+        price = jsonObject.getDouble("pricePerServing");
     }
     public static List<Items> fromJsonArray(JSONArray itemsJsonArray) throws JSONException {
         List<Items> allItems = new ArrayList<>();
@@ -49,7 +50,7 @@ public class Items{
         return image;
     }
 
-//    public String getPrice() {
-//        return price;
-//    }
+    public double getPrice() {
+        return price;
+    }
 }
