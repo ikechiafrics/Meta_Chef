@@ -59,6 +59,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
             tvpopular = itemView.findViewById(R.id.tvpopular);
             ivpopular = itemView.findViewById(R.id.ivpopular);
             btnAdd = itemView.findViewById(R.id.BtnAdd);
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Items items) {

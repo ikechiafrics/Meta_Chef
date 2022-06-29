@@ -36,14 +36,14 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="6dp"
-                android:layout_marginEnd="0dp"
+                android:layout_marginEnd="6dp"
                 app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
             <ImageView
                 android:id="@+id/picFood"
                 android:layout_width="match_parent"
                 android:layout_height="213dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="50dp"
                 tools:srcCompat="@tools:sample/avatars" />
 
         </RelativeLayout>
@@ -84,8 +84,8 @@
 
         <TextView
             android:id="@+id/descriptionTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="166dp"
+            android:layout_height="70dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="TextView"
@@ -99,7 +99,7 @@
             android:id="@+id/numberOrderTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="136dp"
+            android:layout_marginTop="100dp"
             android:text="TextView"
             app:layout_constraintEnd_toStartOf="@+id/plusBtn"
             app:layout_constraintStart_toEndOf="@+id/MinusBtn"
@@ -131,6 +131,29 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$"
+            android:textColor="#C0A131"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvFee"
+            app:layout_constraintEnd_toStartOf="@+id/tvFee"
+            app:layout_constraintTop_toTopOf="@+id/tvFee" />
+
+        <TextView
+            android:id="@+id/tvFee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="53dp"
+            android:layout_marginEnd="39dp"
+            android:text="TextView"
+            android:textColor="#C0A131"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

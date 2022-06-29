@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.metachef.Fragments.HomeFragment;
 import com.example.metachef.Interface.RecipeDetailsListener;
 
@@ -17,7 +18,7 @@ import org.parceler.Parcels;
 public class ShowDetailActivity extends AppCompatActivity {
     RequestManager manager;
     private TextView addToCartBtn;
-    private TextView titleTxt, descriptionTxt, numberOrderTxt, feeTxt;
+    private TextView titleTxt, descriptionTxt, numberOrderTxt, tvFee;
     private ImageView plusBtn, MinusBtn, picFood, BtnBack;
     private Items items;
     int numberOrder = 1;
@@ -40,7 +41,7 @@ public class ShowDetailActivity extends AppCompatActivity {
         });
         addToCartBtn = findViewById(R.id.addToCartBtn);
         titleTxt = findViewById(R.id.titleTxt);
-        feeTxt = findViewById(R.id.addToCartBtn);
+        tvFee = findViewById(R.id.tvFee);
         descriptionTxt = findViewById(R.id.descriptionTxt);
         numberOrderTxt = findViewById(R.id.numberOrderTxt);
         plusBtn = findViewById(R.id.plusBtn);
@@ -51,9 +52,10 @@ public class ShowDetailActivity extends AppCompatActivity {
 
         titleTxt.setText(items.getTitle());
         descriptionTxt.setText(items.getTitle());
-        numberOrderTxt.setText(numberOrder);
-        feeTxt.setText((int) items.getPrice());
-        Glide.with(ShowDetailActivity.this).load(items.getImage()).into(picFood);
+        numberOrderTxt.setText(String.valueOf(numberOrder));
+        Glide.with(ShowDetailActivity.this).load(items.getImage()).transform(new RoundedCorners(90)).into(picFood);
+        String prices = String.valueOf(items.getNum());
+        tvFee.setText(prices);
 
         plusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +75,5 @@ public class ShowDetailActivity extends AppCompatActivity {
             }
         });
     }
-
-
-}
+    }
 
