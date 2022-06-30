@@ -72,7 +72,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
         public void bind(Items items) {
             ParseUser userparse = ParseUser.getCurrentUser();
             tvtitle.setText(items.getTitle());
-            Glide.with(context).load(items.getImage()).into(ivitem);
+            Glide.with(context).load(items.getImage()).transform(new RoundedCorners(30)).into(ivitem);
             ParseFile profilePic = userparse.getParseFile("profile_picture");
             Log.i("Adapter",profilePic.getUrl());
             if (ivProfileImg != null) {

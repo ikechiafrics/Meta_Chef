@@ -24,7 +24,7 @@ public class RequestManager {
 
     public void getRandomRecipes(RandomRecipeListener listener){
         RandomRecipesCall randomRecipesCall = retrofit.create(RandomRecipesCall.class);
-        Call<RandomRecipesResponse> call = randomRecipesCall.callRandomRecipe("a0b47258ef634097812d0213ca6217ea", "20");
+        Call<RandomRecipesResponse> call = randomRecipesCall.callRandomRecipe("a0b47258ef634097812d0213ca6217ea", "40");
 
         //enqueue to make call asynchronously
         call.enqueue(new Callback<RandomRecipesResponse>() {
@@ -46,8 +46,7 @@ public class RequestManager {
 
     public void getRecipeDetails(RecipeDetailsListener listener, int id){
         RecipeDetailsCall RecipeDetailsCall = retrofit.create(RecipeDetailsCall.class);
-        Call<ShowDetailActivity> call = RecipeDetailsCall.callRecipeDetails(id,"a0b47258ef634097812d0213ca6217ea");
-
+        Call<ShowDetailActivity> call = RecipeDetailsCall.callRecipeDetails(id, "a0b47258ef634097812d0213ca6217ea");
         //enqueue to make call asynchronously
         call.enqueue(new Callback<ShowDetailActivity>() {
             @Override

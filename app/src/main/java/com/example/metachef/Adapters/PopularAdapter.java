@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.metachef.model.Items;
 import com.example.metachef.R;
 import com.example.metachef.ShowDetailActivity;
@@ -66,7 +67,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
 
         public void bind(Items items) {
             tvpopular.setText(items.getTitle());
-            Glide.with(context).load(items.getImage()).into(ivpopular);
+            Glide.with(context).load(items.getImage()).transform(new RoundedCorners(30)).into(ivpopular);
         }
 
         @Override

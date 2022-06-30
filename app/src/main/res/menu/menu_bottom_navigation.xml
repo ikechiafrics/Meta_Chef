@@ -9,7 +9,7 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/action_search"
-        android:title="Compose"
+        android:title="Search"
         android:icon="@drawable/search"
         app:showAsAction="always" />
     <item
