@@ -20,10 +20,10 @@ import java.util.List;
 //This class represents the data which the different food items would contain in them
 public class Items{
 
-    private String  title;
+    public String  title;
     public String image;
-    private int num;
-    private int numberInCart;
+    public int num;
+    public int numberInCart;
 
     public Items(int numberInCart){
         this.numberInCart = numberInCart;
