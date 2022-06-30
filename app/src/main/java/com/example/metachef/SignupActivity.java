@@ -14,7 +14,7 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
-
+//This class represents the sign up page
 public class SignupActivity extends AppCompatActivity {
 
     private EditText etUsername;

@@ -4,49 +4,146 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#4F2684"
     tools:context=".ShowDetailActivity">
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteY="311dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/titleTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="title"
-                android:textAlignment="center"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:layout_marginTop="60dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/priceTxt"
-                android:textSize="24sp"
-                android:text="$"
-                android:textAlignment="center"/>
+            android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/imageView"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="6dp"
+                app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
+
+            <ImageView
+                android:id="@+id/picFood"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="213dp"
+                android:layout_marginTop="50dp"
                 tools:srcCompat="@tools:sample/avatars" />
 
-        </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Button"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="420dp"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="142dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/titleTxt"
+            android:layout_width="180dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="32dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/plusBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/numberOrderTxt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/numberOrderTxt"
+            app:layout_constraintTop_toTopOf="@+id/numberOrderTxt"
+            app:srcCompat="@drawable/ic_outline_add_circle_outline_24" />
+
+        <TextView
+            android:id="@+id/descriptionTxt"
+            android:layout_width="166dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="#7A7878"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleTxt" />
+
+        <TextView
+            android:id="@+id/numberOrderTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toStartOf="@+id/plusBtn"
+            app:layout_constraintStart_toEndOf="@+id/MinusBtn"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/MinusBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/numberOrderTxt"
+            app:layout_constraintEnd_toStartOf="@+id/numberOrderTxt"
+            app:layout_constraintStart_toEndOf="@+id/titleTxt"
+            app:layout_constraintTop_toTopOf="@+id/numberOrderTxt"
+            app:srcCompat="@drawable/ic_outline_do_disturb_on_24" />
+
+        <Button
+            android:id="@+id/addToCartBtn"
+            android:layout_width="300dp"
+            android:layout_height="73dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginEnd="55dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#7A3FC5"
+            android:text="Add to Cart"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:cornerRadius="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$"
+            android:textColor="#C0A131"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvFee"
+            app:layout_constraintEnd_toStartOf="@+id/tvFee"
+            app:layout_constraintTop_toTopOf="@+id/tvFee" />
+
+        <TextView
+            android:id="@+id/tvFee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="53dp"
+            android:layout_marginEnd="39dp"
+            android:text="TextView"
+            android:textColor="#C0A131"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

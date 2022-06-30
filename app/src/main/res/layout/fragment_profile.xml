@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    tools:context=".Fragments.ProfileFragment">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivProfileImg"
         android:layout_width="110dp"
         android:layout_height="109dp"
         android:layout_alignParentTop="true"

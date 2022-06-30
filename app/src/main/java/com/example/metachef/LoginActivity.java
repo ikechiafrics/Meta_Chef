@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-
+//This class represents the login pag
 public class LoginActivity extends AppCompatActivity {
 
     public static final String TAG = "LoginActivity";
@@ -41,10 +41,6 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                ProgressDialog mDialog = new ProgressDialog(LoginActivity.this);
-//                mDialog.setMessage("Please waiting...");
-//                mDialog.show();
 
                 Log.i(TAG, "onClick login button");
                 String username = etUsername.getText().toString();

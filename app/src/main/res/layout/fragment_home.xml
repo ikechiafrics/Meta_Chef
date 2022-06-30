@@ -30,7 +30,7 @@
                     android:id="@+id/tvMenu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="5dp"
                     android:text="Menu"
                     android:textColor="#000000"
                     android:textSize="44sp"
@@ -40,7 +40,7 @@
                 <ImageView
                     android:id="@+id/ivProfilePic"
                     android:layout_width="wrap_content"
-                    android:layout_height="86dp"
+                    android:layout_height="65dp"
                     android:layout_marginEnd="4dp"
                     app:layout_constraintBottom_toBottomOf="@+id/tvMenu"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,7 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="32dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="32dp"
                     android:background="@drawable/search_background"
                     android:drawableStart="@android:drawable/ic_menu_search"
@@ -116,43 +116,29 @@
                     app:layout_constraintTop_toBottomOf="@+id/etSearch"
                     tools:visibility="visible">
 
-                    <ImageView
-                        android:id="@+id/ivPromotions"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="33dp"
-                        android:layout_marginEnd="10dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/textView4"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@tools:sample/avatars" />
-
                     <TextView
                         android:id="@+id/tvTodaysOffer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="197dp"
+                        android:layout_height="76dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="4dp"
-                        android:text="Today's Offer"
+                        android:text="Treat yourself to fresh flavors and save"
                         android:textColor="#FFFFFF"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@+id/ivPromotions"
-                        app:layout_constraintHorizontal_bias="0.173"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="Free Box of Fries"
-                        android:textColor="#FFFFFF"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/tvTodaysOffer"
-                        app:layout_constraintTop_toBottomOf="@+id/tvTodaysOffer" />
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="145dp"
+                        android:layout_height="130dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/tvTodaysOffer"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/promotion_photo" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -169,12 +155,12 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvPopular"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginEnd="30dp"
-                    app:layout_constraintEnd_toEndOf="@+id/rvItems"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="362dp"
+                    android:layout_height="222dp"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+                    app:layout_constraintStart_toStartOf="@+id/constraintLayout"
                     app:layout_constraintTop_toBottomOf="@+id/tvPopular" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

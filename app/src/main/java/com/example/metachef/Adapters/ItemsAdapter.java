@@ -1,6 +1,7 @@
-package com.example.metachef;
+package com.example.metachef.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.example.metachef.Items;
+import com.example.metachef.R;
+import com.example.metachef.ShowDetailActivity;
 import com.parse.ParseFile;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import org.parceler.Parcels;
+
 import java.util.List;
+
+//This class is what is attached to the recycler view of the Home fragment
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
 
@@ -47,25 +54,42 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
         return allItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
         private TextView tvtitle;
         private ImageView ivitem;
-        private ImageView ivProfilePic;
-//        RelativeLayout mainLayout;
+        private ImageView ivProfileImg;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvtitle = itemView.findViewById(R.id.tvtitle);
             ivitem = itemView.findViewById(R.id.ivitem);
-            ivProfilePic = itemView.findViewById(R.id.ivProfilePic);
-
-//            mainLayout = itemView.findViewById(R.id.mainLayout);
+            ivProfileImg = itemView.findViewById(R.id.ivProfileImg);
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Items items) {
+            ParseUser userparse = ParseUser.getCurrentUser();
             tvtitle.setText(items.getTitle());
             Glide.with(context).load(items.getImage()).into(ivitem);
+            ParseFile profilePic = userparse.getParseFile("profile_picture");
+            Log.i("Adapter",profilePic.getUrl());
+            if (ivProfileImg != null) {
+                Glide.with(context).load(profilePic.getUrl()).transform(new RoundedCorners(90)).into(ivProfileImg);
+            }
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+
+            if(position != RecyclerView.NO_POSITION){
+                Items items = allItems.get(position);
+                Intent intent = new Intent(context, ShowDetailActivity.class);
+                intent.putExtra(Items.class.getSimpleName(), Parcels.wrap(items));
+                context.startActivity(intent);
+            }
         }
     }
 }

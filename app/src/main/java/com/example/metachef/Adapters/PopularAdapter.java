@@ -1,23 +1,28 @@
-package com.example.metachef;
+package com.example.metachef.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.metachef.Items;
+import com.example.metachef.R;
+import com.example.metachef.ShowDetailActivity;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
-public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHolder>{
+//This class is what is attached to the recycler view of the Home Fragment
+
+public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHolder> {
 
     Context context;
     List<Items> allItems;
@@ -45,27 +50,35 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
         return allItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvpopular;
         ImageView ivpopular;
-        TextView tvprice;
         ImageView btnAdd;
-//        RelativeLayout mainLayout;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvpopular = itemView.findViewById(R.id.tvpopular);
             ivpopular = itemView.findViewById(R.id.ivpopular);
-            tvprice = itemView.findViewById(R.id.tvprice);
             btnAdd = itemView.findViewById(R.id.BtnAdd);
-//            mainLayout = itemView.findViewById(R.id.mainLayout);
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Items items) {
             tvpopular.setText(items.getTitle());
             Glide.with(context).load(items.getImage()).into(ivpopular);
-//            tvprice.setText(items.getPrice());
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+
+            if (position != RecyclerView.NO_POSITION) {
+                Items items = allItems.get(position);
+                Intent intent = new Intent(context, ShowDetailActivity.class);
+                intent.putExtra(Items.class.getSimpleName(), Parcels.wrap(items));
+                context.startActivity(intent);
+            }
         }
     }
 }
