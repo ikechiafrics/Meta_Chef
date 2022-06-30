@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.metachef.R;
-
+//This class represents the profile page
 public class ProfileFragment extends Fragment {
 
     public ProfileFragment() {

@@ -20,6 +20,8 @@ import org.parceler.Parcels;
 
 import java.util.List;
 
+//This class is what is attached to the recycler view of the Home Fragment
+
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHolder> {
 
     Context context;

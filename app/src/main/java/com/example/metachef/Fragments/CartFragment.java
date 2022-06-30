@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.example.metachef.Adapters.CartAdapter;
 import com.example.metachef.R;
 
+//This class represents the Carts page
+
 public class CartFragment extends Fragment {
     private RecyclerView rvCart;
     private CartAdapter cart_adapter;

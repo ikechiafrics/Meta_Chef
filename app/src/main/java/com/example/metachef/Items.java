@@ -17,13 +17,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Parcel
+//This class represents the data which the different food items would contain in them
 public class Items{
 
-    public String  title;
+    private String  title;
     public String image;
     private int num;
+    private int numberInCart;
 
-    public Items(){}
+    public Items(int numberInCart){
+        this.numberInCart = numberInCart;
+    }
 
     public Items(JSONObject jsonObject) throws JSONException {
         image = jsonObject.getString("image");
@@ -31,6 +35,11 @@ public class Items{
         num = jsonObject.getInt("readyInMinutes");
 
     }
+
+    public Items() {
+
+    }
+
     public static List<Items> fromJsonArray(JSONArray itemsJsonArray) throws JSONException {
         List<Items> allItems = new ArrayList<>();
         for (int i = 0; i < itemsJsonArray.length(); i++) {
@@ -53,5 +62,11 @@ public class Items{
         return num;
     }
 
+    public int getNumberInCart() {
+        return numberInCart;
+    }
 
+    public void setNumberInCart(int numberInCart) {
+        this.numberInCart = numberInCart;
+    }
 }

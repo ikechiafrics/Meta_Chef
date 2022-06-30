@@ -24,6 +24,8 @@ import org.parceler.Parcels;
 
 import java.util.List;
 
+//This class is what is attached to the recycler view of the Home fragment
+
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
 
     Context context;
@@ -76,11 +78,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
             if (ivProfileImg != null) {
                 Glide.with(context).load(profilePic.getUrl()).transform(new RoundedCorners(90)).into(ivProfileImg);
             }
-//            User user = new User();
-//            ParseFile image = user.getPicture();
-//            if (image != null) {
-//                Glide.with(context).load(image.getUrl()).transform(new RoundedCorners(90)).into(ivProfilePic);
-//            }
         }
 
         @Override

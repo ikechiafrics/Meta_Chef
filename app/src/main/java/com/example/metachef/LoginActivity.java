@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-
+//This class represents the login pag
 public class LoginActivity extends AppCompatActivity {
 
     public static final String TAG = "LoginActivity";

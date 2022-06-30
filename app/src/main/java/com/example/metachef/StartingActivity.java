@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.parse.ParseUser;
-
+//This class represents the get started page, which appears when a new user logs in
 public class StartingActivity extends AppCompatActivity {
 
     private TextView tvMain;

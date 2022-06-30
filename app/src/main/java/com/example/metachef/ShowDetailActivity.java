@@ -2,18 +2,22 @@ package com.example.metachef;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.example.metachef.Fragments.CartFragment;
 import com.example.metachef.Fragments.HomeFragment;
 import com.example.metachef.Interface.RecipeDetailsListener;
 
 import org.parceler.Parcels;
+//This class represents the details page for each item
 
 public class ShowDetailActivity extends AppCompatActivity {
     RequestManager manager;
@@ -29,16 +33,7 @@ public class ShowDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_detail);
         manager = new RequestManager(ShowDetailActivity.this);
-        //manager.getRecipeDetails();
 
-        BtnBack = findViewById(R.id.BtnBack);
-        BtnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ShowDetailActivity.this, HomeFragment.class);
-                startActivity(i);
-            }
-        });
         addToCartBtn = findViewById(R.id.addToCartBtn);
         titleTxt = findViewById(R.id.titleTxt);
         tvFee = findViewById(R.id.tvFee);
@@ -72,6 +67,13 @@ public class ShowDetailActivity extends AppCompatActivity {
                     numberOrder = numberOrder - 1;
                 }
                 numberOrderTxt.setText(String.valueOf(numberOrder));
+            }
+        });
+
+        addToCartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ShowDetailActivity.this, "Added To Cart", Toast.LENGTH_SHORT).show();
             }
         });
     }

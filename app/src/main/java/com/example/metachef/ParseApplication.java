@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
+//this class links the android studio to the parse database
 
 public class ParseApplication extends Application {
 

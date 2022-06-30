@@ -25,6 +25,8 @@ import com.example.metachef.RequestManager;
 import java.util.ArrayList;
 import java.util.List;
 
+//This class represents the home page
+
 public class HomeFragment extends Fragment {
 
     public static final String TAG = "HomeFragment";
@@ -32,8 +34,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView rvItems;
     private RecyclerView rvPopular;
     RequestManager manager;
-    private ItemsAdapter adapter;
-    private PopularAdapter popular_adapter;
+    private ItemsAdapter itemsAdapter;
+    private PopularAdapter popularAdapter;
     List<Items> allItems;
     List<Items> allItems2;
 
@@ -52,8 +54,8 @@ public class HomeFragment extends Fragment {
     private final RandomRecipeListener responseListener = new RandomRecipeListener() {
         @Override
         public void didfetch(RandomRecipesResponse response, String message) {
-            adapter = new ItemsAdapter(getContext(), allItems);
-            popular_adapter = new PopularAdapter(getContext(), allItems2);
+            itemsAdapter = new ItemsAdapter(getContext(), allItems);
+            popularAdapter = new PopularAdapter(getContext(), allItems2);
             rvItems.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
             rvPopular.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
 
@@ -65,8 +67,8 @@ public class HomeFragment extends Fragment {
                 allItems2.add(response.recipes.get(i));
             }
             Log.e("OnSuccess", "this is working");
-            rvItems.setAdapter(adapter);
-            rvPopular.setAdapter(popular_adapter);
+            rvItems.setAdapter(itemsAdapter);
+            rvPopular.setAdapter(popularAdapter);
         }
 
         @Override
