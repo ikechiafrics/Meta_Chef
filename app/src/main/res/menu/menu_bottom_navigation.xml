@@ -7,11 +7,11 @@
         android:title="Home"
         android:icon="@drawable/home_icon"
         app:showAsAction="always" />
-<!--    <item-->
-<!--        android:id="@+id/action_search"-->
-<!--        android:title="Compose"-->
-<!--        android:icon="@drawable/search"-->
-<!--        app:showAsAction="always" />-->
+    <item
+        android:id="@+id/action_search"
+        android:title="Compose"
+        android:icon="@drawable/search"
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_cart"
         android:title="Cart"

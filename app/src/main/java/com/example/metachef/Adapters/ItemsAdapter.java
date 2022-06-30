@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.example.metachef.Items;
+import com.example.metachef.model.Items;
 import com.example.metachef.R;
 import com.example.metachef.ShowDetailActivity;
 import com.parse.ParseFile;
