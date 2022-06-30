@@ -2,8 +2,6 @@ package com.example.metachef;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,9 +10,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.example.metachef.Fragments.CartFragment;
-import com.example.metachef.Fragments.HomeFragment;
-import com.example.metachef.Interface.RecipeDetailsListener;
+import com.example.metachef.model.Items;
 
 import org.parceler.Parcels;
 //This class represents the details page for each item

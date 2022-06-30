@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.metachef.Items;
+import com.example.metachef.model.Items;
 import com.example.metachef.Adapters.ItemsAdapter;
 import com.example.metachef.Adapters.PopularAdapter;
 import com.example.metachef.R;
