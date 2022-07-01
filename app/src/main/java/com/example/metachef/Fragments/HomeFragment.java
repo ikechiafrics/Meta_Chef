@@ -12,8 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.metachef.Adapters.SearchAdapter;
 import com.example.metachef.model.Items;
 import com.example.metachef.Adapters.ItemsAdapter;
 import com.example.metachef.Adapters.PopularAdapter;
@@ -33,17 +36,20 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView rvItems;
     private RecyclerView rvPopular;
-    RequestManager manager;
+    private RequestManager manager;
     private ItemsAdapter itemsAdapter;
     private PopularAdapter popularAdapter;
-    List<Items> allItems;
-    List<Items> allItems2;
+    private List<Items> allItems;
+    private List<Items> allItems2;
+    private List<String> tags = new ArrayList<>();
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         manager = new RequestManager(getContext());
-        manager.getRandomRecipes(responseListener);
+        manager.getRandomRecipes(responseListener, tags);
         rvItems = view.findViewById(R.id.rvItems);
         rvPopular = view.findViewById(R.id.rvPopular);
         allItems = new ArrayList<>();

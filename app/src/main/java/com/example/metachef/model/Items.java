@@ -1,5 +1,7 @@
 package com.example.metachef.model;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,6 +16,7 @@ public class Items{
 
     public String  title;
     public String image;
+    public String description;
     public int num;
     public int numberInCart;
 
@@ -22,10 +25,11 @@ public class Items{
     }
 
     public Items(JSONObject jsonObject) throws JSONException {
+        Log.e("OnSuccess", "This is getting here");
         image = jsonObject.getString("image");
         title = jsonObject.getString("title");
+        description = jsonObject.getString("summary");
         num = jsonObject.getInt("readyInMinutes");
-
     }
 
     public Items() {
@@ -60,5 +64,9 @@ public class Items{
 
     public void setNumberInCart(int numberInCart) {
         this.numberInCart = numberInCart;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

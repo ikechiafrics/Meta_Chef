@@ -5,6 +5,8 @@ import android.content.Context;
 import com.example.metachef.Interface.RandomRecipeListener;
 import com.example.metachef.Interface.RecipeDetailsListener;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,9 +24,9 @@ public class RequestManager {
         this.mContext = mContext;
     }
 
-    public void getRandomRecipes(RandomRecipeListener listener){
+    public void getRandomRecipes(RandomRecipeListener listener, List<String> tags){
         RandomRecipesCall randomRecipesCall = retrofit.create(RandomRecipesCall.class);
-        Call<RandomRecipesResponse> call = randomRecipesCall.callRandomRecipe("a0b47258ef634097812d0213ca6217ea", "40");
+        Call<RandomRecipesResponse> call = randomRecipesCall.callRandomRecipe("a0b47258ef634097812d0213ca6217ea", "20",tags);
 
         //enqueue to make call asynchronously
         call.enqueue(new Callback<RandomRecipesResponse>() {
@@ -68,7 +70,7 @@ public class RequestManager {
     private interface RandomRecipesCall{
 //        Get Call
         @GET("recipes/random")
-        Call<RandomRecipesResponse> callRandomRecipe(@Query("apiKey") String apiKey, @Query("number") String number);
+        Call<RandomRecipesResponse> callRandomRecipe(@Query("apiKey") String apiKey, @Query("number") String number, @Query("tags")List<String> tags);
     }
 
     private interface RecipeDetailsCall{
