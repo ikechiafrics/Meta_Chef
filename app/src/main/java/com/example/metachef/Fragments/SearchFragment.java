@@ -16,8 +16,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.metachef.Adapters.ItemsAdapter;
-import com.example.metachef.Adapters.PopularAdapter;
 import com.example.metachef.Adapters.SearchAdapter;
 import com.example.metachef.Interface.RandomRecipeListener;
 import com.example.metachef.R;
@@ -36,15 +34,14 @@ public class SearchFragment extends Fragment {
     private RequestManager manager;
     private List<Items> allItems;
     private RecyclerView rvSearch;
-    SearchAdapter searchAdapter;
-    ImageView btnSearch;
-    EditText etSearch;
+    private SearchAdapter searchAdapter;
+    private ImageView btnSearch;
+    private EditText etSearch;
 
     public SearchFragment() {
     }
 
     public static SearchFragment newInstance(String param1, String param2) {
-
         return null;
     }
 
@@ -71,10 +68,8 @@ public class SearchFragment extends Fragment {
                 tags.add(etSearch.getText().toString());
                 manager.getRandomRecipes(responseListener, tags);
                 return;
-
             }
         });
-
     }
 
     private final RandomRecipeListener responseListener = new RandomRecipeListener() {
@@ -89,10 +84,6 @@ public class SearchFragment extends Fragment {
         @Override
         public void diderror(String message) {
             Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-        }
-
-        private void createSearch(View v) {
-            String searchInput = (String) etSearch.getText().toString();
         }
     };
 }
