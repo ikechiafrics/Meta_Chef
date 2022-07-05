@@ -38,7 +38,7 @@ public class SearchFragment extends Fragment {
     private RecyclerView rvSearch;
     SearchAdapter searchAdapter;
     ImageView btnSearch;
-    EditText etSearch2;
+    EditText etSearch;
 
     public SearchFragment() {
     }
@@ -67,7 +67,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 tags.clear();
-                tags.add(etSearch2.getText().toString());
+                tags.add(etSearch.getText().toString());
                 manager.getRandomRecipes(responseListener, tags);
                 return;
 
@@ -91,7 +91,7 @@ public class SearchFragment extends Fragment {
         }
 
         private void createSearch(View v) {
-            String searchInput = (String) etSearch2.getText().toString();
+            String searchInput = (String) etSearch.getText().toString();
         }
     };
 }
