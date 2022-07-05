@@ -57,6 +57,7 @@ public class SearchFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        etSearch = view.findViewById(R.id.etSearch2);
         manager = new RequestManager(getContext());
         manager.getRandomRecipes(responseListener, tags);
         rvSearch = view.findViewById(R.id.rvSearch);
