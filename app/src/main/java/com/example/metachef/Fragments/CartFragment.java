@@ -20,7 +20,7 @@ import com.example.metachef.R;
 //This class represents the Carts page
 
 public class CartFragment extends Fragment {
-    private CartAdapter cart_adapter;
+    private CartAdapter cartAdapter;
     private double tax;
     TextView tvItemsTotalFee, tvDeliveryFee, tvTaxFee, tvTotalFee,tvEmpty;
 
@@ -37,7 +37,7 @@ public class CartFragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         rvCart.setLayoutManager(linearLayoutManager);
-        rvCart.setAdapter(cart_adapter);
+        rvCart.setAdapter(cartAdapter);
     }
 
     @Override
