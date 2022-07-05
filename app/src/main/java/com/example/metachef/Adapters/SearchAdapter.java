@@ -62,11 +62,19 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             search_title = itemView.findViewById(R.id.search_title);
             search_description = itemView.findViewById(R.id.search_description);
             search_image = itemView.findViewById(R.id.search_image);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
+            int position = getAdapterPosition();
 
+            if(position != RecyclerView.NO_POSITION){
+                Items items = allItems.get(position);
+                Intent intent = new Intent(context, ShowDetailActivity.class);
+                intent.putExtra(Items.class.getSimpleName(), Parcels.wrap(items));
+                context.startActivity(intent);
+            }
         }
 
         public void bind(Items items) {
