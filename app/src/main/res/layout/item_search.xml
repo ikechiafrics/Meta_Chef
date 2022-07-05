@@ -10,6 +10,7 @@
         android:layout_width="296dp"
         android:layout_height="73dp"
         android:layout_marginStart="2dp"
+        android:maxLines="4"
         android:text="this id the description of the item"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,7 +22,7 @@
     <TextView
         android:id="@+id/search_title"
         android:layout_width="237dp"
-        android:layout_height="37dp"
+        android:layout_height="35dp"
         android:layout_marginStart="2dp"
         android:layout_marginTop="10dp"
         android:text="Hi, My name is ikechi"

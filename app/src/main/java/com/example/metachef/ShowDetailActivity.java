@@ -42,10 +42,10 @@ public class ShowDetailActivity extends AppCompatActivity {
         items = Parcels.unwrap(getIntent().getParcelableExtra(Items.class.getSimpleName()));
 
         titleTxt.setText(items.getTitle());
-        descriptionTxt.setText(items.getTitle());
+        descriptionTxt.setText(items.getSummary());
         numberOrderTxt.setText(String.valueOf(numberOrder));
         Glide.with(ShowDetailActivity.this).load(items.getImage()).transform(new RoundedCorners(90)).into(picFood);
-        String prices = String.valueOf(items.getNum());
+        String prices = String.valueOf(items.getPricePerServing());
         tvFee.setText(prices);
 
         plusBtn.setOnClickListener(new View.OnClickListener() {

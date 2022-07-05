@@ -16,8 +16,8 @@ public class Items{
 
     public String  title;
     public String image;
-    public String description;
-    public int num;
+    public String summary;
+    public double pricePerServing;
     public int numberInCart;
 
     public Items(int numberInCart){
@@ -28,8 +28,8 @@ public class Items{
         Log.e("OnSuccess", "This is getting here");
         image = jsonObject.getString("image");
         title = jsonObject.getString("title");
-        description = jsonObject.getString("summary");
-        num = jsonObject.getInt("readyInMinutes");
+        summary = jsonObject.getString("summary");
+        pricePerServing = jsonObject.getInt("pricePerServing");
     }
 
     public Items() {
@@ -53,12 +53,13 @@ public class Items{
     public String getImage() {
         return image;
     }
-    public String getDescription() {
-        return description;
+
+    public String getSummary() {
+        return summary;
     }
 
-    public int getNum() {
-        return num;
+    public double getPricePerServing() {
+        return pricePerServing;
     }
 
     public int getNumberInCart() {

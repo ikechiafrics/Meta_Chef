@@ -79,7 +79,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
         public void bind(Items items) {
             search_title.setText(items.getTitle());
-            search_description.setText(items.getDescription());
+            search_description.setText(items.getSummary());
             Glide.with(context).load(items.getImage()).transform(new RoundedCorners(30)).into(search_image);
         }
     }

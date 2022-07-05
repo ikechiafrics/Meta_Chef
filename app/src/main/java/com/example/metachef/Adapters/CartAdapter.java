@@ -63,8 +63,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
         public void bind(Items items) {
             tvCartTitle.setText(items.getTitle());
-            tvFeeEachItem.setText(String.valueOf(items.getNum()));
-            tvTotalEachItem.setText(String.valueOf(Math.round((items.getNumberInCart() * items.getNum()) * 100) / 100));
+            tvFeeEachItem.setText(String.valueOf(items.getPricePerServing()));
+            tvTotalEachItem.setText(String.valueOf(Math.round((items.getNumberInCart() * items.getPricePerServing()) * 100) / 100));
             tvCartnum.setText(items.getNumberInCart());
             Glide.with(context).load(items.getImage()).into(ivItemPic);
         }
