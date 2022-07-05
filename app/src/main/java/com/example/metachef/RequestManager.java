@@ -2,6 +2,8 @@ package com.example.metachef;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.example.metachef.Interface.RandomRecipeListener;
 import com.example.metachef.Interface.RecipeDetailsListener;
 
@@ -31,7 +33,7 @@ public class RequestManager {
         //enqueue to make call asynchronously
         call.enqueue(new Callback<RandomRecipesResponse>() {
             @Override
-            public void onResponse(Call<RandomRecipesResponse> call, Response<RandomRecipesResponse> response) {
+            public void onResponse(@NonNull Call<RandomRecipesResponse> call, @NonNull Response<RandomRecipesResponse> response) {
                 if (!response.isSuccessful()){
                     listener.diderror(response.message());
                     return;
@@ -40,7 +42,7 @@ public class RequestManager {
             }
 
             @Override
-            public void onFailure(Call<RandomRecipesResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<RandomRecipesResponse> call, @NonNull Throwable t) {
                 listener.diderror(t.getMessage());
             }
         });
@@ -52,7 +54,7 @@ public class RequestManager {
         //enqueue to make call asynchronously
         call.enqueue(new Callback<ShowDetailActivity>() {
             @Override
-            public void onResponse(Call<ShowDetailActivity> call, Response<ShowDetailActivity> response) {
+            public void onResponse(@NonNull Call<ShowDetailActivity> call, @NonNull Response<ShowDetailActivity> response) {
                 if (!response.isSuccessful()){
                     listener.diderror(response.message());
                     return;
@@ -61,7 +63,7 @@ public class RequestManager {
             }
 
             @Override
-            public void onFailure(Call<ShowDetailActivity> call, Throwable t) {
+            public void onFailure(@NonNull Call<ShowDetailActivity> call, @NonNull Throwable t) {
                 listener.diderror(t.getMessage());
             }
         });

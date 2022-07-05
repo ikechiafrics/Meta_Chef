@@ -76,7 +76,6 @@ public class HomeFragment extends Fragment {
             for(int i = 10; i < 20; i++){
                 popularItems.add(response.recipes.get(i));
             }
-            Log.e("OnSuccess", "this is working");
             rvItems.setAdapter(itemsAdapter);
             rvPopular.setAdapter(popularAdapter);
         }

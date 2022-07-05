@@ -76,7 +76,6 @@ public class SearchFragment extends Fragment {
         public void didfetch(RandomRecipesResponse response, String message) {
             searchAdapter = new SearchAdapter(getContext(), response.recipes);
             rvSearch.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-            Log.e("OnSuccess", "this is working");
             rvSearch.setAdapter(searchAdapter);
         }
 
