@@ -28,8 +28,8 @@ import java.util.List;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
 
-    final Context context;
-    final List<Items> allItems;
+    private final Context context;
+    private final List<Items> allItems;
 
     public ItemsAdapter(Context context, List<Items> items) {
         this.context = context;

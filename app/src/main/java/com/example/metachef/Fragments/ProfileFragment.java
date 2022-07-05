@@ -23,6 +23,7 @@ import com.parse.ParseUser;
 
 //This class represents the profile page
 public class ProfileFragment extends Fragment {
+    public static final String KEY_IMAGE = "profile_picture";
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -46,7 +47,7 @@ public class ProfileFragment extends Fragment {
         ImageView btnLogout = view.findViewById(R.id.BtnLogout);
         ImageView ivProfileImg = view.findViewById(R.id.ivProfileImg);
         ParseUser user = ParseUser.getCurrentUser();
-        ParseFile img = user.getParseFile("profile_picture");
+        ParseFile img = user.getParseFile(KEY_IMAGE);
         Glide.with(getContext()).load(img.getUrl()).transform(new RoundedCorners(roundingRadius)).into(ivProfileImg);
         super.onViewCreated(view, savedInstanceState);
         btnLogout.setOnClickListener(new View.OnClickListener() {

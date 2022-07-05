@@ -25,8 +25,8 @@ import java.util.List;
 
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHolder> {
 
-    final Context context;
-    final List<Items> allItems;
+    private final Context context;
+    private final List<Items> allItems;
 
     public PopularAdapter(Context context, List<Items> items) {
         this.context = context;

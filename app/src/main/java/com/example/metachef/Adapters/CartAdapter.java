@@ -19,8 +19,8 @@ import java.util.List;
 //This class is what is attached to the recycler view of the cart
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
-    final Context context;
-    final List<Items> allItems;
+    private final Context context;
+    private final List<Items> allItems;
 
     public CartAdapter(Context context, List<Items> allItems) {
         this.context = context;
