@@ -2,7 +2,6 @@ package com.example.metachef.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +24,8 @@ import java.util.List;
 //This class is what is attached to the recycler view of the Search Fragment
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder>{
 
-    Context context;
-    List<Items> allItems;
+    final Context context;
+    final List<Items> allItems;
 
     public SearchAdapter(Context context, List<Items> allItems) {
         this.context = context;
@@ -53,15 +52,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private TextView search_title;
-        private TextView search_description;
-        private ImageView search_image;
+        private final TextView searchTitle;
+        private final TextView searchDescription;
+        private final ImageView searchImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            search_title = itemView.findViewById(R.id.search_title);
-            search_description = itemView.findViewById(R.id.search_description);
-            search_image = itemView.findViewById(R.id.search_image);
+            searchTitle = itemView.findViewById(R.id.search_title);
+            searchDescription = itemView.findViewById(R.id.search_description);
+            searchImage = itemView.findViewById(R.id.search_image);
             itemView.setOnClickListener(this);
         }
 
@@ -78,9 +77,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         }
 
         public void bind(Items items) {
-            search_title.setText(items.getTitle());
-            search_description.setText(items.getSummary());
-            Glide.with(context).load(items.getImage()).transform(new RoundedCorners(30)).into(search_image);
+            int roundingRadius = 50;
+            searchTitle.setText(items.getTitle());
+            searchDescription.setText(items.getSummary());
+            Glide.with(context).load(items.getImage()).transform(new RoundedCorners(roundingRadius)).into(searchImage);
         }
     }
 

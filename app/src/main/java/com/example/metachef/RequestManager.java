@@ -17,8 +17,8 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public class RequestManager {
-    Context mContext;
-    Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.spoonacular.com/").addConverterFactory(GsonConverterFactory.create()).build();
+    final Context mContext;
+    final Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.spoonacular.com/").addConverterFactory(GsonConverterFactory.create()).build();
 
     public RequestManager(Context mContext) {
         this.mContext = mContext;

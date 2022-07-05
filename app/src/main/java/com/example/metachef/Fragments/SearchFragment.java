@@ -29,13 +29,12 @@ import java.util.List;
 //this Class represents the Search fragment view
 public class SearchFragment extends Fragment {
     public static final String TAG = "Search Fragment";
-    private List<String> tags = new ArrayList<>();
+    private final List<String> tags = new ArrayList<>();
 
     private RequestManager manager;
     private List<Items> allItems;
     private RecyclerView rvSearch;
     private SearchAdapter searchAdapter;
-    private ImageView btnSearch;
     private EditText etSearch;
 
     public SearchFragment() {
@@ -60,7 +59,7 @@ public class SearchFragment extends Fragment {
         rvSearch = view.findViewById(R.id.rvSearch);
         searchAdapter = new SearchAdapter(getContext(), allItems);
         rvSearch.setAdapter(searchAdapter);
-        btnSearch = view.findViewById(R.id.btnSearch);
+        ImageView btnSearch = view.findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

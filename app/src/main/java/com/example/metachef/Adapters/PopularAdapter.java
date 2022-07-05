@@ -25,8 +25,8 @@ import java.util.List;
 
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHolder> {
 
-    Context context;
-    List<Items> allItems;
+    final Context context;
+    final List<Items> allItems;
 
     public PopularAdapter(Context context, List<Items> items) {
         this.context = context;
@@ -52,9 +52,9 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView tvpopular;
-        ImageView ivpopular;
-        ImageView btnAdd;
+        final TextView tvpopular;
+        final ImageView ivpopular;
+        final ImageView btnAdd;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -67,7 +67,8 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
 
         public void bind(Items items) {
             tvpopular.setText(items.getTitle());
-            Glide.with(context).load(items.getImage()).transform(new RoundedCorners(30)).into(ivpopular);
+            int roundingRadius = 50;
+            Glide.with(context).load(items.getImage()).transform(new RoundedCorners(roundingRadius)).into(ivpopular);
         }
 
         @Override

@@ -19,7 +19,6 @@ public class SignupActivity extends AppCompatActivity {
 
     private EditText etUsername;
     private EditText etPassword;
-    private Button btSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +27,7 @@ public class SignupActivity extends AppCompatActivity {
 
         etUsername = findViewById(R.id.etSignupUsername);
         etPassword = findViewById(R.id.etSignupPassword);
-        btSignUp = findViewById(R.id.btSendSignup);
+        Button btSignUp = findViewById(R.id.btSendSignup);
 
         btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -40,37 +40,34 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView rvItems;
     private RecyclerView rvPopular;
-    private RequestManager manager;
-    private ItemsAdapter itemsAdapter;
-    private PopularAdapter popularAdapter;
-    private ImageView ivProfilePic;
     private List<Items> allItems;
     private List<Items> allItems2;
-    private List<String> tags = new ArrayList<>();
+    private final List<String> tags = new ArrayList<>();
 
 
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        manager = new RequestManager(getContext());
+        int roundingRadius = 200;
+        RequestManager manager = new RequestManager(getContext());
         manager.getRandomRecipes(responseListener, tags);
         rvItems = view.findViewById(R.id.rvItems);
         rvPopular = view.findViewById(R.id.rvPopular);
-        ivProfilePic = view.findViewById(R.id.ivProfilePic);
+        ImageView ivProfilePic = view.findViewById(R.id.ivProfilePic);
         allItems = new ArrayList<>();
         allItems2 = new ArrayList<>();
         ParseUser user = ParseUser.getCurrentUser();
         ParseFile image = user.getParseFile("profile_picture");
-        Glide.with(getContext()).load(image.getUrl()).transform(new RoundedCorners(200)).into(ivProfilePic);
+        Glide.with(getContext()).load(image.getUrl()).transform(new RoundedCorners(roundingRadius)).into(ivProfilePic);
 
     }
 
     private final RandomRecipeListener responseListener = new RandomRecipeListener() {
         @Override
         public void didfetch(RandomRecipesResponse response, String message) {
-            itemsAdapter = new ItemsAdapter(getContext(), allItems);
-            popularAdapter = new PopularAdapter(getContext(), allItems2);
+            ItemsAdapter itemsAdapter = new ItemsAdapter(getContext(), allItems);
+            PopularAdapter popularAdapter = new PopularAdapter(getContext(), allItems2);
             rvItems.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
             rvPopular.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
 

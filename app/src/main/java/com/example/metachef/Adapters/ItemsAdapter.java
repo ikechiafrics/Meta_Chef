@@ -28,8 +28,8 @@ import java.util.List;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
 
-    Context context;
-    List<Items> allItems;
+    final Context context;
+    final List<Items> allItems;
 
     public ItemsAdapter(Context context, List<Items> items) {
         this.context = context;
@@ -56,9 +56,9 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private TextView tvtitle;
-        private ImageView ivitem;
-        private ImageView ivProfileImg;
+        private final TextView tvtitle;
+        private final ImageView ivitem;
+        private final ImageView ivProfileImg;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -72,11 +72,12 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
         public void bind(Items items) {
             ParseUser userparse = ParseUser.getCurrentUser();
             tvtitle.setText(items.getTitle());
-            Glide.with(context).load(items.getImage()).transform(new RoundedCorners(30)).into(ivitem);
+            int roundingRadius = 50;
+            Glide.with(context).load(items.getImage()).transform(new RoundedCorners(roundingRadius)).into(ivitem);
             ParseFile profilePic = userparse.getParseFile("profile_picture");
-            Log.i("Adapter",profilePic.getUrl());
+
             if (ivProfileImg != null) {
-                Glide.with(context).load(profilePic.getUrl()).transform(new RoundedCorners(90)).into(ivProfileImg);
+                Glide.with(context).load(profilePic.getUrl()).transform(new RoundedCorners(roundingRadius)).into(ivProfileImg);
             }
         }
 

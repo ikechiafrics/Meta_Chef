@@ -23,8 +23,6 @@ import com.parse.ParseUser;
 
 //This class represents the profile page
 public class ProfileFragment extends Fragment {
-    private ImageView ivProfileImg;
-    private ImageView BtnLogout;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -44,13 +42,14 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        BtnLogout = view.findViewById(R.id.BtnLogout);
-        ivProfileImg = view.findViewById(R.id.ivProfileImg);
+        int roundingRadius = 200;
+        ImageView btnLogout = view.findViewById(R.id.BtnLogout);
+        ImageView ivProfileImg = view.findViewById(R.id.ivProfileImg);
         ParseUser user = ParseUser.getCurrentUser();
         ParseFile img = user.getParseFile("profile_picture");
-        Glide.with(getContext()).load(img.getUrl()).transform(new RoundedCorners(200)).into(ivProfileImg);
+        Glide.with(getContext()).load(img.getUrl()).transform(new RoundedCorners(roundingRadius)).into(ivProfileImg);
         super.onViewCreated(view, savedInstanceState);
-        BtnLogout.setOnClickListener(new View.OnClickListener() {
+        btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ParseUser.logOut();
