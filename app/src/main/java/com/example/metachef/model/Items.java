@@ -53,6 +53,9 @@ public class Items{
     public String getImage() {
         return image;
     }
+    public String getDescription() {
+        return description;
+    }
 
     public int getNum() {
         return num;
@@ -64,9 +67,5 @@ public class Items{
 
     public void setNumberInCart(int numberInCart) {
         this.numberInCart = numberInCart;
-    }
-
-    public String getDescription() {
-        return description;
     }
 }

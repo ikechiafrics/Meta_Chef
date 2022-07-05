@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.metachef.Adapters.SearchAdapter;
 import com.example.metachef.model.Items;
 import com.example.metachef.Adapters.ItemsAdapter;
@@ -24,6 +26,8 @@ import com.example.metachef.R;
 import com.example.metachef.Interface.RandomRecipeListener;
 import com.example.metachef.RandomRecipesResponse;
 import com.example.metachef.RequestManager;
+import com.parse.ParseFile;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +43,7 @@ public class HomeFragment extends Fragment {
     private RequestManager manager;
     private ItemsAdapter itemsAdapter;
     private PopularAdapter popularAdapter;
+    private ImageView ivProfilePic;
     private List<Items> allItems;
     private List<Items> allItems2;
     private List<String> tags = new ArrayList<>();
@@ -52,8 +57,12 @@ public class HomeFragment extends Fragment {
         manager.getRandomRecipes(responseListener, tags);
         rvItems = view.findViewById(R.id.rvItems);
         rvPopular = view.findViewById(R.id.rvPopular);
+        ivProfilePic = view.findViewById(R.id.ivProfilePic);
         allItems = new ArrayList<>();
         allItems2 = new ArrayList<>();
+        ParseUser user = ParseUser.getCurrentUser();
+        ParseFile image = user.getParseFile("profile_picture");
+        Glide.with(getContext()).load(image.getUrl()).transform(new RoundedCorners(200)).into(ivProfilePic);
 
     }
 
