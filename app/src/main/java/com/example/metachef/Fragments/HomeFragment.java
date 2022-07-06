@@ -12,8 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.metachef.model.Items;
 import com.example.metachef.Adapters.ItemsAdapter;
 import com.example.metachef.Adapters.PopularAdapter;
@@ -21,6 +24,8 @@ import com.example.metachef.R;
 import com.example.metachef.Interface.RandomRecipeListener;
 import com.example.metachef.RandomRecipesResponse;
 import com.example.metachef.RequestManager;
+import com.parse.ParseFile;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,34 +33,39 @@ import java.util.List;
 //This class represents the home page
 
 public class HomeFragment extends Fragment {
-
+    public static final String KEY_IMAGE = "profile_picture";
     public static final String TAG = "HomeFragment";
 
     private RecyclerView rvItems;
     private RecyclerView rvPopular;
-    RequestManager manager;
-    private ItemsAdapter itemsAdapter;
-    private PopularAdapter popularAdapter;
-    List<Items> allItems;
-    List<Items> allItems2;
+    private List<Items> allItems;
+    private List<Items> popularItems;
+    private final List<String> tags = new ArrayList<>();
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        manager = new RequestManager(getContext());
-        manager.getRandomRecipes(responseListener);
+        int roundingRadius = 200;
+        RequestManager manager = new RequestManager(getContext());
+        manager.getRandomRecipes(responseListener, tags);
         rvItems = view.findViewById(R.id.rvItems);
         rvPopular = view.findViewById(R.id.rvPopular);
+        ImageView ivProfilePic = view.findViewById(R.id.ivProfilePic);
         allItems = new ArrayList<>();
-        allItems2 = new ArrayList<>();
+        popularItems = new ArrayList<>();
+        ParseUser user = ParseUser.getCurrentUser();
+        ParseFile image = user.getParseFile(KEY_IMAGE);
+        Glide.with(getContext()).load(image.getUrl()).transform(new RoundedCorners(roundingRadius)).into(ivProfilePic);
 
     }
 
     private final RandomRecipeListener responseListener = new RandomRecipeListener() {
         @Override
         public void didfetch(RandomRecipesResponse response, String message) {
-            itemsAdapter = new ItemsAdapter(getContext(), allItems);
-            popularAdapter = new PopularAdapter(getContext(), allItems2);
+            ItemsAdapter itemsAdapter = new ItemsAdapter(getContext(), allItems);
+            PopularAdapter popularAdapter = new PopularAdapter(getContext(), popularItems);
             rvItems.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
             rvPopular.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
 
@@ -64,9 +74,8 @@ public class HomeFragment extends Fragment {
             }
 
             for(int i = 10; i < 20; i++){
-                allItems2.add(response.recipes.get(i));
+                popularItems.add(response.recipes.get(i));
             }
-            Log.e("OnSuccess", "this is working");
             rvItems.setAdapter(itemsAdapter);
             rvPopular.setAdapter(popularAdapter);
         }

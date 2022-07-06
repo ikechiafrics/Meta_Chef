@@ -2,7 +2,6 @@ package com.example.metachef;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +12,6 @@ import com.parse.ParseUser;
 //This class represents the get started page, which appears when a new user logs in
 public class StartingActivity extends AppCompatActivity {
 
-    private TextView tvMain;
     Button btnGetStarted;
 
     @Override
@@ -26,7 +24,7 @@ public class StartingActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_starting);
 
-        tvMain = findViewById(R.id.tvMain);
+        TextView tvMain = findViewById(R.id.tvMain);
         btnGetStarted = findViewById(R.id.btnGetStarted);
 
         btnGetStarted.setOnClickListener(new View.OnClickListener() {

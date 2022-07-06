@@ -2,8 +2,12 @@ package com.example.metachef;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.example.metachef.Interface.RandomRecipeListener;
 import com.example.metachef.Interface.RecipeDetailsListener;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,21 +19,21 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public class RequestManager {
-    Context mContext;
-    Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.spoonacular.com/").addConverterFactory(GsonConverterFactory.create()).build();
+    final Context mContext;
+    final Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.spoonacular.com/").addConverterFactory(GsonConverterFactory.create()).build();
 
     public RequestManager(Context mContext) {
         this.mContext = mContext;
     }
 
-    public void getRandomRecipes(RandomRecipeListener listener){
+    public void getRandomRecipes(RandomRecipeListener listener, List<String> tags){
         RandomRecipesCall randomRecipesCall = retrofit.create(RandomRecipesCall.class);
-        Call<RandomRecipesResponse> call = randomRecipesCall.callRandomRecipe("a0b47258ef634097812d0213ca6217ea", "20");
+        Call<RandomRecipesResponse> call = randomRecipesCall.callRandomRecipe("a0b47258ef634097812d0213ca6217ea", "20",tags);
 
         //enqueue to make call asynchronously
         call.enqueue(new Callback<RandomRecipesResponse>() {
             @Override
-            public void onResponse(Call<RandomRecipesResponse> call, Response<RandomRecipesResponse> response) {
+            public void onResponse(@NonNull Call<RandomRecipesResponse> call, @NonNull Response<RandomRecipesResponse> response) {
                 if (!response.isSuccessful()){
                     listener.diderror(response.message());
                     return;
@@ -38,7 +42,7 @@ public class RequestManager {
             }
 
             @Override
-            public void onFailure(Call<RandomRecipesResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<RandomRecipesResponse> call, @NonNull Throwable t) {
                 listener.diderror(t.getMessage());
             }
         });
@@ -46,12 +50,11 @@ public class RequestManager {
 
     public void getRecipeDetails(RecipeDetailsListener listener, int id){
         RecipeDetailsCall RecipeDetailsCall = retrofit.create(RecipeDetailsCall.class);
-        Call<ShowDetailActivity> call = RecipeDetailsCall.callRecipeDetails(id,"a0b47258ef634097812d0213ca6217ea");
-
+        Call<ShowDetailActivity> call = RecipeDetailsCall.callRecipeDetails(id, "a0b47258ef634097812d0213ca6217ea");
         //enqueue to make call asynchronously
         call.enqueue(new Callback<ShowDetailActivity>() {
             @Override
-            public void onResponse(Call<ShowDetailActivity> call, Response<ShowDetailActivity> response) {
+            public void onResponse(@NonNull Call<ShowDetailActivity> call, @NonNull Response<ShowDetailActivity> response) {
                 if (!response.isSuccessful()){
                     listener.diderror(response.message());
                     return;
@@ -60,7 +63,7 @@ public class RequestManager {
             }
 
             @Override
-            public void onFailure(Call<ShowDetailActivity> call, Throwable t) {
+            public void onFailure(@NonNull Call<ShowDetailActivity> call, @NonNull Throwable t) {
                 listener.diderror(t.getMessage());
             }
         });
@@ -69,7 +72,7 @@ public class RequestManager {
     private interface RandomRecipesCall{
 //        Get Call
         @GET("recipes/random")
-        Call<RandomRecipesResponse> callRandomRecipe(@Query("apiKey") String apiKey, @Query("number") String number);
+        Call<RandomRecipesResponse> callRandomRecipe(@Query("apiKey") String apiKey, @Query("number") String number, @Query("tags")List<String> tags);
     }
 
     private interface RecipeDetailsCall{

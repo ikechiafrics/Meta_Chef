@@ -19,8 +19,8 @@ import java.util.List;
 //This class is what is attached to the recycler view of the cart
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
-    Context context;
-    List<Items> allItems;
+    private final Context context;
+    private final List<Items> allItems;
 
     public CartAdapter(Context context, List<Items> allItems) {
         this.context = context;
@@ -46,9 +46,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvCartTitle,tvFeeEachItem;
-        ImageView ivItemPic,btnPlusItem, btnMinusItem;
-        TextView tvTotalEachItem, tvCartnum;
+        final TextView tvCartTitle;
+        final TextView tvFeeEachItem;
+        final ImageView ivItemPic;
+        final ImageView btnPlusItem;
+        final ImageView btnMinusItem;
+        final TextView tvTotalEachItem;
+        final TextView tvCartnum;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,8 +67,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
         public void bind(Items items) {
             tvCartTitle.setText(items.getTitle());
-            tvFeeEachItem.setText(String.valueOf(items.getNum()));
-            tvTotalEachItem.setText(String.valueOf(Math.round((items.getNumberInCart() * items.getNum()) * 100) / 100));
+            tvFeeEachItem.setText(String.valueOf(items.getPricePerServing()));
+            tvTotalEachItem.setText(String.valueOf(Math.round((items.getNumberInCart() * items.getPricePerServing()) * 100) / 100));
             tvCartnum.setText(items.getNumberInCart());
             Glide.with(context).load(items.getImage()).into(ivItemPic);
         }

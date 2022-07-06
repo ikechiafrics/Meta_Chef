@@ -17,10 +17,8 @@ import org.parceler.Parcels;
 
 public class ShowDetailActivity extends AppCompatActivity {
     RequestManager manager;
-    private TextView addToCartBtn;
-    private TextView titleTxt, descriptionTxt, numberOrderTxt, tvFee;
-    private ImageView plusBtn, MinusBtn, picFood, BtnBack;
-    private Items items;
+    private TextView numberOrderTxt;
+    private ImageView BtnBack;
     int numberOrder = 1;
 
 
@@ -30,22 +28,22 @@ public class ShowDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_detail);
         manager = new RequestManager(ShowDetailActivity.this);
 
-        addToCartBtn = findViewById(R.id.addToCartBtn);
-        titleTxt = findViewById(R.id.titleTxt);
-        tvFee = findViewById(R.id.tvFee);
-        descriptionTxt = findViewById(R.id.descriptionTxt);
+        TextView addToCartBtn = findViewById(R.id.addToCartBtn);
+        TextView titleTxt = findViewById(R.id.titleTxt);
+        TextView tvFee = findViewById(R.id.tvFee);
+        TextView descriptionTxt = findViewById(R.id.descriptionTxt);
         numberOrderTxt = findViewById(R.id.numberOrderTxt);
-        plusBtn = findViewById(R.id.plusBtn);
-        MinusBtn = findViewById(R.id.MinusBtn);
-        picFood = findViewById(R.id.picFood);
+        ImageView plusBtn = findViewById(R.id.plusBtn);
+        ImageView minusBtn = findViewById(R.id.MinusBtn);
+        ImageView picFood = findViewById(R.id.picFood);
 
-        items = Parcels.unwrap(getIntent().getParcelableExtra(Items.class.getSimpleName()));
+        Items items = Parcels.unwrap(getIntent().getParcelableExtra(Items.class.getSimpleName()));
 
         titleTxt.setText(items.getTitle());
-        descriptionTxt.setText(items.getTitle());
+        descriptionTxt.setText(items.getSummary());
         numberOrderTxt.setText(String.valueOf(numberOrder));
         Glide.with(ShowDetailActivity.this).load(items.getImage()).transform(new RoundedCorners(90)).into(picFood);
-        String prices = String.valueOf(items.getNum());
+        String prices = String.valueOf(items.getPricePerServing());
         tvFee.setText(prices);
 
         plusBtn.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +54,7 @@ public class ShowDetailActivity extends AppCompatActivity {
             }
         });
 
-        MinusBtn.setOnClickListener(new View.OnClickListener() {
+        minusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (numberOrder > 1) {

@@ -7,7 +7,7 @@ import com.parse.ParseUser;
 //This class contains data which calls the use's information from the database
 @ParseClassName("_User")
 public class User extends ParseObject {
-    private static final String KEY_IMAGE = "profile_picture";
+    public static final String KEY_IMAGE = "profile_picture";
     private static final String KEY_USER = "username";
 
 

@@ -20,26 +20,24 @@ import com.example.metachef.R;
 //This class represents the Carts page
 
 public class CartFragment extends Fragment {
-    private RecyclerView rvCart;
-    private CartAdapter cart_adapter;
+    private CartAdapter cartAdapter;
     private double tax;
-    private ScrollView scrollView;
     TextView tvItemsTotalFee, tvDeliveryFee, tvTaxFee, tvTotalFee,tvEmpty;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvCart = view.findViewById(R.id.rvCart);
+        RecyclerView rvCart = view.findViewById(R.id.rvCart);
         tvItemsTotalFee = view.findViewById(R.id.tvItemsTotalFee);
         tvTaxFee = view.findViewById(R.id.tvTaxFee);
         tvTotalFee = view.findViewById(R.id.tvTotalFee);
         tvDeliveryFee = view.findViewById(R.id.tvDeliveryFee);
         tvEmpty = view.findViewById(R.id.tvEmpty);
-        scrollView = view.findViewById(R.id.scrollView4);
+        ScrollView scrollView = view.findViewById(R.id.scrollView4);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         rvCart.setLayoutManager(linearLayoutManager);
-        rvCart.setAdapter(cart_adapter);
+        rvCart.setAdapter(cartAdapter);
     }
 
     @Override
