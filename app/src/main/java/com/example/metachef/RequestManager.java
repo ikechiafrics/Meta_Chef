@@ -50,11 +50,11 @@ public class RequestManager {
 
     public void getRecipeDetails(RecipeDetailsListener listener, int id){
         RecipeDetailsCall RecipeDetailsCall = retrofit.create(RecipeDetailsCall.class);
-        Call<ShowDetailActivity> call = RecipeDetailsCall.callRecipeDetails(id, "a0b47258ef634097812d0213ca6217ea");
+        Call<RecipeDetailsResponse> call = RecipeDetailsCall.callRecipeDetails(id, "a0b47258ef634097812d0213ca6217ea");
         //enqueue to make call asynchronously
-        call.enqueue(new Callback<ShowDetailActivity>() {
+        call.enqueue(new Callback<RecipeDetailsResponse>() {
             @Override
-            public void onResponse(@NonNull Call<ShowDetailActivity> call, @NonNull Response<ShowDetailActivity> response) {
+            public void onResponse(@NonNull Call<RecipeDetailsResponse> call, @NonNull Response<RecipeDetailsResponse> response) {
                 if (!response.isSuccessful()){
                     listener.diderror(response.message());
                     return;
@@ -63,7 +63,7 @@ public class RequestManager {
             }
 
             @Override
-            public void onFailure(@NonNull Call<ShowDetailActivity> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<RecipeDetailsResponse> call, @NonNull Throwable t) {
                 listener.diderror(t.getMessage());
             }
         });
@@ -78,7 +78,7 @@ public class RequestManager {
     private interface RecipeDetailsCall{
 //        Get Call
         @GET("recipes/{id}/information")
-        Call<ShowDetailActivity> callRecipeDetails(@Path("id") int id, @Query("apiKey") String apiKey);
+        Call<RecipeDetailsResponse> callRecipeDetails(@Path("id") int id, @Query("apiKey") String apiKey);
     }
 
 }
