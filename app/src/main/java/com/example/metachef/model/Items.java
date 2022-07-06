@@ -58,12 +58,28 @@ public class Items{
         return summary;
     }
 
-    public double getPricePerServing() {
+    public Double getPricePerServing() {
         return pricePerServing;
     }
 
     public int getNumberInCart() {
         return numberInCart;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public void setPricePerServing(double pricePerServing) {
+        this.pricePerServing = pricePerServing;
     }
 
     public void setNumberInCart(int numberInCart) {
