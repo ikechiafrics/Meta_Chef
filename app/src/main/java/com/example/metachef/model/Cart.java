@@ -9,11 +9,18 @@ import com.parse.ParseUser;
 //This class contains data which calls the use's information from the database
 @ParseClassName("Cart")
 public class Cart extends ParseObject {
+    public static final String KEY_ID = "id";
     public static final String KEY_TITLE = "title";
     public static final String KEY_IMAGE = "image";
     public static final String KEY_USER = "user";
     public static final String KEY_SIZE = "size";
     public static final String KEY_PRICE = "price";
+
+    public int getId() {return getInt(KEY_ID);}
+
+    public void setId(int id){
+        put(KEY_ID, id);
+    }
 
     public String getTitle() {return getString(KEY_TITLE);}
 

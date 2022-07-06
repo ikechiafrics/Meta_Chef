@@ -77,6 +77,7 @@ public class ShowDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(ShowDetailActivity.this, "Added To Cart", Toast.LENGTH_SHORT).show();
                 Cart cart = new Cart();
+                cart.setId(items.getId());
                 cart.setTitle(items.getTitle());
                 File file = new File(items.getImage());
                 final ParseFile imageFile = new ParseFile(items.getImage(), null);
