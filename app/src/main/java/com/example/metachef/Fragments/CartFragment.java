@@ -19,10 +19,11 @@ import com.example.metachef.Adapters.CartAdapter;
 import com.example.metachef.R;
 import com.example.metachef.RequestManager;
 import com.example.metachef.model.Cart;
-import com.example.metachef.model.Items;
+import com.example.metachef.model.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +64,10 @@ public class CartFragment extends Fragment {
     }
 
     private void queryPosts(int size) {
+        User currentUser = (User) ParseUser.getCurrentUser();
+        String Id = currentUser.getObjectId();
         ParseQuery<Cart> query = ParseQuery.getQuery(Cart.class);
+        query.whereEqualTo(Cart.KEY_USER, currentUser);
         query.findInBackground(new FindCallback<Cart>() {
             @Override
             public void done(List<Cart> objects, ParseException e) {

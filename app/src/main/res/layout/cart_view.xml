@@ -22,7 +22,10 @@
         android:id="@+id/tvCartItem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:maxLines="2"
         android:text="TextView"
         android:textColor="#000000"
         android:textSize="20sp"
@@ -96,7 +99,6 @@
 
     <TextView
         android:id="@+id/tvTotalEachItem"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="2"
@@ -105,6 +107,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/btnPlusItem"
         app:layout_constraintEnd_toEndOf="@+id/tvfeeEachItem"
-        app:layout_constraintTop_toBottomOf="@+id/tvfeeEachItem" />
+        app:layout_constraintTop_toBottomOf="@+id/tvfeeEachItem"
+        android:layout_width="wrap_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

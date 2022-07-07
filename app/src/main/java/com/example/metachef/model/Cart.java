@@ -7,6 +7,8 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 //This class contains data which calls the use's information from the database
 @ParseClassName("Cart")
