@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.metachef.model.Items;
+import com.example.metachef.model.Cart;
 import com.example.metachef.R;
 
 import java.util.List;
@@ -20,11 +20,11 @@ import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private final Context context;
-    private final List<Items> allItems;
+    private final List<Cart> allCartItems;
 
-    public CartAdapter(Context context, List<Items> allItems) {
+    public CartAdapter(Context context, List<Cart> cartItems) {
         this.context = context;
-        this.allItems = allItems;
+        this.allCartItems = cartItems;
     }
 
     @NonNull
@@ -36,13 +36,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Items items = allItems.get(position);
-        holder.bind(items);
+        Cart cartItems = allCartItems.get(position);
+        holder.bind(cartItems);
     }
 
     @Override
-    public int getItemCount() {
-        return allItems.size();
+    public int getItemCount() {return allCartItems.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -52,7 +51,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         final ImageView btnPlusItem;
         final ImageView btnMinusItem;
         final TextView tvTotalEachItem;
-        final TextView tvCartnum;
+        final TextView tvCartNum;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -62,15 +62,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             tvTotalEachItem = itemView.findViewById(R.id.tvTotalEachItem);
             btnPlusItem = itemView.findViewById(R.id.btnPlusItem);
             btnMinusItem = itemView.findViewById(R.id.btnMinusItem);
-            tvCartnum = itemView.findViewById(R.id.tvCartnum);
+            tvCartNum = itemView.findViewById(R.id.tvCartNum);
         }
 
-        public void bind(Items items) {
-            tvCartTitle.setText(items.getTitle());
-            tvFeeEachItem.setText(String.valueOf(items.getPricePerServing()));
-            tvTotalEachItem.setText(String.valueOf(Math.round((items.getNumberInCart() * items.getPricePerServing()) * 100) / 100));
-            tvCartnum.setText(items.getNumberInCart());
-            Glide.with(context).load(items.getImage()).into(ivItemPic);
+        public void bind(Cart cartItems) {
+            tvCartTitle.setText(cartItems.getTitle());
+            tvFeeEachItem.setText(String.valueOf(cartItems.getPrice()));
+            tvTotalEachItem.setText(String.valueOf(Math.round((cartItems.getSize() * cartItems.getPrice()) * 100) / 100));
+            tvCartNum.setText(String.valueOf(cartItems.getSize()));
+//            Glide.with(context).load(cartItems.getImage()).into(ivItemPic);
         }
+
+
     }
 }

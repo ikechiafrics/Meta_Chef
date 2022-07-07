@@ -2,33 +2,32 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
     android:layout_marginTop="10dp"
-    android:layout_marginEnd="16dp"
     android:layout_marginBottom="10dp"
     android:elevation="3dp">
 
     <ImageView
         android:id="@+id/ivItemPic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="240dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/promotion_photo" />
 
     <TextView
         android:id="@+id/tvCartItem"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:text="TextView"
         android:textColor="#000000"
         android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/tvDollarSign"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/ivItemPic"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,29 +35,27 @@
         android:id="@+id/btnPlusItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvCartnum"
-        app:layout_constraintTop_toBottomOf="@+id/ivItemPic"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCartNum"
+        app:layout_constraintStart_toEndOf="@+id/tvCartNum"
+        app:layout_constraintTop_toTopOf="@+id/tvCartNum"
         app:srcCompat="@drawable/ic_outline_add_circle_outline_24" />
 
     <ImageView
         android:id="@+id/btnMinusItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnPlusItem"
-        app:layout_constraintEnd_toStartOf="@+id/tvCartnum"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCartNum"
+        app:layout_constraintEnd_toStartOf="@+id/tvCartNum"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvCartnum"
+        app:layout_constraintTop_toTopOf="@+id/tvCartNum"
         app:srcCompat="@drawable/ic_outline_do_disturb_on_24" />
 
     <TextView
-        android:id="@+id/tvCartnum"
+        android:id="@+id/tvCartNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="2dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -72,8 +69,9 @@
         android:layout_height="wrap_content"
         android:text="$"
         android:textColor="#C0A131"
+        app:layout_constraintBottom_toBottomOf="@+id/tvfeeEachItem"
         app:layout_constraintEnd_toStartOf="@+id/tvfeeEachItem"
-        app:layout_constraintTop_toTopOf="@+id/tvCartItem" />
+        app:layout_constraintTop_toTopOf="@+id/tvfeeEachItem" />
 
     <TextView
         android:id="@+id/tvfeeEachItem"
@@ -100,11 +98,13 @@
         android:id="@+id/tvTotalEachItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
         android:text="TextView"
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/btnPlusItem"
         app:layout_constraintEnd_toEndOf="@+id/tvfeeEachItem"
-        app:layout_constraintTop_toTopOf="@+id/btnPlusItem" />
+        app:layout_constraintTop_toBottomOf="@+id/tvfeeEachItem" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

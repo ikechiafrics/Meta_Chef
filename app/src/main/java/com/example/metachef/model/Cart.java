@@ -6,6 +6,8 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.io.File;
+
 //This class contains data which calls the use's information from the database
 @ParseClassName("Cart")
 public class Cart extends ParseObject {

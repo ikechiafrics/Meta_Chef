@@ -2,8 +2,11 @@ package com.example.metachef;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,10 +29,11 @@ import java.io.File;
 public class ShowDetailActivity extends AppCompatActivity {
     RequestManager manager;
     private TextView numberOrderTxt;
-    private ImageView BtnBack;
+    private ImageView BtnBack, btnLike;
     int numberOrder = 1;
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,7 @@ public class ShowDetailActivity extends AppCompatActivity {
         ImageView plusBtn = findViewById(R.id.plusBtn);
         ImageView minusBtn = findViewById(R.id.MinusBtn);
         ImageView picFood = findViewById(R.id.picFood);
+        ImageView btnLike = findViewById(R.id.btnLike);
 
         Items items = Parcels.unwrap(getIntent().getParcelableExtra(Items.class.getSimpleName()));
 
@@ -53,6 +58,24 @@ public class ShowDetailActivity extends AppCompatActivity {
         Glide.with(ShowDetailActivity.this).load(items.getImage()).transform(new RoundedCorners(90)).into(picFood);
         String prices = String.valueOf(items.getPricePerServing());
         tvFee.setText(prices);
+
+        picFood.setOnTouchListener(new View.OnTouchListener() {
+            private GestureDetector gestureDetector = new GestureDetector(ShowDetailActivity.this, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onDoubleTap(MotionEvent e) {
+                        btnLike.setImageResource(R.drawable.ic_baseline_favorite_24);
+                        Log.d("TEST", "onDoubleTap");
+                    return super.onDoubleTap(e);
+                }
+            });
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.d("TEST", "Raw event: " + event.getAction() + ", (" + event.getRawX() + ", " + event.getRawY() + ")");
+                gestureDetector.onTouchEvent(event);
+                return true;
+            }
+        });
 
         plusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +101,9 @@ public class ShowDetailActivity extends AppCompatActivity {
                 Toast.makeText(ShowDetailActivity.this, "Added To Cart", Toast.LENGTH_SHORT).show();
                 Cart cart = new Cart();
                 cart.setItem(items.getId());
+                String img = items.getImage();
+                cart.setTitle(items.getTitle());
+                cart.setPrice(items.getPricePerServing());
                 cart.setSize(numberOrder);
                 ParseUser user = ParseUser.getCurrentUser();
                 cart.setUser(user);

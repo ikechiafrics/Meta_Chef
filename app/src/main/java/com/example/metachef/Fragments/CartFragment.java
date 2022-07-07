@@ -8,68 +8,80 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.metachef.Adapters.CartAdapter;
-import com.example.metachef.Adapters.ItemsAdapter;
-import com.example.metachef.Adapters.PopularAdapter;
-import com.example.metachef.Interface.RandomRecipeListener;
-import com.example.metachef.Interface.RecipeDetailsListener;
 import com.example.metachef.R;
-import com.example.metachef.RandomRecipesResponse;
-import com.example.metachef.RecipeDetailsResponse;
 import com.example.metachef.RequestManager;
+import com.example.metachef.model.Cart;
 import com.example.metachef.model.Items;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //This class represents the Carts page
 
 public class CartFragment extends Fragment {
-    private int id;
-    private CartAdapter cartAdapter;
+    protected CartAdapter cartAdapter;
     private double tax;
-    private List<Items> allItems;
+    public static final String TAG = "Cart Fragment";
+    List<Cart> allCartItems;
+    private List<String> cartId = new ArrayList<>();
     private RecyclerView rvCart;
+    RequestManager manager;
     TextView tvItemsTotalFee, tvDeliveryFee, tvTaxFee, tvTotalFee,tvEmpty;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RequestManager manager = new RequestManager(getContext());
-        manager.getRecipeDetails(responseListener, id);
+
+//        manager = new RequestManager(getContext());
+//        manager.getRecipeDetails(responseListener, cartId);
 
         RecyclerView rvCart = view.findViewById(R.id.rvCart);
         tvItemsTotalFee = view.findViewById(R.id.tvItemsTotalFee);
+        allCartItems = new ArrayList<>();
         tvTaxFee = view.findViewById(R.id.tvTaxFee);
         tvTotalFee = view.findViewById(R.id.tvTotalFee);
         tvDeliveryFee = view.findViewById(R.id.tvDeliveryFee);
         tvEmpty = view.findViewById(R.id.tvEmpty);
         ScrollView scrollView = view.findViewById(R.id.scrollView4);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
-        rvCart.setLayoutManager(linearLayoutManager);
+        cartAdapter = new CartAdapter(getContext(), allCartItems);
+        rvCart.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         rvCart.setAdapter(cartAdapter);
+        queryPosts(allCartItems.size());
+
     }
 
-    private final RecipeDetailsListener responseListener = new RecipeDetailsListener() {
-        @Override
-        public void didfetch(RecipeDetailsResponse response, String message) {
-            CartAdapter cartAdapter = new CartAdapter(getContext(), allItems);
-            rvCart.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-            rvCart.setAdapter(cartAdapter);
-        }
-
-        @Override
-        public void diderror(String message) {
-            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-        }
-    };
+    private void queryPosts(int size) {
+        ParseQuery<Cart> query = ParseQuery.getQuery(Cart.class);
+        query.findInBackground(new FindCallback<Cart>() {
+            @Override
+            public void done(List<Cart> objects, ParseException e) {
+                if(e != null){
+                    Log.e (TAG, "Issue with getting posts", e);
+                    return;
+                }
+                for (Cart cart : objects) {
+                    Log.i(TAG, "title: " + cart.getTitle() + ", price: " + cart.getPrice());
+                }
+                allCartItems.addAll(objects);
+                cartAdapter.notifyDataSetChanged();
+            }
+        });
+        query.include(Cart.KEY_USER);
+        query.include(Cart.KEY_ID);
+        query.include(Cart.KEY_SIZE);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
