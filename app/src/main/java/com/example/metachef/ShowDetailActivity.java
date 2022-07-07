@@ -101,7 +101,8 @@ public class ShowDetailActivity extends AppCompatActivity {
                 Toast.makeText(ShowDetailActivity.this, "Added To Cart", Toast.LENGTH_SHORT).show();
                 Cart cart = new Cart();
                 cart.setItem(items.getId());
-                String img = items.getImage();
+//                String img = items.getImage();
+                cart.setKeyImage(items.getImage());
                 cart.setTitle(items.getTitle());
                 cart.setPrice(items.getPricePerServing());
                 cart.setSize(numberOrder);

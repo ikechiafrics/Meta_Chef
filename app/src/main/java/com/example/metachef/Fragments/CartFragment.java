@@ -44,9 +44,6 @@ public class CartFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        manager = new RequestManager(getContext());
-//        manager.getRecipeDetails(responseListener, cartId);
-
         RecyclerView rvCart = view.findViewById(R.id.rvCart);
         tvItemsTotalFee = view.findViewById(R.id.tvItemsTotalFee);
         allCartItems = new ArrayList<>();

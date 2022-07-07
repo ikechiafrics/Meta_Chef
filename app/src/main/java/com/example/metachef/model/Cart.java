@@ -2,13 +2,8 @@ package com.example.metachef.model;
 
 
 import com.parse.ParseClassName;
-import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 //This class contains data which calls the use's information from the database
 @ParseClassName("Cart")
@@ -38,18 +33,17 @@ public class Cart extends ParseObject {
         put(KEY_PRICE, price);
     }
 
-    public ParseFile getImage() {return getParseFile(KEY_IMAGE);
+    public String getKeyImage() { return getString(KEY_IMAGE);
     }
-
+    public void setKeyImage(String image){
+        put(KEY_IMAGE, image);
+    }
     public int getSize() {return getInt(KEY_SIZE);}
 
     public void setSize(int size){
         put(KEY_SIZE, size);
     }
 
-    public void setImage(ParseFile parsefile){
-        put(KEY_IMAGE, parsefile);
-    }
     public ParseUser getUser() {
         return getParseUser(KEY_USER);
     }
@@ -57,4 +51,16 @@ public class Cart extends ParseObject {
         put(KEY_USER, user);
     }
 
+    public void plusFoodNumber(){
+        put(KEY_SIZE, (getSize()+1));
+    }
+
+    public void minusFoodNumber(){
+        if (getSize() == 1){
+            return;
+        }
+        else {
+            put(KEY_SIZE, (getSize() - 1));
+        }
+    }
 }

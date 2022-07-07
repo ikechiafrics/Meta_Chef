@@ -6,13 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.metachef.model.Cart;
 import com.example.metachef.R;
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 
 import java.util.List;
 
@@ -22,9 +26,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private final Context context;
     private final List<Cart> allCartItems;
 
-    public CartAdapter(Context context, List<Cart> cartItems) {
+    public CartAdapter(Context context, List<Cart> allCartItems) {
         this.context = context;
-        this.allCartItems = cartItems;
+        this.allCartItems = allCartItems;
     }
 
     @NonNull
@@ -70,7 +74,41 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             tvFeeEachItem.setText(String.valueOf(cartItems.getPrice()));
             tvTotalEachItem.setText(String.valueOf(Math.round((cartItems.getSize() * cartItems.getPrice()) * 100) / 100));
             tvCartNum.setText(String.valueOf(cartItems.getSize()));
-//            Glide.with(context).load(cartItems.getImage()).into(ivItemPic);
+            int roundingRadius = 60;
+            Glide.with(context).load(cartItems.getKeyImage()).transform(new RoundedCorners(roundingRadius)).into(ivItemPic);
+
+            btnPlusItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cartItems.plusFoodNumber();
+                    cartItems.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            Toast.makeText(context,"Increased number to " + cartItems.getSize(), Toast.LENGTH_SHORT);
+                        }
+                    });
+                    refreshCart(cartItems);
+                }
+            });
+
+            btnMinusItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cartItems.minusFoodNumber();
+                    cartItems.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            Toast.makeText(context,"Decreased number to " + cartItems.getSize(), Toast.LENGTH_SHORT);
+                        }
+                    });
+                    refreshCart(cartItems);
+                }
+            });
+        }
+
+        private void refreshCart(Cart cartItems) {
+            tvTotalEachItem.setText(String.valueOf(Math.round((cartItems.getSize() * cartItems.getPrice()) * 100) / 100));
+            tvCartNum.setText(String.valueOf(cartItems.getSize()));
         }
 
 
