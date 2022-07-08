@@ -5,6 +5,9 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //This class contains data which calls the use's information from the database
 @ParseClassName("Cart")
 public class Cart extends ParseObject {
@@ -15,6 +18,7 @@ public class Cart extends ParseObject {
     public static final String KEY_USER = "user";
     public static final String KEY_SIZE = "size";
     public static final String KEY_PRICE = "price";
+    public static final String KEY_LIKED_BY = "liked_post";
 
     public int getItem() {return getInt(KEY_ID);}
 
@@ -22,10 +26,10 @@ public class Cart extends ParseObject {
         put(KEY_ID, item);
     }
 
-    public int getItemstotal() {return getInt(KEY_ITEMSTOTAL);}
+    public double getItemstotal() {return getDouble(KEY_ITEMSTOTAL);}
 
-    public void setItemstotal(int itemstotal){
-        put(KEY_ID, itemstotal);
+    public void setItemstotal(double itemstotal){
+        put(KEY_ITEMSTOTAL, itemstotal);
     }
 
     public String getTitle() {return getString(KEY_TITLE);}
@@ -58,6 +62,19 @@ public class Cart extends ParseObject {
         put(KEY_USER, user);
     }
 
+    public List<String> getLikedBy() {
+        List<String> likeBy = getList(KEY_LIKED_BY);
+        if(likeBy == null) {
+            likeBy = new ArrayList<>();
+        }
+        return likeBy;
+    }
+
+    public void setLikedBy(List<String> likedBy)
+    {
+        put(KEY_LIKED_BY, likedBy);
+    }
+
     public void plusFoodNumber(){
         put(KEY_SIZE, (getSize()+1));
     }
@@ -71,6 +88,6 @@ public class Cart extends ParseObject {
         }
     }
     public void itemsTotal(){
-        
+
     }
 }

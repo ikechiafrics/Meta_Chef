@@ -1,6 +1,7 @@
 package com.example.metachef.Adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,7 +121,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             tvTotalEachItem.setText(String.valueOf(Math.round((cartItems.getSize() * cartItems.getPrice()) * 100) / 100));
             tvCartNum.setText(String.valueOf(cartItems.getSize()));
         }
+    }
 
 
+    public void clear() {
+        allCartItems.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<Cart> listCart) {
+        allCartItems.addAll(listCart);
+        notifyDataSetChanged();
     }
 }

@@ -7,8 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +32,7 @@ import java.util.List;
 
 public class CartFragment extends Fragment {
     protected CartAdapter cartAdapter;
+    public SwipeRefreshLayout swipeContainer;
     private double tax;
     public static final String TAG = "Cart Fragment";
     List<Cart> allCartItems;
@@ -40,9 +41,31 @@ public class CartFragment extends Fragment {
     RequestManager manager;
     TextView tvItemsTotalFee, tvDeliveryFee, tvTaxFee, tvTotalFee,tvEmpty;
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        // Lookup the swipe container view
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                cartAdapter.clear();
+                queryPosts(0);
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
         RecyclerView rvCart = view.findViewById(R.id.rvCart);
         tvItemsTotalFee = view.findViewById(R.id.tvItemsTotalFee);
@@ -51,13 +74,12 @@ public class CartFragment extends Fragment {
         tvTotalFee = view.findViewById(R.id.tvTotalFee);
         tvDeliveryFee = view.findViewById(R.id.tvDeliveryFee);
         tvEmpty = view.findViewById(R.id.tvEmpty);
-        ScrollView scrollView = view.findViewById(R.id.scrollView4);
+        ScrollView scrollView = view.findViewById(R.id.scrollView);
 
         cartAdapter = new CartAdapter(getContext(), allCartItems);
         rvCart.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         rvCart.setAdapter(cartAdapter);
         queryPosts(allCartItems.size());
-
     }
 
     private void queryPosts(int size) {
@@ -75,9 +97,7 @@ public class CartFragment extends Fragment {
                 cartAdapter.notifyDataSetChanged();
             }
         });
-        query.include(Cart.KEY_USER);
-        query.include(Cart.KEY_ID);
-        query.include(Cart.KEY_SIZE);
+        swipeContainer.setRefreshing(false);
     }
 
     @Override
