@@ -69,11 +69,7 @@ public class CartFragment extends Fragment {
             @Override
             public void done(List<Cart> objects, ParseException e) {
                 if(e != null){
-                    Log.e (TAG, "Issue with getting posts", e);
                     return;
-                }
-                for (Cart cart : objects) {
-                    Log.i(TAG, "title: " + cart.getTitle() + ", price: " + cart.getPrice());
                 }
                 allCartItems.addAll(objects);
                 cartAdapter.notifyDataSetChanged();

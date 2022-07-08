@@ -64,14 +64,12 @@ public class ShowDetailActivity extends AppCompatActivity {
                 @Override
                 public boolean onDoubleTap(MotionEvent e) {
                         btnLike.setImageResource(R.drawable.ic_baseline_favorite_24);
-                        Log.d("TEST", "onDoubleTap");
                     return super.onDoubleTap(e);
                 }
             });
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.d("TEST", "Raw event: " + event.getAction() + ", (" + event.getRawX() + ", " + event.getRawY() + ")");
                 gestureDetector.onTouchEvent(event);
                 return true;
             }
@@ -101,22 +99,13 @@ public class ShowDetailActivity extends AppCompatActivity {
                 Toast.makeText(ShowDetailActivity.this, "Added To Cart", Toast.LENGTH_SHORT).show();
                 Cart cart = new Cart();
                 cart.setItem(items.getId());
-//                String img = items.getImage();
                 cart.setKeyImage(items.getImage());
                 cart.setTitle(items.getTitle());
                 cart.setPrice(items.getPricePerServing());
                 cart.setSize(numberOrder);
                 ParseUser user = ParseUser.getCurrentUser();
                 cart.setUser(user);
-                cart.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if (e!= null)
-                        {
-                            Log.e("error","issue with adding to database", e);
-                        }
-                    }
-                });
+                cart.saveInBackground();
             }
         });
     }

@@ -56,6 +56,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         final ImageView btnMinusItem;
         final TextView tvTotalEachItem;
         final TextView tvCartNum;
+        final ImageView btnRemove;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -67,6 +68,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             btnPlusItem = itemView.findViewById(R.id.btnPlusItem);
             btnMinusItem = itemView.findViewById(R.id.btnMinusItem);
             tvCartNum = itemView.findViewById(R.id.tvCartNum);
+            btnRemove = itemView.findViewById(R.id.btnRemove);
         }
 
         public void bind(Cart cartItems) {
@@ -101,6 +103,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                             Toast.makeText(context,"Decreased number to " + cartItems.getSize(), Toast.LENGTH_SHORT);
                         }
                     });
+                    refreshCart(cartItems);
+                }
+            });
+
+            btnRemove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cartItems.deleteInBackground();
                     refreshCart(cartItems);
                 }
             });

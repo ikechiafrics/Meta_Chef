@@ -9,6 +9,7 @@ import com.parse.ParseUser;
 @ParseClassName("Cart")
 public class Cart extends ParseObject {
     public static final String KEY_ID = "item";
+    public static final String KEY_ITEMSTOTAL = "itemstotal";
     public static final String KEY_TITLE = "title";
     public static final String KEY_IMAGE = "image";
     public static final String KEY_USER = "user";
@@ -19,6 +20,12 @@ public class Cart extends ParseObject {
 
     public void setItem(int item){
         put(KEY_ID, item);
+    }
+
+    public int getItemstotal() {return getInt(KEY_ITEMSTOTAL);}
+
+    public void setItemstotal(int itemstotal){
+        put(KEY_ID, itemstotal);
     }
 
     public String getTitle() {return getString(KEY_TITLE);}
@@ -62,5 +69,8 @@ public class Cart extends ParseObject {
         else {
             put(KEY_SIZE, (getSize() - 1));
         }
+    }
+    public void itemsTotal(){
+        
     }
 }
