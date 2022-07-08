@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.metachef.Fragments.CartFragment;
 import com.example.metachef.model.Cart;
+import com.example.metachef.model.Food;
 import com.example.metachef.model.Items;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -35,7 +36,7 @@ public class ShowDetailActivity extends AppCompatActivity {
     private TextView numberOrderTxt;
     private ImageView BtnBack, btnLike;
     int numberOrder = 1;
-    Cart cart= new Cart() ;
+    Food food= new Food() ;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -43,7 +44,7 @@ public class ShowDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_detail);
-        List<String> likeBy = cart.getLikedBy();
+        List<String> likeBy = food.getLikedBy();
         manager = new RequestManager(ShowDetailActivity.this);
 
         TextView addToCartBtn = findViewById(R.id.addToCartBtn);
@@ -69,16 +70,10 @@ public class ShowDetailActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                if (!likeBy.contains(ParseUser.getCurrentUser().getObjectId())) {
-                    likeBy.add(ParseUser.getCurrentUser().getObjectId());
-                    cart.setLikedBy(likeBy);
                     btnLike.setImageResource(R.drawable.ic_baseline_favorite_border_24);
-                }
-                else {
                     likeBy.remove(ParseUser.getCurrentUser().getObjectId());
-                    cart.setLikedBy(likeBy);
-                }
-                cart.saveInBackground();
+                    food.setLikedBy(likeBy);
+                food.saveInBackground();
             }
         });
 
@@ -89,13 +84,13 @@ public class ShowDetailActivity extends AppCompatActivity {
                 public boolean onDoubleTap(MotionEvent e) {
                     if (!likeBy.contains(ParseUser.getCurrentUser().getObjectId())) {
                         likeBy.add(ParseUser.getCurrentUser().getObjectId());
-                        cart.setLikedBy(likeBy);
+                        food.setLikedBy(likeBy);
                         btnLike.setImageResource(R.drawable.ic_baseline_favorite_24);
-                        cart.saveInBackground();
+                        food.saveInBackground();
                     }
                     else{
                         likeBy.remove(ParseUser.getCurrentUser().getObjectId());
-                        cart.setLikedBy(likeBy);
+                        food.setLikedBy(likeBy);
                         btnLike.setImageResource(R.drawable.ic_baseline_favorite_24);
                     }
                     return super.onDoubleTap(e);

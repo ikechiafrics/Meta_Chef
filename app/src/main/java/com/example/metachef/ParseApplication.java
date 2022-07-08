@@ -3,6 +3,7 @@ package com.example.metachef;
 import android.app.Application;
 
 import com.example.metachef.model.Cart;
+import com.example.metachef.model.Food;
 import com.example.metachef.model.User;
 import com.parse.Parse;
 import com.parse.ParseObject;
@@ -14,6 +15,7 @@ public class ParseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ParseObject.registerSubclass(User.class);
+        ParseObject.registerSubclass(Food.class);
         ParseObject.registerSubclass(Cart.class);
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("fC6abkFFT8zsmhxtKdOHMjx2XwCRvI6NxfmbwI5B")
