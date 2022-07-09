@@ -33,35 +33,28 @@ import java.util.List;
 public class CartFragment extends Fragment {
     protected CartAdapter cartAdapter;
     public SwipeRefreshLayout swipeContainer;
-    private double tax;
-    public static final String TAG = "Cart Fragment";
     List<Cart> allCartItems;
-    private List<String> cartId = new ArrayList<>();
-    private RecyclerView rvCart;
-    RequestManager manager;
     TextView tvItemsTotalFee, tvDeliveryFee, tvTaxFee, tvTotalFee,tvEmpty;
+
+    public CartFragment() {
+    }
 
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-        // Lookup the swipe container view
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
 
-        // Setup refresh listener which triggers new data loading
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // Your code to refresh the list here.
-                // Make sure you call swipeContainer.setRefreshing(false)
-                // once the network request has completed successfully.
+
                 cartAdapter.clear();
                 queryPosts(0);
             }
         });
-        // Configure the refreshing colors
+
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
@@ -80,6 +73,30 @@ public class CartFragment extends Fragment {
         rvCart.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         rvCart.setAdapter(cartAdapter);
         queryPosts(allCartItems.size());
+
+        int deliveryFee = 10;
+        tvDeliveryFee.setText("$" + deliveryFee);
+
+        RecyclerView.AdapterDataObserver adapterDataObserver = new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+
+                String total = String.format("%.2f", cartAdapter.itemsTotal());
+                tvItemsTotalFee.setText(total);
+                double tax = cartAdapter.itemsTotal() * 0.10;
+
+                String taxStr = String.format("%.2f", tax);
+                tvTaxFee.setText(taxStr);
+
+                double totalAmount = cartAdapter.itemsTotal() + deliveryFee + tax;
+                String totalAmountStr = String.format("%.2f", totalAmount);
+                tvTotalFee.setText(totalAmountStr);
+            }
+        };
+
+        cartAdapter.registerAdapterDataObserver(adapterDataObserver);
+
     }
 
     private void queryPosts(int size) {
@@ -109,7 +126,7 @@ public class CartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_cart, container, false);
     }
 }

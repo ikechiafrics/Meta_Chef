@@ -2,6 +2,7 @@ package com.example.metachef.Adapters;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import java.util.List;
 //This class is what is attached to the recycler view of the cart
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
+    private static final String TAG = "CartAdapter";
     private final Context context;
     private final List<Cart> allCartItems;
 
@@ -46,10 +48,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
 
     @Override
-    public int getItemCount() {return allCartItems.size();
+    public int getItemCount() {
+        return allCartItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         final TextView tvCartTitle;
         final TextView tvFeeEachItem;
         final ImageView ivItemPic;
@@ -75,7 +78,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         public void bind(Cart cartItems) {
             tvCartTitle.setText(cartItems.getTitle());
             tvFeeEachItem.setText(String.valueOf(cartItems.getPrice()));
-            tvTotalEachItem.setText(String.valueOf(Math.round((cartItems.getSize() * cartItems.getPrice()) * 100) / 100));
+            Double itemTotal = (double) Math.round((cartItems.getSize() * cartItems.getPrice()) * 100) / 100;
+            tvTotalEachItem.setText(String.valueOf(itemTotal));
             tvCartNum.setText(String.valueOf(cartItems.getSize()));
             int roundingRadius = 60;
             Glide.with(context).load(cartItems.getKeyImage()).transform(new RoundedCorners(roundingRadius)).into(ivItemPic);
@@ -83,25 +87,28 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             btnPlusItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    itemsTotal();
                     cartItems.plusFoodNumber();
                     cartItems.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
-                            Toast.makeText(context,"Increased number to " + cartItems.getSize(), Toast.LENGTH_SHORT);
+                            Toast.makeText(context, "Increased number to " + cartItems.getSize(), Toast.LENGTH_SHORT);
                         }
                     });
                     refreshCart(cartItems);
+
                 }
             });
 
             btnMinusItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    itemsTotal();
                     cartItems.minusFoodNumber();
                     cartItems.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
-                            Toast.makeText(context,"Decreased number to " + cartItems.getSize(), Toast.LENGTH_SHORT);
+                            Toast.makeText(context, "Decreased number to " + cartItems.getSize(), Toast.LENGTH_SHORT);
                         }
                     });
                     refreshCart(cartItems);
@@ -118,11 +125,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         }
 
         private void refreshCart(Cart cartItems) {
-            tvTotalEachItem.setText(String.valueOf(Math.round((cartItems.getSize() * cartItems.getPrice()) * 100) / 100));
+            Double itemTotal = (double) Math.round((cartItems.getSize() * cartItems.getPrice()) * 100) / 100;
+            tvTotalEachItem.setText(String.valueOf(itemTotal));
             tvCartNum.setText(String.valueOf(cartItems.getSize()));
+            notifyDataSetChanged();
         }
     }
-
 
     public void clear() {
         allCartItems.clear();
@@ -132,5 +140,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public void addAll(List<Cart> listCart) {
         allCartItems.addAll(listCart);
         notifyDataSetChanged();
+    }
+
+    public double itemsTotal() {
+        double price = 0.0;
+        for (Cart allCartItem : allCartItems) {
+            price += allCartItem.getItemstotal();
+        }
+        return price;
     }
 }

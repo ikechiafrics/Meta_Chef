@@ -40,10 +40,6 @@ public class SearchFragment extends Fragment {
     public SearchFragment() {
     }
 
-    public static SearchFragment newInstance(String param1, String param2) {
-        return null;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

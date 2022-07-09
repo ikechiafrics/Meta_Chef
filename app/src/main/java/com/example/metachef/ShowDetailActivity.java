@@ -36,7 +36,7 @@ public class ShowDetailActivity extends AppCompatActivity {
     private TextView numberOrderTxt;
     private ImageView BtnBack, btnLike;
     int numberOrder = 1;
-    Food food= new Food() ;
+    final Food food= new Food() ;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -79,7 +79,7 @@ public class ShowDetailActivity extends AppCompatActivity {
 
         picFood.setOnTouchListener(new View.OnTouchListener() {
 
-            private GestureDetector gestureDetector = new GestureDetector(ShowDetailActivity.this, new GestureDetector.SimpleOnGestureListener() {
+            private final GestureDetector gestureDetector = new GestureDetector(ShowDetailActivity.this, new GestureDetector.SimpleOnGestureListener() {
                 @Override
                 public boolean onDoubleTap(MotionEvent e) {
                     if (!likeBy.contains(ParseUser.getCurrentUser().getObjectId())) {

@@ -20,8 +20,6 @@ public class Cart extends ParseObject {
     public static final String KEY_PRICE = "price";
     public static final String KEY_LIKED_BY = "liked_post";
 
-    public int getItem() {return getInt(KEY_ID);}
-
     public void setItem(int item){
         put(KEY_ID, item);
     }
@@ -77,7 +75,10 @@ public class Cart extends ParseObject {
 
     public void plusFoodNumber(){
         put(KEY_SIZE, (getSize()+1));
+        put(KEY_ITEMSTOTAL, (getPrice()*getSize()));
     }
+
+
 
     public void minusFoodNumber(){
         if (getSize() == 1){
@@ -85,9 +86,7 @@ public class Cart extends ParseObject {
         }
         else {
             put(KEY_SIZE, (getSize() - 1));
+            put(KEY_ITEMSTOTAL, (getPrice()*getSize()));
         }
-    }
-    public void itemsTotal(){
-
     }
 }
