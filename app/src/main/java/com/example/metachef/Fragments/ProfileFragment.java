@@ -10,10 +10,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.example.metachef.FavouritesActivity;
 import com.example.metachef.LoginActivity;
 import com.example.metachef.R;
 import com.parse.ParseFile;
@@ -22,9 +24,8 @@ import com.parse.ParseUser;
 //This class represents the profile page
 public class ProfileFragment extends Fragment {
     public static final String KEY_IMAGE = "profile_picture";
-
+    private Button btnFav;
     public ProfileFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -42,12 +43,22 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         int roundingRadius = 200;
+        btnFav = view.findViewById(R.id.btnFav);
         ImageView btnLogout = view.findViewById(R.id.BtnLogout);
         ImageView ivProfileImg = view.findViewById(R.id.ivProfileImg);
         ParseUser user = ParseUser.getCurrentUser();
         ParseFile img = user.getParseFile(KEY_IMAGE);
         Glide.with(getContext()).load(img.getUrl()).transform(new RoundedCorners(roundingRadius)).into(ivProfileImg);
         super.onViewCreated(view, savedInstanceState);
+
+
+        btnFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Favourites();
+            }
+        });
+
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,5 +68,11 @@ public class ProfileFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+    }
+
+    private void Favourites() {
+        Intent intent = new Intent(getContext(), FavouritesActivity.class);
+        startActivity(intent);
     }
 }

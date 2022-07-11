@@ -85,6 +85,10 @@ public class ShowDetailActivity extends AppCompatActivity {
                     if (!likeBy.contains(ParseUser.getCurrentUser().getObjectId())) {
                         likeBy.add(ParseUser.getCurrentUser().getObjectId());
                         food.setLikedBy(likeBy);
+                        food.setImage(items.getImage());
+                        food.setTitle(items.getTitle());
+                        ParseUser user = ParseUser.getCurrentUser();
+                        food.setUser(user);
                         btnLike.setImageResource(R.drawable.ic_baseline_favorite_24);
                         food.saveInBackground();
                     }

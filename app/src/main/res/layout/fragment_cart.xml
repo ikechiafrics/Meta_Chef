@@ -29,7 +29,7 @@
                 android:textStyle="bold" />
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/swipeContainer"
+                android:id="@+id/favswipeContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="300dp"
                 android:layout_below="@+id/profiletoolbar"

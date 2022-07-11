@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.example.metachef.Adapters.CartAdapter;
 import com.example.metachef.R;
-import com.example.metachef.RequestManager;
 import com.example.metachef.model.Cart;
 import com.example.metachef.model.User;
 import com.parse.FindCallback;
@@ -45,14 +44,14 @@ public class CartFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.favswipeContainer);
 
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 
                 cartAdapter.clear();
-                queryPosts(0);
+                queryCart(0);
             }
         });
 
@@ -73,7 +72,7 @@ public class CartFragment extends Fragment {
         cartAdapter = new CartAdapter(getContext(), allCartItems);
         rvCart.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         rvCart.setAdapter(cartAdapter);
-        queryPosts(allCartItems.size());
+        queryCart(allCartItems.size());
 
         int deliveryFee = 10;
         tvDeliveryFee.setText("$" + deliveryFee);
@@ -107,7 +106,7 @@ public class CartFragment extends Fragment {
         }
     }
 
-    private void queryPosts(int size) {
+    private void queryCart(int size) {
         User currentUser = (User) ParseUser.getCurrentUser();
         String Id = currentUser.getObjectId();
         ParseQuery<Cart> query = ParseQuery.getQuery(Cart.class);

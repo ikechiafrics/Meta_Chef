@@ -9,8 +9,23 @@ import java.util.List;
 
 @ParseClassName("Food")
 public class Food extends ParseObject{
+    public static final String KEY_TITLE = "title";
+    public static final String KEY_IMAGE = "image";
     public static final String KEY_USER = "user";
     public static final String KEY_LIKED_BY = "liked_post";
+
+
+    public String getTitle() {return getString(KEY_TITLE);}
+
+    public void setTitle(String title){
+        put(KEY_TITLE, title);
+    }
+
+    public String getImage() { return getString(KEY_IMAGE);
+    }
+    public void setImage(String image){
+        put(KEY_IMAGE, image);
+    }
 
     public ParseUser getUser() {
         return getParseUser(KEY_USER);
