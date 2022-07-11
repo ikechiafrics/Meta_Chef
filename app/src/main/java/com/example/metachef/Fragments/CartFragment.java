@@ -35,6 +35,7 @@ public class CartFragment extends Fragment {
     public SwipeRefreshLayout swipeContainer;
     List<Cart> allCartItems;
     TextView tvItemsTotalFee, tvDeliveryFee, tvTaxFee, tvTotalFee,tvEmpty;
+    ScrollView scrollView;
 
     public CartFragment() {
     }
@@ -67,7 +68,7 @@ public class CartFragment extends Fragment {
         tvTotalFee = view.findViewById(R.id.tvTotalFee);
         tvDeliveryFee = view.findViewById(R.id.tvDeliveryFee);
         tvEmpty = view.findViewById(R.id.tvEmpty);
-        ScrollView scrollView = view.findViewById(R.id.scrollView);
+        scrollView = view.findViewById(R.id.scrollView);
 
         cartAdapter = new CartAdapter(getContext(), allCartItems);
         rvCart.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -97,6 +98,13 @@ public class CartFragment extends Fragment {
 
         cartAdapter.registerAdapterDataObserver(adapterDataObserver);
 
+        if(allCartItems.isEmpty()){
+            tvEmpty.setVisibility(View.VISIBLE);
+            scrollView.setVisibility(View.GONE);
+        } else{
+            tvEmpty.setVisibility(View.GONE);
+            scrollView.setVisibility(View.VISIBLE);
+        }
     }
 
     private void queryPosts(int size) {
@@ -111,6 +119,13 @@ public class CartFragment extends Fragment {
                     return;
                 }
                 allCartItems.addAll(objects);
+                if(allCartItems.isEmpty()){
+                    tvEmpty.setVisibility(View.VISIBLE);
+                    scrollView.setVisibility(View.GONE);
+                } else{
+                    tvEmpty.setVisibility(View.GONE);
+                    scrollView.setVisibility(View.VISIBLE);
+                }
                 cartAdapter.notifyDataSetChanged();
             }
         });
