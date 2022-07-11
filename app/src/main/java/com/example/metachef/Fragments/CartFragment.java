@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,28 +17,104 @@ import android.widget.TextView;
 
 import com.example.metachef.Adapters.CartAdapter;
 import com.example.metachef.R;
+import com.example.metachef.RequestManager;
+import com.example.metachef.model.Cart;
+import com.example.metachef.model.User;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //This class represents the Carts page
 
 public class CartFragment extends Fragment {
-    private CartAdapter cartAdapter;
-    private double tax;
+    protected CartAdapter cartAdapter;
+    public SwipeRefreshLayout swipeContainer;
+    List<Cart> allCartItems;
     TextView tvItemsTotalFee, tvDeliveryFee, tvTaxFee, tvTotalFee,tvEmpty;
+
+    public CartFragment() {
+    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                cartAdapter.clear();
+                queryPosts(0);
+            }
+        });
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
         RecyclerView rvCart = view.findViewById(R.id.rvCart);
         tvItemsTotalFee = view.findViewById(R.id.tvItemsTotalFee);
+        allCartItems = new ArrayList<>();
         tvTaxFee = view.findViewById(R.id.tvTaxFee);
         tvTotalFee = view.findViewById(R.id.tvTotalFee);
         tvDeliveryFee = view.findViewById(R.id.tvDeliveryFee);
         tvEmpty = view.findViewById(R.id.tvEmpty);
-        ScrollView scrollView = view.findViewById(R.id.scrollView4);
+        ScrollView scrollView = view.findViewById(R.id.scrollView);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
-        rvCart.setLayoutManager(linearLayoutManager);
+        cartAdapter = new CartAdapter(getContext(), allCartItems);
+        rvCart.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         rvCart.setAdapter(cartAdapter);
+        queryPosts(allCartItems.size());
+
+        int deliveryFee = 10;
+        tvDeliveryFee.setText("$" + deliveryFee);
+
+        RecyclerView.AdapterDataObserver adapterDataObserver = new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+
+                String total = String.format("%.2f", cartAdapter.itemsTotal());
+                tvItemsTotalFee.setText(total);
+                double tax = cartAdapter.itemsTotal() * 0.10;
+
+                String taxStr = String.format("%.2f", tax);
+                tvTaxFee.setText(taxStr);
+
+                double totalAmount = cartAdapter.itemsTotal() + deliveryFee + tax;
+                String totalAmountStr = String.format("%.2f", totalAmount);
+                tvTotalFee.setText(totalAmountStr);
+            }
+        };
+
+        cartAdapter.registerAdapterDataObserver(adapterDataObserver);
+
+    }
+
+    private void queryPosts(int size) {
+        User currentUser = (User) ParseUser.getCurrentUser();
+        String Id = currentUser.getObjectId();
+        ParseQuery<Cart> query = ParseQuery.getQuery(Cart.class);
+        query.whereEqualTo(Cart.KEY_USER, currentUser);
+        query.findInBackground(new FindCallback<Cart>() {
+            @Override
+            public void done(List<Cart> objects, ParseException e) {
+                if(e != null){
+                    return;
+                }
+                allCartItems.addAll(objects);
+                cartAdapter.notifyDataSetChanged();
+            }
+        });
+        swipeContainer.setRefreshing(false);
     }
 
     @Override
@@ -49,7 +126,7 @@ public class CartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_cart, container, false);
     }
 }

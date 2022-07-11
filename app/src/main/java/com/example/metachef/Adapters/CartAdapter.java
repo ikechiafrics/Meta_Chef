@@ -1,30 +1,37 @@
 package com.example.metachef.Adapters;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.metachef.model.Items;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.example.metachef.model.Cart;
 import com.example.metachef.R;
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 
 import java.util.List;
 
 //This class is what is attached to the recycler view of the cart
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
+    private static final String TAG = "CartAdapter";
     private final Context context;
-    private final List<Items> allItems;
+    private final List<Cart> allCartItems;
 
-    public CartAdapter(Context context, List<Items> allItems) {
+    public CartAdapter(Context context, List<Cart> allCartItems) {
         this.context = context;
-        this.allItems = allItems;
+        this.allCartItems = allCartItems;
     }
 
     @NonNull
@@ -36,23 +43,25 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Items items = allItems.get(position);
-        holder.bind(items);
+        Cart cartItems = allCartItems.get(position);
+        holder.bind(cartItems);
     }
 
     @Override
     public int getItemCount() {
-        return allItems.size();
+        return allCartItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         final TextView tvCartTitle;
         final TextView tvFeeEachItem;
         final ImageView ivItemPic;
         final ImageView btnPlusItem;
         final ImageView btnMinusItem;
         final TextView tvTotalEachItem;
-        final TextView tvCartnum;
+        final TextView tvCartNum;
+        final ImageView btnRemove;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -62,15 +71,82 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             tvTotalEachItem = itemView.findViewById(R.id.tvTotalEachItem);
             btnPlusItem = itemView.findViewById(R.id.btnPlusItem);
             btnMinusItem = itemView.findViewById(R.id.btnMinusItem);
-            tvCartnum = itemView.findViewById(R.id.tvCartnum);
+            tvCartNum = itemView.findViewById(R.id.tvCartNum);
+            btnRemove = itemView.findViewById(R.id.btnRemove);
         }
 
-        public void bind(Items items) {
-            tvCartTitle.setText(items.getTitle());
-            tvFeeEachItem.setText(String.valueOf(items.getPricePerServing()));
-            tvTotalEachItem.setText(String.valueOf(Math.round((items.getNumberInCart() * items.getPricePerServing()) * 100) / 100));
-            tvCartnum.setText(items.getNumberInCart());
-            Glide.with(context).load(items.getImage()).into(ivItemPic);
+        public void bind(Cart cartItems) {
+            tvCartTitle.setText(cartItems.getTitle());
+            tvFeeEachItem.setText(String.valueOf(cartItems.getPrice()));
+            Double itemTotal = (double) Math.round((cartItems.getSize() * cartItems.getPrice()) * 100) / 100;
+            tvTotalEachItem.setText(String.valueOf(itemTotal));
+            tvCartNum.setText(String.valueOf(cartItems.getSize()));
+            int roundingRadius = 60;
+            Glide.with(context).load(cartItems.getKeyImage()).transform(new RoundedCorners(roundingRadius)).into(ivItemPic);
+
+            btnPlusItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    itemsTotal();
+                    cartItems.plusFoodNumber();
+                    cartItems.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            Toast.makeText(context, "Increased number to " + cartItems.getSize(), Toast.LENGTH_SHORT);
+                        }
+                    });
+                    refreshCart(cartItems);
+
+                }
+            });
+
+            btnMinusItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    itemsTotal();
+                    cartItems.minusFoodNumber();
+                    cartItems.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            Toast.makeText(context, "Decreased number to " + cartItems.getSize(), Toast.LENGTH_SHORT);
+                        }
+                    });
+                    refreshCart(cartItems);
+                }
+            });
+
+            btnRemove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    cartItems.deleteInBackground();
+                    refreshCart(cartItems);
+                }
+            });
         }
+
+        private void refreshCart(Cart cartItems) {
+            Double itemTotal = (double) Math.round((cartItems.getSize() * cartItems.getPrice()) * 100) / 100;
+            tvTotalEachItem.setText(String.valueOf(itemTotal));
+            tvCartNum.setText(String.valueOf(cartItems.getSize()));
+            notifyDataSetChanged();
+        }
+    }
+
+    public void clear() {
+        allCartItems.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<Cart> listCart) {
+        allCartItems.addAll(listCart);
+        notifyDataSetChanged();
+    }
+
+    public double itemsTotal() {
+        double price = 0.0;
+        for (Cart allCartItem : allCartItems) {
+            price += allCartItem.getItemstotal();
+        }
+        return price;
     }
 }

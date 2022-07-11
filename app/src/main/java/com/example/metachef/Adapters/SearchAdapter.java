@@ -17,6 +17,7 @@ import com.example.metachef.R;
 import com.example.metachef.ShowDetailActivity;
 import com.example.metachef.model.Items;
 
+import org.jsoup.Jsoup;
 import org.parceler.Parcels;
 
 import java.util.List;
@@ -79,7 +80,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         public void bind(Items items) {
             int roundingRadius = 50;
             searchTitle.setText(items.getTitle());
-            searchDescription.setText(items.getSummary());
+            searchDescription.setText(Jsoup.parse(items.getSummary()).text());
             Glide.with(context).load(items.getImage()).transform(new RoundedCorners(roundingRadius)).into(searchImage);
         }
     }

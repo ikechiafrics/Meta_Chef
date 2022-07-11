@@ -14,6 +14,7 @@ import java.util.List;
 //This class represents the data which the different food items would contain in them
 public class Items{
 
+    public int id;
     public String  title;
     public String image;
     public String summary;
@@ -25,7 +26,7 @@ public class Items{
     }
 
     public Items(JSONObject jsonObject) throws JSONException {
-        Log.e("OnSuccess", "This is getting here");
+        id = jsonObject.getInt("id");
         image = jsonObject.getString("image");
         title = jsonObject.getString("title");
         summary = jsonObject.getString("summary");
@@ -46,6 +47,10 @@ public class Items{
         return allItems;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -58,12 +63,28 @@ public class Items{
         return summary;
     }
 
-    public double getPricePerServing() {
+    public Double getPricePerServing() {
         return pricePerServing;
     }
 
     public int getNumberInCart() {
         return numberInCart;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public void setPricePerServing(double pricePerServing) {
+        this.pricePerServing = pricePerServing;
     }
 
     public void setNumberInCart(int numberInCart) {

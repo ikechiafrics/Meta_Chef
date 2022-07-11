@@ -19,7 +19,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/btnLike"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_alignParentTop="true"
