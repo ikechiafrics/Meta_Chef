@@ -42,7 +42,7 @@
         android:textStyle="italic" />
 
     <Button
-        android:id="@+id/btSendSignup"
+        android:id="@+id/btnSendSignup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

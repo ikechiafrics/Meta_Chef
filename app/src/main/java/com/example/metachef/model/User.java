@@ -12,7 +12,7 @@ import java.util.List;
 @ParseClassName("_User")
 public class User extends ParseUser {
     public static final String KEY_IMAGE = "profile_picture";
-    private static final String KEY_USER = "username";
+    public static final String KEY_USER = "username";
     public static final String KEY_CART = "cart";
 
 

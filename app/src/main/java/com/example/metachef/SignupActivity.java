@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.metachef.model.User;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -18,6 +19,7 @@ public class SignupActivity extends AppCompatActivity {
 
     private EditText etUsername;
     private EditText etPassword;
+    private Button btnSendSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +28,12 @@ public class SignupActivity extends AppCompatActivity {
 
         etUsername = findViewById(R.id.etSignupUsername);
         etPassword = findViewById(R.id.etSignupPassword);
-        Button btSignUp = findViewById(R.id.btSendSignup);
+        btnSendSignUp = findViewById(R.id.btnSendSignup);
 
-        btSignUp.setOnClickListener(new View.OnClickListener() {
+        btnSendSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ParseUser user = new ParseUser();
+                User user = new User();
                 user.setUsername(String.valueOf(etUsername.getText()));
                 user.setPassword(String.valueOf(etPassword.getText()));
                 String nME =  String.valueOf(etPassword.getText());

@@ -33,7 +33,11 @@ import com.example.metachef.R;
 import com.example.metachef.Interface.RandomRecipeListener;
 import com.example.metachef.RandomRecipesResponse;
 import com.example.metachef.RequestManager;
+import com.example.metachef.model.User;
+import com.parse.GetCallback;
+import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import org.parceler.Parcels;
@@ -46,6 +50,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     public static final String KEY_IMAGE = "profile_picture";
     public static final String TAG = "HomeFragment";
+    public User user = (User) User.getCurrentUser();
 
     private RecyclerView rvItems;
     private RecyclerView rvPopular;
@@ -57,6 +62,7 @@ public class HomeFragment extends Fragment {
     private SlideAdapter slideAdapter;
     private TextView[] mDots;
     private ImageButton btnNext;
+    private ImageView ivProfilePic;
     private ImageButton btnPrevious;
     private int currentPage;
 
@@ -75,7 +81,7 @@ public class HomeFragment extends Fragment {
         manager.getRandomRecipes(responseListener, tags);
         rvItems = view.findViewById(R.id.rvItems);
         rvPopular = view.findViewById(R.id.rvPopular);
-        ImageView ivProfilePic = view.findViewById(R.id.ivProfilePic);
+        ivProfilePic = view.findViewById(R.id.ivProfilePic);
         allItems = new ArrayList<>();
         popularItems = new ArrayList<>();
         slideAdapter = new SlideAdapter(getContext());
@@ -83,8 +89,16 @@ public class HomeFragment extends Fragment {
         addDotsIndicator(0);
         slideViewPager.addOnPageChangeListener(viewListener);
         ParseUser user = ParseUser.getCurrentUser();
-        ParseFile image = user.getParseFile(KEY_IMAGE);
-        Glide.with(getContext()).load(image.getUrl()).transform(new RoundedCorners(roundingRadius)).into(ivProfilePic);
+//        ParseFile image = user.getParseFile(KEY_IMAGE);
+//        Glide.with(getContext()).load(image.getUrl()).transform(new RoundedCorners(roundingRadius)).into(ivProfilePic);
+
+
+        user.fetchInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                displayInfo();
+            }
+        });
 
 
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +114,18 @@ public class HomeFragment extends Fragment {
                 slideViewPager.setCurrentItem(currentPage - 1);
             }
         });
+    }
+
+    private void displayInfo() {
+        int roundingRadius = 200;
+        ParseUser user = ParseUser.getCurrentUser();
+        ParseFile profilePhoto = user.getParseFile(KEY_IMAGE);
+        if (profilePhoto != null) {
+            Glide.with(getContext()).load(profilePhoto.getUrl()).transform(new RoundedCorners(roundingRadius)).into(ivProfilePic);
+        } else {
+            Glide.with(getContext()).load(R.drawable.profile_pic).transform(new RoundedCorners(roundingRadius)).into(ivProfilePic);
+            Toast.makeText(getContext(), "profile photo does not exist for " + user.getUsername(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private final RandomRecipeListener responseListener = new RandomRecipeListener() {

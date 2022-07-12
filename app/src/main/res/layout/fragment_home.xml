@@ -152,9 +152,10 @@
 
                 <ImageButton
                     android:id="@+id/btnNext"
-                    android:background="@color/white"
                     android:layout_width="30dp"
                     android:layout_height="42dp"
+                    android:background="@color/white"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="@+id/btnPrevious"
                     app:layout_constraintStart_toEndOf="@+id/constraintLayout"
                     app:layout_constraintTop_toTopOf="@+id/btnPrevious"
