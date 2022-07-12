@@ -39,10 +39,10 @@
 
                 <ImageView
                     android:id="@+id/ivProfilePic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="65dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_marginStart="106dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintBottom_toBottomOf="@+id/tvMenu"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvCategories"

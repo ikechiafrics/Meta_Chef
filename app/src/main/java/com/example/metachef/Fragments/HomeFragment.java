@@ -122,7 +122,8 @@ public class HomeFragment extends Fragment {
         ParseFile profilePhoto = user.getParseFile(KEY_IMAGE);
         if (profilePhoto != null) {
             Glide.with(getContext()).load(profilePhoto.getUrl()).transform(new RoundedCorners(roundingRadius)).into(ivProfilePic);
-        } else {
+        }
+        else {
             Glide.with(getContext()).load(R.drawable.profile_pic).transform(new RoundedCorners(roundingRadius)).into(ivProfilePic);
             Toast.makeText(getContext(), "profile photo does not exist for " + user.getUsername(), Toast.LENGTH_SHORT).show();
         }
