@@ -24,6 +24,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.metachef.Adapters.SlideAdapter;
+import com.example.metachef.ShowDetailActivity;
+import com.example.metachef.model.Cart;
 import com.example.metachef.model.Items;
 import com.example.metachef.Adapters.ItemsAdapter;
 import com.example.metachef.Adapters.PopularAdapter;
@@ -33,6 +35,8 @@ import com.example.metachef.RandomRecipesResponse;
 import com.example.metachef.RequestManager;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,10 +60,8 @@ public class HomeFragment extends Fragment {
     private ImageButton btnPrevious;
     private int currentPage;
 
-
     public HomeFragment() {
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -98,7 +100,6 @@ public class HomeFragment extends Fragment {
                 slideViewPager.setCurrentItem(currentPage - 1);
             }
         });
-
     }
 
     private final RandomRecipeListener responseListener = new RandomRecipeListener() {

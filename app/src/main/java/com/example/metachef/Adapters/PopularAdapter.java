@@ -52,23 +52,21 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        final TextView tvpopular;
-        final ImageView ivpopular;
-        final ImageView btnAdd;
+        final TextView tvPopular;
+        final ImageView ivPopular;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvpopular = itemView.findViewById(R.id.tvpopular);
-            ivpopular = itemView.findViewById(R.id.ivpopular);
-            btnAdd = itemView.findViewById(R.id.BtnAdd);
+            tvPopular = itemView.findViewById(R.id.tvpopular);
+            ivPopular = itemView.findViewById(R.id.ivpopular);
             itemView.setOnClickListener(this);
         }
 
         public void bind(Items items) {
-            tvpopular.setText(items.getTitle());
+            tvPopular.setText(items.getTitle());
             int roundingRadius = 50;
-            Glide.with(context).load(items.getImage()).transform(new RoundedCorners(roundingRadius)).into(ivpopular);
+            Glide.with(context).load(items.getImage()).transform(new RoundedCorners(roundingRadius)).into(ivPopular);
         }
 
         @Override
