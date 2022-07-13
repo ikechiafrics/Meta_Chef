@@ -2,6 +2,7 @@ package com.example.metachef.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvtitle = itemView.findViewById(R.id.tvtitle);
+            tvtitle.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            tvtitle.setSelected(true);
             ivitem = itemView.findViewById(R.id.ivitem);
             ivProfileImg = itemView.findViewById(R.id.ivProfileImg);
             itemView.setOnClickListener(this);

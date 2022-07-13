@@ -2,6 +2,7 @@ package com.example.metachef.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,8 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvPopular = itemView.findViewById(R.id.tvpopular);
+            tvPopular.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            tvPopular.setSelected(true);
             ivPopular = itemView.findViewById(R.id.ivpopular);
             itemView.setOnClickListener(this);
         }
