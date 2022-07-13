@@ -64,6 +64,7 @@ public class HomeFragment extends Fragment {
     private ImageButton btnNext;
     private ImageView ivProfilePic;
     private ImageButton btnPrevious;
+    private TextView tvWelcome;
     private int currentPage;
 
     public HomeFragment() {
@@ -73,6 +74,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         int roundingRadius = 200;
+        tvWelcome = view.findViewById(R.id.tvWelcome);
         btnNext = (ImageButton) view.findViewById(R.id.btnNext);
         btnPrevious = (ImageButton) view.findViewById(R.id.btnPrevious);
         slideViewPager = (ViewPager) view.findViewById(R.id.slideViewPager);
@@ -89,8 +91,7 @@ public class HomeFragment extends Fragment {
         addDotsIndicator(0);
         slideViewPager.addOnPageChangeListener(viewListener);
         ParseUser user = ParseUser.getCurrentUser();
-//        ParseFile image = user.getParseFile(KEY_IMAGE);
-//        Glide.with(getContext()).load(image.getUrl()).transform(new RoundedCorners(roundingRadius)).into(ivProfilePic);
+        tvWelcome.setText("Welcome " + user.getUsername());
 
 
         user.fetchInBackground(new GetCallback<ParseObject>() {

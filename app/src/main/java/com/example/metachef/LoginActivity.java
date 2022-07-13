@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -63,6 +65,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (e != null){
+                    YoYo.with(Techniques.Tada)
+                            .duration(700)
+                            .playOn(findViewById(R.id.etPassword));
                     Toast.makeText(LoginActivity.this, "Issue with login", Toast.LENGTH_LONG).show();
                     return;
                 }

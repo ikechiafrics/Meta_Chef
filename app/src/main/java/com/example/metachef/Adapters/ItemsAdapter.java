@@ -74,7 +74,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder>{
         public void bind(Items items) {
             ParseUser userparse = ParseUser.getCurrentUser();
             tvtitle.setText(items.getTitle());
-            int roundingRadius = 50;
+            int roundingRadius = 40;
             Glide.with(context).load(items.getImage()).transform(new RoundedCorners(roundingRadius)).into(ivitem);
             ParseFile profilePic = userparse.getParseFile("profile_picture");
 
