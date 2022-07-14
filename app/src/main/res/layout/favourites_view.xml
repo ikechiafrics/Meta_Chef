@@ -12,41 +12,37 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
         app:cardCornerRadius="20dp">
-        
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/ivFavPic"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/promotion_photo" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvFavTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="30dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="TextView"
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
-                <ImageView
-                    android:id="@+id/ivFavPic"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="4dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/promotion_photo" />
+        <ImageView
+            android:id="@+id/btnFavRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@drawable/ic_outline_cancel_24" />
 
-                <TextView
-                    android:id="@+id/tvFavTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:text="TextView"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
-            </LinearLayout>
-        </LinearLayout>
-        
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

@@ -63,8 +63,9 @@ public class ShowDetailActivity extends AppCompatActivity {
         descriptionTxt.setText(Jsoup.parse(items.getSummary()).text());
         numberOrderTxt.setText(String.valueOf(numberOrder));
         Glide.with(ShowDetailActivity.this).load(items.getImage()).transform(new RoundedCorners(90)).into(picFood);
-        String prices = String.valueOf(items.getPricePerServing());
-        tvFee.setText(prices);
+        double prices = (items.getPricePerServing() / 10);
+        String pricesStr = String.format("%.2f", prices);
+        tvFee.setText(pricesStr);
 
         btnLike.setOnClickListener(new View.OnClickListener() {
 
@@ -134,7 +135,7 @@ public class ShowDetailActivity extends AppCompatActivity {
                 cart.setItem(items.getId());
                 cart.setKeyImage(items.getImage());
                 cart.setTitle(items.getTitle());
-                cart.setPrice(items.getPricePerServing());
+                cart.setPrice((items.getPricePerServing() / 10));
                 cart.setSize(numberOrder);
                 int size = cart.getSize();
                 Double price = cart.getPrice();
