@@ -81,7 +81,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             int roundingRadius = 50;
             searchTitle.setText(items.getTitle());
             searchDescription.setText(Jsoup.parse(items.getSummary()).text());
-            Glide.with(context).load(items.getImage()).transform(new RoundedCorners(roundingRadius)).into(searchImage);
+            Glide.with(context).load(items.getImage()).placeholder(R.drawable.placeholder).transform(new RoundedCorners(roundingRadius)).into(searchImage);
         }
     }
 
