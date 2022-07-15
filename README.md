@@ -24,7 +24,6 @@ Required Must-have Stories
 - User can search for their food choice
 - User can filter out their searches.
 - User can see their profile page with their profile picture
-- User can track their delivery.
 
 …
 2. Screen Archetypes
@@ -90,3 +89,30 @@ Flow Navigation (Screen to Screen)
    | email     | String | User's email |
    | FirstName    | String   | User's first name |
    | LastName    | String | User's last name |
+   
+   
+#### Cart
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | objectId      | String   | unique id for the user (default field) |
+   | username        | String | User's username |
+   | price         | Number     | each item price |
+   | createdAt     | DateTime | date when the user created account |
+   | updatedAt     | DateTime | date when the user last updated the account |
+   | size     | Number | amount of the food  |
+   | itemstotal     | Number | Total price depending on the size |
+   | Image  | String   | Image of the item |
+   
+   
+#### Food
+
+   | Property      | Type     | Description |
+   | ------------- | -------- | ------------|
+   | objectId      | String   | unique id for the user (default field) |
+   | user        | pointer<user>     | A pointer to the user who liked a food |
+   | createdAt     | DateTime | date when the user created account |
+   | updatedAt     | DateTime | date when the user last updated the account |
+   | Image  | String   | Image of the item liked |
+   | title    | String | Name of item liked |
+   | Liked_post    | Array   | an array of likes |
