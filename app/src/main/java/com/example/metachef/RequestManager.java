@@ -15,7 +15,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public class RequestManager {
@@ -48,13 +47,13 @@ public class RequestManager {
         });
     }
 
-    public void getRecipeDetails(RecipeDetailsListener listener, List<String> id){
-        RecipeDetailsCall RecipeDetailsCall = retrofit.create(RecipeDetailsCall.class);
-        Call<RecipeDetailsResponse> call = RecipeDetailsCall.callRecipeDetails(id, "a0b47258ef634097812d0213ca6217ea");
+    public void getSearchRecipes(RecipeDetailsListener listener, List<String> id){
+        SearchRecipesCall searchRecipesCall = retrofit.create(SearchRecipesCall.class);
+        Call<SearchRecipesResponse> call = searchRecipesCall.callSearchRecipes(id, "a0b47258ef634097812d0213ca6217ea");
         //enqueue to make call asynchronously
-        call.enqueue(new Callback<RecipeDetailsResponse>() {
+        call.enqueue(new Callback<SearchRecipesResponse>() {
             @Override
-            public void onResponse(@NonNull Call<RecipeDetailsResponse> call, @NonNull Response<RecipeDetailsResponse> response) {
+            public void onResponse(@NonNull Call<SearchRecipesResponse> call, @NonNull Response<SearchRecipesResponse> response) {
                 if (!response.isSuccessful()){
                     listener.diderror(response.message());
                     return;
@@ -63,7 +62,7 @@ public class RequestManager {
             }
 
             @Override
-            public void onFailure(@NonNull Call<RecipeDetailsResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<SearchRecipesResponse> call, @NonNull Throwable t) {
                 listener.diderror(t.getMessage());
             }
         });
@@ -75,10 +74,10 @@ public class RequestManager {
         Call<RandomRecipesResponse> callRandomRecipe(@Query("apiKey") String apiKey, @Query("number") String number, @Query("tags")List<String> tags);
     }
 
-    private interface RecipeDetailsCall{
+    private interface SearchRecipesCall{
 //        Get Call
-        @GET("recipes/informationBulk")
-        Call<RecipeDetailsResponse> callRecipeDetails(@Query("ids") List<String> id, @Query("apiKey") String apiKey);
+        @GET("recipes/complexSearch")
+        Call<SearchRecipesResponse> callSearchRecipes(@Query("ids") List<String> id, @Query("apiKey") String apiKey);
     }
 
 }

@@ -2,10 +2,12 @@ package com.example.metachef.Fragments;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,7 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -42,11 +44,11 @@ import java.io.File;
 public class ProfileFragment extends Fragment {
     public static final String KEY_IMAGE = "profile_picture";
     public User user = (User) User.getCurrentUser();
-    private Button btnFav;
     protected File photoFile;
-    private String photoFileName = "photo.jpg";
     private ImageView ivProfileImg;
-    private ImageView btnLogout;
+    private EditText updatePassword;
+    private Dialog dialog;
+    String newPassword;
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
 
     public ProfileFragment() {
@@ -67,9 +69,23 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        btnFav = view.findViewById(R.id.btnFav);
-        btnLogout = view.findViewById(R.id.BtnLogout);
+
+        dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.custom_dialog);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+
+        }
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+
+        Button btnOkay = dialog.findViewById(R.id.btn_Okay);
+        Button btnCancel = dialog.findViewById(R.id.btn_Cancel);
+        Button btnFav = view.findViewById(R.id.btnFav);
+        Button btnUpdatePassword = view.findViewById(R.id.btnUpdatePassword);
+        ImageView btnLogout = view.findViewById(R.id.BtnLogout);
         ivProfileImg = view.findViewById(R.id.ivProfileImg);
+        updatePassword = dialog.findViewById(R.id.etUpdatePassword);
         ParseUser user = ParseUser.getCurrentUser();
 
 
@@ -105,12 +121,35 @@ public class ProfileFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+        btnOkay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updatePassword();
+                dialog.dismiss();
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"Cancelled", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+        btnUpdatePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.show();
+            }
+        });
     }
 
     private void launchCamera() {
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Create a File reference for future access
+        String photoFileName = "photo.jpg";
         photoFile = getPhotoFileUri(photoFileName);
 
         // wrap File object into a content provider
@@ -176,5 +215,20 @@ public class ProfileFragment extends Fragment {
     private void Favourites() {
         Intent intent = new Intent(getContext(), FavouritesActivity.class);
         startActivity(intent);
+    }
+
+    private void updatePassword(){
+        if(user != null){
+            newPassword = updatePassword.getText().toString();
+            user.setPassword(newPassword);
+
+            user.saveInBackground(e -> {
+                if(e == null) {
+                    Toast.makeText(getContext(), "Successfully Updated password", Toast.LENGTH_SHORT).show();
+                } else{
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }

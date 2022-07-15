@@ -82,7 +82,6 @@ public class Cart extends ParseObject {
 
     public void minusFoodNumber(){
         if (getSize() == 1){
-            return;
         }
         else {
             put(KEY_SIZE, (getSize() - 1));

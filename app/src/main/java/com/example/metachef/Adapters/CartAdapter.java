@@ -1,8 +1,6 @@
 package com.example.metachef.Adapters;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,7 +80,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             tvTotalEachItem.setText(String.valueOf(itemTotal));
             tvCartNum.setText(String.valueOf(cartItems.getSize()));
             int roundingRadius = 60;
-            Glide.with(context).load(cartItems.getKeyImage()).transform(new RoundedCorners(roundingRadius)).into(ivItemPic);
+            Glide.with(context).load(cartItems.getKeyImage()).placeholder(R.drawable.placeholder).transform(new RoundedCorners(roundingRadius)).into(ivItemPic);
 
             btnPlusItem.setOnClickListener(new View.OnClickListener() {
                 @Override

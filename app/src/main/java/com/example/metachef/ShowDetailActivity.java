@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,21 +11,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.example.metachef.Fragments.CartFragment;
 import com.example.metachef.model.Cart;
 import com.example.metachef.model.Food;
 import com.example.metachef.model.Items;
-import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import org.jsoup.Jsoup;
 import org.parceler.Parcels;
 
-import java.io.File;
 import java.util.List;
 //This class represents the details page for each item
 
@@ -35,7 +29,7 @@ public class ShowDetailActivity extends AppCompatActivity {
     RequestManager manager;
     private TextView numberOrderTxt;
     private ImageView BtnBack, btnLike;
-    int numberOrder = 1;
+    private int numberOrder = 1;
     final Food food= new Food() ;
 
 
@@ -74,7 +68,7 @@ public class ShowDetailActivity extends AppCompatActivity {
                     btnLike.setImageResource(R.drawable.ic_baseline_favorite_border_24);
                     likeBy.remove(ParseUser.getCurrentUser().getObjectId());
                     food.setLikedBy(likeBy);
-                food.saveInBackground();
+                food.deleteInBackground();
             }
         });
 
@@ -135,11 +129,12 @@ public class ShowDetailActivity extends AppCompatActivity {
                 cart.setItem(items.getId());
                 cart.setKeyImage(items.getImage());
                 cart.setTitle(items.getTitle());
-                cart.setPrice((items.getPricePerServing() / 10));
+                double prices = (items.getPricePerServing() / 10);
+                Double pricesStr = Double.valueOf(String.format("%.2f", prices));
+                cart.setPrice(pricesStr);
                 cart.setSize(numberOrder);
                 int size = cart.getSize();
                 Double price = cart.getPrice();
-                double total = size * price;
                 cart.setItemstotal((size * price));
                 ParseUser user = ParseUser.getCurrentUser();
                 cart.setUser(user);

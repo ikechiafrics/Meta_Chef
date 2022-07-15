@@ -10,11 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,8 +22,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.metachef.Adapters.SlideAdapter;
-import com.example.metachef.ShowDetailActivity;
-import com.example.metachef.model.Cart;
 import com.example.metachef.model.Items;
 import com.example.metachef.Adapters.ItemsAdapter;
 import com.example.metachef.Adapters.PopularAdapter;
@@ -39,8 +35,6 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
-
-import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,12 +53,10 @@ public class HomeFragment extends Fragment {
     private ViewPager slideViewPager;
     private LinearLayout dotLayout;
     private final List<String> tags = new ArrayList<>();
-    private SlideAdapter slideAdapter;
     private TextView[] mDots;
     private ImageButton btnNext;
     private ImageView ivProfilePic;
     private ImageButton btnPrevious;
-    private TextView tvWelcome;
     private int currentPage;
 
     public HomeFragment() {
@@ -74,7 +66,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         int roundingRadius = 200;
-        tvWelcome = view.findViewById(R.id.tvWelcome);
+        TextView tvWelcome = view.findViewById(R.id.tvWelcome);
         btnNext = (ImageButton) view.findViewById(R.id.btnNext);
         btnPrevious = (ImageButton) view.findViewById(R.id.btnPrevious);
         slideViewPager = (ViewPager) view.findViewById(R.id.slideViewPager);
@@ -86,7 +78,7 @@ public class HomeFragment extends Fragment {
         ivProfilePic = view.findViewById(R.id.ivProfilePic);
         allItems = new ArrayList<>();
         popularItems = new ArrayList<>();
-        slideAdapter = new SlideAdapter(getContext());
+        SlideAdapter slideAdapter = new SlideAdapter(getContext());
         slideViewPager.setAdapter(slideAdapter);
         addDotsIndicator(0);
         slideViewPager.addOnPageChangeListener(viewListener);

@@ -3,24 +3,24 @@ package com.example.metachef;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 
 import com.example.metachef.Fragments.CartFragment;
 import com.example.metachef.Fragments.HomeFragment;
 import com.example.metachef.Fragments.ProfileFragment;
 import com.example.metachef.Fragments.SearchFragment;
-import com.example.metachef.model.Items;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.List;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<Items> allItems;
+    private final int[] icons = new int[] {R.drawable.home_icon, R.drawable.search, R.drawable.shopping_cart, R.drawable.user};
 
     final FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -29,33 +29,38 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        ViewPager2 viewPager = findViewById(R.id.viewPager);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Fragment fragment;
-                switch (menuItem.getItemId()) {
-                    case R.id.action_home:
-                        fragment = new HomeFragment();
-                        break;
-                    case R.id.action_search:
-                        fragment = new SearchFragment();
-                        break;
-                    case R.id.action_cart:
-                        fragment = new CartFragment();
-                        break;
-                    case R.id.action_profile:
-                    default:
-                        fragment = new ProfileFragment();
-                        break;
-                }
-                fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
-                return true;
+        viewPager.setAdapter(new ViewPagerFragmentSetAdapter(this));
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setIcon(icons[position])).attach();
+    }
+
+    public class ViewPagerFragmentSetAdapter extends FragmentStateAdapter{
+        public ViewPagerFragmentSetAdapter(FragmentActivity fragmentActivity){
+            super(fragmentActivity);
+        }
+
+        @NonNull
+        @Override
+        public Fragment createFragment(int position) {
+            switch (position) {
+                case 0:
+                    return new HomeFragment();
+                case 1:
+                    return new SearchFragment();
+                case 2:
+                    return new CartFragment();
+                case 3:
+                    return new ProfileFragment();
             }
-        });
-        // Set default selection
-        bottomNavigationView.setSelectedItemId(R.id.action_home);
+            return new HomeFragment();
+        }
+
+        @Override
+        public int getItemCount() {
+            return icons.length;
+        }
     }
 
     @Override

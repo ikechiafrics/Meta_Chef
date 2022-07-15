@@ -69,7 +69,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
         public void bind(Items items) {
             tvPopular.setText(items.getTitle());
             int roundingRadius = 50;
-            Glide.with(context).load(items.getImage()).transform(new RoundedCorners(roundingRadius)).into(ivPopular);
+            Glide.with(context).load(items.getImage()).placeholder(R.drawable.placeholder).transform(new RoundedCorners(roundingRadius)).into(ivPopular);
         }
 
         @Override

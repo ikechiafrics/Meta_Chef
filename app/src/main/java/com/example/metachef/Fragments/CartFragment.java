@@ -12,8 +12,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.metachef.Adapters.CartAdapter;
 import com.example.metachef.R;
@@ -35,6 +37,7 @@ public class CartFragment extends Fragment {
     List<Cart> allCartItems;
     TextView tvItemsTotalFee, tvDeliveryFee, tvTaxFee, tvTotalFee,tvEmpty;
     ScrollView scrollView;
+    Button btnAddToCart;
 
     public CartFragment() {
     }
@@ -67,12 +70,20 @@ public class CartFragment extends Fragment {
         tvTotalFee = view.findViewById(R.id.tvTotalFee);
         tvDeliveryFee = view.findViewById(R.id.tvDeliveryFee);
         tvEmpty = view.findViewById(R.id.tvEmpty);
+        btnAddToCart = view.findViewById(R.id.BtnCheckout);
         scrollView = view.findViewById(R.id.scrollView);
 
         cartAdapter = new CartAdapter(getContext(), allCartItems);
         rvCart.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         rvCart.setAdapter(cartAdapter);
         queryCart(allCartItems.size());
+
+        btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"Purchased", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         int deliveryFee = 10;
         tvDeliveryFee.setText("$" + deliveryFee);
@@ -97,13 +108,6 @@ public class CartFragment extends Fragment {
 
         cartAdapter.registerAdapterDataObserver(adapterDataObserver);
 
-        if(allCartItems.isEmpty()){
-            tvEmpty.setVisibility(View.VISIBLE);
-            scrollView.setVisibility(View.GONE);
-        } else{
-            tvEmpty.setVisibility(View.GONE);
-            scrollView.setVisibility(View.VISIBLE);
-        }
     }
 
     private void queryCart(int size) {
