@@ -75,11 +75,13 @@
                     android:layout_height="150dp"
                     android:layout_marginStart="30dp"
                     android:layout_marginEnd="30dp"
+                    android:background="#F1F1F1"
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toTopOf="@+id/tvPromotions"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvCategories">
+                    app:layout_constraintTop_toBottomOf="@+id/tvCategories"
+                    android:scrollbars="horizontal">
 
                 </androidx.recyclerview.widget.RecyclerView>
 
@@ -99,7 +101,8 @@
                     <androidx.viewpager.widget.ViewPager
                         android:id="@+id/slideViewPager"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        tools:ignore="SpeakableTextPresentCheck">
 
                     </androidx.viewpager.widget.ViewPager>
 
@@ -132,11 +135,12 @@
                     android:id="@+id/rvPopular"
                     android:layout_width="362dp"
                     android:layout_height="200dp"
-                    android:layout_marginStart="20dp"
+                    android:background="#F1F1F1"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
-                    app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPopular" />
+                    app:layout_constraintEnd_toEndOf="@+id/rvItems"
+                    app:layout_constraintStart_toStartOf="@+id/rvItems"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPopular"
+                    android:scrollbars="horizontal"/>
 
                 <ImageButton
                     android:id="@+id/btnPrevious"
@@ -147,7 +151,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.533"
+                    app:layout_constraintVertical_bias="0.568"
                     app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
 
                 <ImageButton
@@ -159,7 +163,9 @@
                     app:layout_constraintBottom_toBottomOf="@+id/btnPrevious"
                     app:layout_constraintStart_toEndOf="@+id/constraintLayout"
                     app:layout_constraintTop_toTopOf="@+id/btnPrevious"
-                    app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
+                    app:layout_constraintVertical_bias="0.0"
+                    app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                 <TextView
                     android:id="@+id/tvWelcome"

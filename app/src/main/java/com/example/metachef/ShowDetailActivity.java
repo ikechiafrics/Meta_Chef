@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,19 +13,14 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.example.metachef.Fragments.CartFragment;
 import com.example.metachef.model.Cart;
 import com.example.metachef.model.Food;
 import com.example.metachef.model.Items;
-import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import org.jsoup.Jsoup;
 import org.parceler.Parcels;
 
-import java.io.File;
 import java.util.List;
 //This class represents the details page for each item
 
@@ -135,11 +128,12 @@ public class ShowDetailActivity extends AppCompatActivity {
                 cart.setItem(items.getId());
                 cart.setKeyImage(items.getImage());
                 cart.setTitle(items.getTitle());
-                cart.setPrice((items.getPricePerServing() / 10));
+                double prices = (items.getPricePerServing() / 10);
+                Double pricesStr = Double.valueOf(String.format("%.2f", prices));
+                cart.setPrice(pricesStr);
                 cart.setSize(numberOrder);
                 int size = cart.getSize();
                 Double price = cart.getPrice();
-                double total = size * price;
                 cart.setItemstotal((size * price));
                 ParseUser user = ParseUser.getCurrentUser();
                 cart.setUser(user);

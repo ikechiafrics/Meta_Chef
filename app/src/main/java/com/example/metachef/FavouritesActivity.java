@@ -1,12 +1,13 @@
 package com.example.metachef;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -25,10 +26,9 @@ import java.util.List;
 public class FavouritesActivity extends AppCompatActivity {
     public SwipeRefreshLayout swipeContainer;
     public FavouritesAdapter favouritesAdapter;
-    private TextView tvFavTxt;
-    private ImageView ivFavPic;
+    private TextView tvFavEmpty;
     private List<Food> allFavFood;
-    private RecyclerView rvFavourites;
+    ScrollView favScrollView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,10 +52,12 @@ public class FavouritesActivity extends AppCompatActivity {
                 android.R.color.holo_red_light);
 
         int roundingRadius = 200;
-        rvFavourites = findViewById(R.id.rvFavourites);
+        RecyclerView rvFavourites = findViewById(R.id.rvFavourites);
         allFavFood = new ArrayList<>();
-        ivFavPic = findViewById(R.id.ivFavPic);
-        tvFavTxt = findViewById(R.id.tvFavTxt);
+        ImageView ivFavPic = findViewById(R.id.ivFavPic);
+        TextView tvFavTxt = findViewById(R.id.tvFavTxt);
+        tvFavEmpty = findViewById(R.id.tvFavEmpty);
+        favScrollView = findViewById(R.id.favScrollview);
 
         favouritesAdapter = new FavouritesAdapter(FavouritesActivity.this, allFavFood);
         rvFavourites.setAdapter(favouritesAdapter);
@@ -75,6 +77,13 @@ public class FavouritesActivity extends AppCompatActivity {
                     return;
                 }
                 allFavFood.addAll(objects);
+                if(allFavFood.isEmpty()){
+                    tvFavEmpty.setVisibility(View.VISIBLE);
+                    favScrollView.setVisibility(View.GONE);
+                } else{
+                    tvFavEmpty.setVisibility(View.GONE);
+                    favScrollView.setVisibility(View.VISIBLE);
+                }
                 favouritesAdapter.notifyDataSetChanged();
             }
         });

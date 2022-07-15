@@ -1,10 +1,9 @@
 package com.example.metachef.Interface;
 
-import com.example.metachef.RecipeDetailsResponse;
-import com.example.metachef.ShowDetailActivity;
+import com.example.metachef.SearchRecipesResponse;
 
 public interface RecipeDetailsListener {
-    void didfetch(RecipeDetailsResponse response, String message);
+    void didfetch(SearchRecipesResponse response, String message);
 
     void diderror(String message);
 }

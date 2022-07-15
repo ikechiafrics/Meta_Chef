@@ -97,13 +97,6 @@ public class CartFragment extends Fragment {
 
         cartAdapter.registerAdapterDataObserver(adapterDataObserver);
 
-        if(allCartItems.isEmpty()){
-            tvEmpty.setVisibility(View.VISIBLE);
-            scrollView.setVisibility(View.GONE);
-        } else{
-            tvEmpty.setVisibility(View.GONE);
-            scrollView.setVisibility(View.VISIBLE);
-        }
     }
 
     private void queryCart(int size) {

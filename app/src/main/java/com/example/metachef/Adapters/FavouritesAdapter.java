@@ -6,25 +6,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.example.metachef.FavouritesActivity;
 import com.example.metachef.R;
-import com.example.metachef.model.Cart;
 import com.example.metachef.model.Food;
 
 import java.util.List;
 
 public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.ViewHolder>{
 
-    private Context context;
-    private List<Food> allFavFood;
+    private final Context context;
+    private final List<Food> allFavFood;
 
     public FavouritesAdapter(Context context, List<Food> allFavFood) {
         this.context = context;

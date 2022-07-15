@@ -24,11 +24,9 @@ public class SignupActivity extends AppCompatActivity {
     private EditText etLastname;
     private EditText etUsername;
     private EditText email;
-    private TextView tvLogInLink;
     private TextInputLayout layout_ConfirmPasswordSignUp;
     private EditText etPassword;
     private EditText etConfirmPassword;
-    private Button btnSendSignUp;
 
 
     @Override
@@ -40,12 +38,12 @@ public class SignupActivity extends AppCompatActivity {
         email = findViewById(R.id.etEmail);
         etLastname = findViewById(R.id.etLastName);
         layout_ConfirmPasswordSignUp = findViewById(R.id.layout_ConfirmPasswordSignUp);
-        tvLogInLink = findViewById(R.id.tvLogInLink);
+        TextView tvLogInLink = findViewById(R.id.tvLogInLink);
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
 
         etUsername = findViewById(R.id.etSignupUsername);
         etPassword = findViewById(R.id.etSignupPassword);
-        btnSendSignUp = findViewById(R.id.btnSendSignup);
+        Button btnSendSignUp = findViewById(R.id.btnSendSignup);
 
         etConfirmPassword.addTextChangedListener(new TextWatcher() {
             @Override
