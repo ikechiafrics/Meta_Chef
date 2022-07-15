@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.metachef.model.Cart;
@@ -28,7 +29,7 @@ public class ShowDetailActivity extends AppCompatActivity {
     RequestManager manager;
     private TextView numberOrderTxt;
     private ImageView BtnBack, btnLike;
-    int numberOrder = 1;
+    private int numberOrder = 1;
     final Food food= new Food() ;
 
 
@@ -67,7 +68,7 @@ public class ShowDetailActivity extends AppCompatActivity {
                     btnLike.setImageResource(R.drawable.ic_baseline_favorite_border_24);
                     likeBy.remove(ParseUser.getCurrentUser().getObjectId());
                     food.setLikedBy(likeBy);
-                food.saveInBackground();
+                food.deleteInBackground();
             }
         });
 
