@@ -28,7 +28,7 @@ import java.util.List;
 public class ShowDetailActivity extends AppCompatActivity {
     RequestManager manager;
     private TextView numberOrderTxt;
-    private ImageView BtnBack, btnLike;
+    private ImageView btnLike;
     private int numberOrder = 1;
     final Food food= new Food() ;
 
@@ -49,7 +49,7 @@ public class ShowDetailActivity extends AppCompatActivity {
         ImageView plusBtn = findViewById(R.id.plusBtn);
         ImageView minusBtn = findViewById(R.id.MinusBtn);
         ImageView picFood = findViewById(R.id.picFood);
-        ImageView btnLike = findViewById(R.id.btnLike);
+        btnLike = findViewById(R.id.btnLike);
 
         Items items = Parcels.unwrap(getIntent().getParcelableExtra(Items.class.getSimpleName()));
 

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomSheetContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_background"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="Sort and Filter"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/coloDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvDiets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Diets"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+            <CheckBox
+                android:id="@+id/checkGluten"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gluten Free"/>
+            <CheckBox
+                android:id="@+id/checkVegetarian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vegetarian"/>
+            <CheckBox
+                android:id="@+id/checkVegan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vegan"/>
+            <CheckBox
+                android:id="@+id/checkKetogenic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ketogenic"/>
+            <CheckBox
+                android:id="@+id/checkWhole30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Whole30"/>
+
+
+            <Spinner
+                android:id="@+id/tvSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/meal_types"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnDone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Done" />
+
+</LinearLayout>
