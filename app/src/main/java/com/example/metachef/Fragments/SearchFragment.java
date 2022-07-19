@@ -45,6 +45,7 @@ public class SearchFragment extends Fragment {
     private SearchAdapter searchAdapter;
     private ImageView btnFilter;
     private SearchView searchView;
+    private ArrayList<String> mResult;
     private EditText etMaxCalories, etMinCalories;
     private CheckBox checkGluten, checkVegetarian, checkVegan, checkKetogenic, checkWhole30, checkPopularity, checkPrice, checkCalories, checkAscending, checkDescending;
 
@@ -70,6 +71,7 @@ public class SearchFragment extends Fragment {
         checkCalories = view.findViewById(R.id.checkCalories);
         checkAscending = view.findViewById(R.id.checkAscending);
         checkDescending = view.findViewById(R.id.checkDescending);
+        mResult = new ArrayList<>();
 
         etMaxCalories = view.findViewById(R.id.etMaxCalories);
         etMinCalories = view.findViewById(R.id.etMinCalories);
@@ -83,6 +85,9 @@ public class SearchFragment extends Fragment {
         rvSearch.setAdapter(searchAdapter);
         btnFilter = view.findViewById(R.id.btnFilter);
 
+
+
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -95,7 +100,16 @@ public class SearchFragment extends Fragment {
                 return false;
             }
         });
-
+//        checkGluten.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (checkGluten.isChecked())
+//                    mResult.add("Gluten");
+//                else{
+//                    mResult.remove("Gluten");
+//                }
+//            }
+//        });
 
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,6 +149,7 @@ public class SearchFragment extends Fragment {
     private final SearchRecipesListener searchRecipesListener = new SearchRecipesListener() {
         @Override
         public void didfetch(SearchRecipesResponse response, String message) {
+
             rvSearch.setLayoutManager(new LinearLayoutManager(getContext()));
             ComplexSearchAdapter adapter = new ComplexSearchAdapter(getContext(), response.results);
             rvSearch.setAdapter(adapter);

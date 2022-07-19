@@ -50,7 +50,28 @@ public class RequestManager {
 
     public void getSearchRecipes(SearchRecipesListener listener, String query){
         SearchRecipesCall searchRecipesCall = retrofit.create(SearchRecipesCall.class);
-        Call<SearchRecipesResponse> call = searchRecipesCall.callSearchRecipes(query, "a0b47258ef634097812d0213ca6217ea");
+        Call<SearchRecipesResponse> call = searchRecipesCall.callSearchRecipes(query, null, null,null,null,null,null, "a0b47258ef634097812d0213ca6217ea");
+        //enqueue to make call asynchronously
+        call.enqueue(new Callback<SearchRecipesResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<SearchRecipesResponse> call, @NonNull Response<SearchRecipesResponse> response) {
+                if (!response.isSuccessful()){
+                    listener.diderror(response.message());
+                    return;
+                }
+                listener.didfetch(response.body(), response.message());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<SearchRecipesResponse> call, @NonNull Throwable t) {
+                listener.diderror(t.getMessage());
+            }
+        });
+    }
+
+    public void getSearchRecipes(SearchRecipesListener listener, String query, String diet, String type, String sort, String sortDirection, String maxCalories, String minCalories){
+        SearchRecipesCall searchRecipesCall = retrofit.create(SearchRecipesCall.class);
+        Call<SearchRecipesResponse> call = searchRecipesCall.callSearchRecipes(query, diet, type, sort, sortDirection, maxCalories, minCalories, "a0b47258ef634097812d0213ca6217ea");
         //enqueue to make call asynchronously
         call.enqueue(new Callback<SearchRecipesResponse>() {
             @Override
@@ -78,7 +99,7 @@ public class RequestManager {
     private interface SearchRecipesCall{
 //        Get Call
         @GET("recipes/complexSearch")
-        Call<SearchRecipesResponse> callSearchRecipes(@Query("query") String query, @Query("apiKey") String apiKey);
+        Call<SearchRecipesResponse> callSearchRecipes(@Query("query") String query,@Query("diet") String diet, @Query("type") String type, @Query("sort") String sort, @Query("sortDirection") String sortDirection, @Query("maxCalories") String maxCalories, @Query("minCalories") String minCalories, @Query("apiKey") String apiKey);
     }
 
 }
