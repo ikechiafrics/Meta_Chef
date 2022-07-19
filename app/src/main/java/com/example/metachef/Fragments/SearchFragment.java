@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,6 +45,8 @@ public class SearchFragment extends Fragment {
     private SearchAdapter searchAdapter;
     private ImageView btnFilter;
     private SearchView searchView;
+    private EditText etMaxCalories, etMinCalories;
+    private CheckBox checkGluten, checkVegetarian, checkVegan, checkKetogenic, checkWhole30, checkPopularity, checkPrice, checkCalories, checkAscending, checkDescending;
 
     public SearchFragment() {
     }
@@ -57,6 +60,21 @@ public class SearchFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        checkGluten = view.findViewById(R.id.checkGluten);
+        checkVegan = view.findViewById(R.id.checkVegan);
+        checkVegetarian = view.findViewById(R.id.checkVegetarian);
+        checkKetogenic = view.findViewById(R.id.checkKetogenic);
+        checkWhole30 = view.findViewById(R.id.checkWhole30);
+        checkPopularity = view.findViewById(R.id.checkPopularity);
+        checkPrice = view.findViewById(R.id.checkPrice);
+        checkCalories = view.findViewById(R.id.checkCalories);
+        checkAscending = view.findViewById(R.id.checkAscending);
+        checkDescending = view.findViewById(R.id.checkDescending);
+
+        etMaxCalories = view.findViewById(R.id.etMaxCalories);
+        etMinCalories = view.findViewById(R.id.etMinCalories);
+
+
         searchView = view.findViewById(R.id.etSearch2);
         manager = new RequestManager(getContext());
         manager.getRandomRecipes(responseListener, tags);
