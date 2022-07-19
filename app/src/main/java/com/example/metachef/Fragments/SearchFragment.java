@@ -42,9 +42,8 @@ public class SearchFragment extends Fragment {
     private List<Items> allItems;
     private RecyclerView rvSearch;
     private SearchAdapter searchAdapter;
-    private ImageView btnSearch, btnFilter;
+    private ImageView btnFilter;
     private SearchView searchView;
-    private Spinner spinner;
 
     public SearchFragment() {
     }
@@ -65,7 +64,6 @@ public class SearchFragment extends Fragment {
         searchAdapter = new SearchAdapter(getContext(), allItems);
         rvSearch.setAdapter(searchAdapter);
         btnFilter = view.findViewById(R.id.btnFilter);
-        spinner = view.findViewById(R.id.tvSpinner);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -79,7 +77,8 @@ public class SearchFragment extends Fragment {
                 return false;
             }
         });
-//
+
+
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +97,6 @@ public class SearchFragment extends Fragment {
                 bottomSheetDialog.setContentView(bottomSheetView);
                 bottomSheetDialog.show();
             }
-
         });
     }
 
