@@ -31,139 +31,156 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvDiets"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="Diets"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvDiets"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Diets"
-                android:textColor="#000000"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+        <CheckBox
+            android:id="@+id/checkGluten"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gluten Free" />
 
-            <CheckBox
-                android:id="@+id/checkGluten"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Gluten Free" />
+        <CheckBox
+            android:id="@+id/checkVegetarian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vegetarian" />
 
-            <CheckBox
-                android:id="@+id/checkVegetarian"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vegetarian" />
+        <CheckBox
+            android:id="@+id/checkVegan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vegan" />
 
-            <CheckBox
-                android:id="@+id/checkVegan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vegan" />
+        <CheckBox
+            android:id="@+id/checkKetogenic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ketogenic" />
 
-            <CheckBox
-                android:id="@+id/checkKetogenic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ketogenic" />
-
-            <CheckBox
-                android:id="@+id/checkWhole30"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Whole30" />
+        <CheckBox
+            android:id="@+id/checkWhole30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Whole30" />
 
 
-            <TextView
-                android:id="@+id/tvSort"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sort"
-                android:textColor="#000000"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/coloDivider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
-            <CheckBox
-                android:id="@+id/checkPopularity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Popularity" />
+        <TextView
+            android:id="@+id/tvTypes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Meal Types"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
-            <CheckBox
-                android:id="@+id/checkPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Price" />
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/meal_types"
+            android:minHeight="48dp" />
 
-            <CheckBox
-                android:id="@+id/checkCalories"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Calories" />
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/coloDivider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
-            <TextView
-                android:id="@+id/tvMaxCalories"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Maximum Calories"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvMaxCalories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Maximum Calories"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/etMaxCalories"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Max of 800" />
+        <EditText
+            android:id="@+id/etMaxCalories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Max of 800"
+            android:minHeight="48dp" />
 
-            <TextView
-                android:id="@+id/tvMinCalories"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Minimum Calories"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvMinCalories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Minimum Calories"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/etMinCalories"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Min of 50" />
+        <EditText
+            android:id="@+id/etMinCalories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Min of 50"
+            android:minHeight="48dp" />
 
-            <TextView
-                android:id="@+id/tvSortDirection"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sort"
-                android:textColor="#000000"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+        <View
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/coloDivider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
-            <CheckBox
-                android:id="@+id/checkAscending"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ascending" />
+        <TextView
+            android:id="@+id/tvSortDirection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sort"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
-            <CheckBox
-                android:id="@+id/checkDescending"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Descending" />
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/Sort"
+            android:minHeight="48dp" />
 
-            <Button
-                android:id="@+id/btnDone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Done" />
-        </LinearLayout>
-    </ScrollView>
+        <Button
+            android:id="@+id/btnDone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Done" />
+    </LinearLayout>
 
 </LinearLayout>
