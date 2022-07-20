@@ -8,14 +8,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -45,8 +47,10 @@ public class SearchFragment extends Fragment {
     private ImageView btnFilter;
     private Spinner spinner, sortSpinner;
     private SearchView searchView;
-    private EditText etMaxCalories, etMinCalories;
-    private CheckBox checkGluten, checkVegetarian, checkVegan, checkKetogenic, checkWhole30;
+    private List<String> Intolerances;
+    private List<String> sort;
+    private List<String> sortDirection;
+    private CheckBox checkGluten, checkPeanut, checkDairy, checkWheat, checkSeafood, checkPopularity, checkPrice, checkCholesterol, checkAscending, checkDescending;
 
     public SearchFragment() {
     }
@@ -78,7 +82,7 @@ public class SearchFragment extends Fragment {
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
+            public boolean onQueryTextChange(String query) {
                 return false;
             }
         });
@@ -121,6 +125,21 @@ public class SearchFragment extends Fragment {
         }
     };
 
+    private final SearchRecipesListener filterRecipesListener = new SearchRecipesListener() {
+        @Override
+        public void didfetch(SearchRecipesResponse response, String message) {
+
+            rvSearch.setLayoutManager(new LinearLayoutManager(getContext()));
+            ComplexSearchAdapter adapter = new ComplexSearchAdapter(getContext(), response.results);
+            rvSearch.setAdapter(adapter);
+        }
+
+        @Override
+        public void diderror(String message) {
+
+        }
+    };
+
     public void toggleBottomSheet(){
         View view = getLayoutInflater().inflate(R.layout.bottomsheet, null);
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext(), R.style.BottomSheetDialogTheme);
@@ -129,83 +148,132 @@ public class SearchFragment extends Fragment {
                 view.findViewById(R.id.bottomSheetContainer)
         );
 
+        Intolerances = new ArrayList<>();
+        sort = new ArrayList<>();
+        sortDirection = new ArrayList<>();
+
         checkGluten = view.requireViewById(R.id.checkGluten);
         checkGluten.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (checkGluten.isChecked()){
-                    String Gluten = (String) checkGluten.getText();
+                    Intolerances.add("Gluten Free");
                 }else {
-                    return;
+                    Intolerances.remove("Gluten Free");
                 }
             }
         });
-        checkVegan = view.requireViewById(R.id.checkVegan);
-        checkVegan.setOnClickListener(new View.OnClickListener() {
+        checkDairy = view.requireViewById(R.id.checkDairy);
+        checkDairy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkVegan.isChecked()){
-                    String Vegan = (String) checkVegan.getText();
+                if (checkDairy.isChecked()){
+                    Intolerances.add("Vegan");
                 }else {
-                    return;
+                    Intolerances.remove("Vegan");
                 }
             }
         });
-        checkVegetarian = view.requireViewById(R.id.checkVegetarian);
-        checkVegetarian.setOnClickListener(new View.OnClickListener() {
+        checkPeanut = view.requireViewById(R.id.checkPeanut);
+        checkPeanut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkVegetarian.isChecked()){
-                    String Vegetarian = (String) checkVegetarian.getText();
+                if (checkPeanut.isChecked()){
+                    Intolerances.add("Vegetarian");
                 }else {
-                    return;
+                    Intolerances.remove("Vegetarian");
                 }
             }
         });
-        checkKetogenic = view.requireViewById(R.id.checkKetogenic);
-        checkKetogenic.setOnClickListener(new View.OnClickListener() {
+        checkWheat = view.requireViewById(R.id.checkWheat);
+        checkWheat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkKetogenic.isChecked()){
-                    String Ketogenic = (String) checkKetogenic.getText();
+                if(checkWheat.isChecked()){
+                    Intolerances.add("Ketogenic");
                 } else{
-                    return;
+                    Intolerances.remove("Ketogenic");
                 }
             }
         });
-        checkWhole30 = view.requireViewById(R.id.checkWhole30);
-        checkWhole30.setOnClickListener(new View.OnClickListener() {
+        checkSeafood = view.requireViewById(R.id.checkSeafood);
+        checkSeafood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkWhole30.isChecked()){
-                    String Whole30 = (String) checkWhole30.getText();
+                if(checkSeafood.isChecked()){
+                    Intolerances.add("Whole30");
                 } else{
-                    return;
+                    Intolerances.remove("Whole30");
+                }
+            }
+        });
+        checkPopularity = view.requireViewById(R.id.checkPopularity);
+        checkPopularity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checkPopularity.isChecked()){
+                    sort.add("popularity");
+                } else{
+                    sort.remove("popularity");
+                }
+            }
+        });
+        checkPrice = view.requireViewById(R.id.checkPrice);
+        checkPrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checkPrice.isChecked()){
+                    sort.add("price");
+                } else{
+                    sort.remove("price");
+                }
+            }
+        });
+        checkCholesterol = view.requireViewById(R.id.checkCholesterol);
+        checkCholesterol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checkCholesterol.isChecked()){
+                    sort.add("cholesterol");
+                } else{
+                    sort.remove("cholesterol");
+                }
+            }
+        });
+        checkAscending = view.requireViewById(R.id.checkAscending);
+        checkAscending.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checkAscending.isChecked()){
+                    sortDirection.add("asc");
+                } else{
+                    sortDirection.remove("asc");
+                }
+            }
+        });
+        checkDescending = view.requireViewById(R.id.checkDescending);
+        checkDescending.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checkSeafood.isChecked()){
+                    sortDirection.add("desc");
+                } else{
+                    sortDirection.remove("desc");
                 }
             }
         });
 
-        etMaxCalories = view.requireViewById(R.id.etMaxCalories);
-        String maxCalories = etMaxCalories.getText().toString();
-
-        etMinCalories = view.requireViewById(R.id.etMinCalories);
-        String minCalories = etMinCalories.getText().toString();
-
-        spinner = view.requireViewById(R.id.spinner1);
-        sortSpinner = view.requireViewById(R.id.spinner2);
-
-        ArrayAdapter arrayAdapter = ArrayAdapter.createFromResource(getContext(), R.array.meal_types, R.layout.spinner_item);
-        arrayAdapter.setDropDownViewResource(R.layout.spinner_drop_text);
-
-        ArrayAdapter sortAdapter = ArrayAdapter.createFromResource(getContext(), R.array.meal_types, R.layout.spinner_item);
-        sortAdapter.setDropDownViewResource(R.layout.spinner_drop_text);
-
-        spinner.setAdapter(arrayAdapter);
-        sortSpinner.setAdapter(sortAdapter);
+        String query = searchView.getQuery().toString();
 
         bottomSheetView.findViewById(R.id.btnDone).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                manager.getSearchRecipes(filterRecipesListener,
+                        query,
+                        Intolerances,
+                        sort,
+                        sortDirection);
+                Log.i("Onsuccess", "These are all your filters " + query + Intolerances + sort + sortDirection);
                 Toast.makeText(getContext(), "Done", Toast.LENGTH_SHORT).show();
                 bottomSheetDialog.dismiss();
             }
