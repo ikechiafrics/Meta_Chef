@@ -45,11 +45,11 @@ public class SearchFragment extends Fragment {
     private RecyclerView rvSearch;
     private SearchAdapter searchAdapter;
     private ImageView btnFilter;
-    private Spinner spinner, sortSpinner;
     private SearchView searchView;
     private List<String> Intolerances;
     private List<String> sort;
     private List<String> sortDirection;
+    private EditText etNumber;
     private CheckBox checkGluten, checkPeanut, checkDairy, checkWheat, checkSeafood, checkPopularity, checkPrice, checkCholesterol, checkAscending, checkDescending;
 
     public SearchFragment() {
@@ -157,9 +157,9 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (checkGluten.isChecked()){
-                    Intolerances.add("Gluten Free");
+                    Intolerances.add("Gluten");
                 }else {
-                    Intolerances.remove("Gluten Free");
+                    Intolerances.remove("Gluten");
                 }
             }
         });
@@ -168,9 +168,9 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (checkDairy.isChecked()){
-                    Intolerances.add("Vegan");
+                    Intolerances.add("Dairy");
                 }else {
-                    Intolerances.remove("Vegan");
+                    Intolerances.remove("Dairy");
                 }
             }
         });
@@ -179,9 +179,9 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (checkPeanut.isChecked()){
-                    Intolerances.add("Vegetarian");
+                    Intolerances.add("Peanut");
                 }else {
-                    Intolerances.remove("Vegetarian");
+                    Intolerances.remove("Peanut");
                 }
             }
         });
@@ -190,9 +190,9 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(checkWheat.isChecked()){
-                    Intolerances.add("Ketogenic");
+                    Intolerances.add("Wheat");
                 } else{
-                    Intolerances.remove("Ketogenic");
+                    Intolerances.remove("Wheat");
                 }
             }
         });
@@ -201,12 +201,13 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(checkSeafood.isChecked()){
-                    Intolerances.add("Whole30");
+                    Intolerances.add("Seafood");
                 } else{
-                    Intolerances.remove("Whole30");
+                    Intolerances.remove("Seafood");
                 }
             }
         });
+
         checkPopularity = view.requireViewById(R.id.checkPopularity);
         checkPopularity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,6 +241,9 @@ public class SearchFragment extends Fragment {
                 }
             }
         });
+
+        etNumber = view.requireViewById(R.id.etNumber);
+
         checkAscending = view.requireViewById(R.id.checkAscending);
         checkAscending.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -268,12 +272,14 @@ public class SearchFragment extends Fragment {
         bottomSheetView.findViewById(R.id.btnDone).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String Number = etNumber.getText().toString();
                 manager.getSearchRecipes(filterRecipesListener,
                         query,
                         Intolerances,
                         sort,
-                        sortDirection);
-                Log.i("Onsuccess", "These are all your filters " + query + Intolerances + sort + sortDirection);
+                        sortDirection,
+                        Number);
+                Log.i("Onsuccess", "These are all your filters " + query + Intolerances + sort + sortDirection + Number);
                 Toast.makeText(getContext(), "Done", Toast.LENGTH_SHORT).show();
                 bottomSheetDialog.dismiss();
             }

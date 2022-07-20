@@ -22,6 +22,7 @@
         <entry key="app/src/main/res/drawable/promtions_background.xml" value="0.486" />
         <entry key="app/src/main/res/drawable/round_outline.xml" value="0.1085" />
         <entry key="app/src/main/res/drawable/search_background.xml" value="0.485" />
+        <entry key="app/src/main/res/drawable/switch_btn_bg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/username_background.xml" value="0.296" />
         <entry key="app/src/main/res/layout/activity_favourites.xml" value="0.2023782800745081" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.5463541666666667" />
@@ -32,6 +33,7 @@
         <entry key="app/src/main/res/layout/activity_starting.xml" value="0.446875" />
         <entry key="app/src/main/res/layout/bottomsheet.xml" value="0.23268698060941828" />
         <entry key="app/src/main/res/layout/cart_view.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/color_theme.xml" value="0.375" />
         <entry key="app/src/main/res/layout/custom_dialog.xml" value="0.33482142857142855" />
         <entry key="app/src/main/res/layout/favourites_view.xml" value="0.375" />
         <entry key="app/src/main/res/layout/fee_view.xml" value="0.335" />
@@ -46,6 +48,7 @@
         <entry key="app/src/main/res/layout/item_view.xml" value="0.375" />
         <entry key="app/src/main/res/layout/popular_view.xml" value="0.3875" />
         <entry key="app/src/main/res/layout/practice.xml" value="0.2601851851851852" />
+        <entry key="app/src/main/res/layout/settings.xml" value="0.40260416666666665" />
         <entry key="app/src/main/res/layout/slide_layout.xml" value="0.2861111111111111" />
         <entry key="app/src/main/res/layout/spinner_drop_text.xml" value="0.25677083333333334" />
         <entry key="app/src/main/res/layout/spinner_item.xml" value="0.25677083333333334" />

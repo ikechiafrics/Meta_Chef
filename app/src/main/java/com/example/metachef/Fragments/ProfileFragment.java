@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.example.metachef.ColorThemeActivity;
 import com.example.metachef.FavouritesActivity;
 import com.example.metachef.LoginActivity;
 import com.example.metachef.R;
@@ -43,7 +44,7 @@ import java.io.File;
 //This class represents the profile page
 public class ProfileFragment extends Fragment {
     public static final String KEY_IMAGE = "profile_picture";
-    public User user = (User) User.getCurrentUser();
+    public final User user = (User) User.getCurrentUser();
     protected File photoFile;
     private ImageView ivProfileImg;
     private EditText updatePassword;
@@ -82,6 +83,7 @@ public class ProfileFragment extends Fragment {
         Button btnOkay = dialog.findViewById(R.id.btn_Okay);
         Button btnCancel = dialog.findViewById(R.id.btn_Cancel);
         Button btnFav = view.findViewById(R.id.btnFav);
+        Button btnColor = view.findViewById(R.id.btnColor);
         Button btnUpdatePassword = view.findViewById(R.id.btnUpdatePassword);
         ImageView btnLogout = view.findViewById(R.id.BtnLogout);
         ivProfileImg = view.findViewById(R.id.ivProfileImg);
@@ -109,6 +111,13 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Favourites();
+            }
+        });
+
+        btnColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ColorTheme();
             }
         });
 
@@ -210,6 +219,10 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(getContext(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    private void ColorTheme() {
+        Intent intent = new Intent(getContext(), ColorThemeActivity.class);
+        startActivity(intent);
     }
 
     private void Favourites() {

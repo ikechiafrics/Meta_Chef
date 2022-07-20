@@ -32,7 +32,7 @@
         android:id="@+id/btnFav"
         android:layout_width="318dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button3"
+        android:layout_above="@+id/btnColor"
         android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="46dp"
@@ -42,7 +42,7 @@
         android:textColor="#000000" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnColor"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -51,7 +51,7 @@
         android:layout_marginStart="45dp"
         android:layout_marginBottom="204dp"
         android:backgroundTint="#FFFFFF"
-        android:text="Settings"
+        android:text="Color Theme"
         android:textColor="#000000" />
 
     <ImageView
