@@ -32,9 +32,6 @@
             android:name=".FavouritesActivity"
             android:exported="false"/>
         <activity
-            android:name=".ColorThemeActivity"
-            android:exported="false"/>
-        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
