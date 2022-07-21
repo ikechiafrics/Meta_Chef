@@ -43,7 +43,7 @@ import java.io.File;
 //This class represents the profile page
 public class ProfileFragment extends Fragment {
     public static final String KEY_IMAGE = "profile_picture";
-    public User user = (User) User.getCurrentUser();
+    public final User user = (User) User.getCurrentUser();
     protected File photoFile;
     private ImageView ivProfileImg;
     private EditText updatePassword;
@@ -211,7 +211,6 @@ public class ProfileFragment extends Fragment {
             }
         }
     }
-
     private void Favourites() {
         Intent intent = new Intent(getContext(), FavouritesActivity.class);
         startActivity(intent);

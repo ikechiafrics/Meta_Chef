@@ -51,9 +51,9 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvFavTxt;
-        ImageView ivFavPic;
-        ImageView btnRemove;
+        final TextView tvFavTxt;
+        final ImageView ivFavPic;
+        final ImageView btnRemove;
 
         public ViewHolder(@NonNull View itemsView) {
             super(itemsView);

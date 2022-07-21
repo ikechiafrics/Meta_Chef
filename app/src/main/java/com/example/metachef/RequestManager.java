@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import com.example.metachef.Interface.RandomRecipeListener;
-import com.example.metachef.Interface.RecipeDetailsListener;
+import com.example.metachef.Interface.SearchRecipesListener;
 
 import java.util.List;
 
@@ -47,9 +47,30 @@ public class RequestManager {
         });
     }
 
-    public void getSearchRecipes(RecipeDetailsListener listener, List<String> id){
+    public void getSearchRecipes(SearchRecipesListener listener, String query){
         SearchRecipesCall searchRecipesCall = retrofit.create(SearchRecipesCall.class);
-        Call<SearchRecipesResponse> call = searchRecipesCall.callSearchRecipes(id, "a0b47258ef634097812d0213ca6217ea");
+        Call<SearchRecipesResponse> call = searchRecipesCall.callSearchRecipes(query, null, null,null, null,"a0b47258ef634097812d0213ca6217ea");
+        //enqueue to make call asynchronously
+        call.enqueue(new Callback<SearchRecipesResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<SearchRecipesResponse> call, @NonNull Response<SearchRecipesResponse> response) {
+                if (!response.isSuccessful()){
+                    listener.diderror(response.message());
+                    return;
+                }
+                listener.didfetch(response.body(), response.message());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<SearchRecipesResponse> call, @NonNull Throwable t) {
+                listener.diderror(t.getMessage());
+            }
+        });
+    }
+
+    public void getSearchRecipes(SearchRecipesListener listener, String query, List<String> intolerances, List<String> sort, List<String> sortDirection, String number){
+        SearchRecipesCall searchRecipesCall = retrofit.create(SearchRecipesCall.class);
+        Call<SearchRecipesResponse> call = searchRecipesCall.callSearchRecipes(query, intolerances,sort, sortDirection, number, "a0b47258ef634097812d0213ca6217ea");
         //enqueue to make call asynchronously
         call.enqueue(new Callback<SearchRecipesResponse>() {
             @Override
@@ -77,7 +98,6 @@ public class RequestManager {
     private interface SearchRecipesCall{
 //        Get Call
         @GET("recipes/complexSearch")
-        Call<SearchRecipesResponse> callSearchRecipes(@Query("ids") List<String> id, @Query("apiKey") String apiKey);
+        Call<SearchRecipesResponse> callSearchRecipes(@Query("query") String query,@Query("intolerances") List<String> intolerances, @Query("sort") List<String> sort, @Query("sortDirection") List<String> sortDirection, @Query("number") String number, @Query("apiKey") String apiKey);
     }
-
 }

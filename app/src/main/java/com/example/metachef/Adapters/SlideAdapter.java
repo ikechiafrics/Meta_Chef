@@ -14,7 +14,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.example.metachef.R;
 
 public class SlideAdapter extends PagerAdapter {
-    Context context;
+    final Context context;
     LayoutInflater layoutInflater;
 
     public SlideAdapter(Context context){
@@ -22,13 +22,13 @@ public class SlideAdapter extends PagerAdapter {
     }
 
     //Arrays
-    public int[] slide_images = {
+    public final int[] slide_images = {
             R.drawable.food_variety,
             R.drawable.icecream,
             R.drawable.spaghetti
     };
 
-    public String[] slide_docs = {
+    public final String[] slide_docs = {
             "Today's Offer" + "" +
                     "Free drink on all orders above $50",
 
