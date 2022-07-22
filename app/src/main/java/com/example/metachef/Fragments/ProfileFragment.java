@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Environment;
@@ -26,20 +25,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.example.metachef.Adapters.ComplexSearchAdapter;
-import com.example.metachef.Adapters.QuickAnswerAdapter;
 import com.example.metachef.FavouritesActivity;
 import com.example.metachef.Interface.QuickAnswerListener;
-import com.example.metachef.Interface.SearchRecipesListener;
 import com.example.metachef.LoginActivity;
 import com.example.metachef.QuickAnswerResponse;
 import com.example.metachef.R;
 import com.example.metachef.RequestManager;
-import com.example.metachef.SearchRecipesResponse;
 import com.example.metachef.model.User;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -58,7 +54,8 @@ public class ProfileFragment extends Fragment {
     private ImageView ivProfileImg;
     private RecyclerView rvAnswer;
     private EditText updatePassword, etQuickAnswer;
-    private ImageView btnAnswer;
+    private ImageView btnAnswer, ivAnswer;
+    private TextView tvAnswer;
     private Dialog dialog;
     String newPassword;
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
@@ -82,6 +79,7 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        manager = new RequestManager(getContext());
         dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.custom_dialog);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
@@ -98,18 +96,21 @@ public class ProfileFragment extends Fragment {
         ImageView btnLogout = view.findViewById(R.id.BtnLogout);
         ivProfileImg = view.findViewById(R.id.ivProfileImg);
         updatePassword = dialog.findViewById(R.id.etUpdatePassword);
+        etQuickAnswer = view.requireViewById(R.id.etQuickAnswer);
+        ivAnswer = view.findViewById(R.id.ivAnswer);
+        tvAnswer = view.findViewById(R.id.tvAnswer);
         btnAnswer = view.findViewById(R.id.btnAnswer);
-        etQuickAnswer = view.findViewById(R.id.etQuickAnswer);
         ParseUser user = ParseUser.getCurrentUser();
 
 
-//        btnAnswer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String Question = etQuickAnswer.getText().toString();
-//                manager.getQuickAnswer(quickAnswerListener, Question);
-//            }
-//        });
+        btnAnswer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String Question = etQuickAnswer.getText().toString();
+                Log.i("OnSuccess", "This is the question" + Question);
+                manager.getQuickAnswer(quickAnswerListener, Question);
+            }
+        });
 
 
 //        set profile picture
@@ -253,18 +254,16 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-//    private final QuickAnswerListener quickAnswerListener = new QuickAnswerListener() {
-//        @Override
-//        public void didfetch(QuickAnswerResponse response, String message) {
-//
-//            rvAnswer.setLayoutManager(new LinearLayoutManager(getContext()));
-//            QuickAnswerAdapter adapter = new QuickAnswerAdapter(getContext(), response.);
-//            rvAnswer.setAdapter(adapter);
-//        }
-//
-//        @Override
-//        public void diderror(String message) {
-//
-//        }
-//    };
+    private final QuickAnswerListener quickAnswerListener = new QuickAnswerListener() {
+        @Override
+        public void didfetch(QuickAnswerResponse response, String message) {
+            int roundingRadius = 40;
+            tvAnswer.setText(response.answer);
+            Glide.with(getContext()).load(response.image).transform(new RoundedCorners(roundingRadius)).into(ivAnswer);
+        }
+        @Override
+        public void diderror(String message) {
+
+        }
+    };
 }

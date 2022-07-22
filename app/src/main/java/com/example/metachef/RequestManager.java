@@ -28,7 +28,7 @@ public class RequestManager {
 
     public void getRandomRecipes(RandomRecipeListener listener, List<String> tags){
         RandomRecipesCall randomRecipesCall = retrofit.create(RandomRecipesCall.class);
-        Call<RandomRecipesResponse> call = randomRecipesCall.callRandomRecipe("a0b47258ef634097812d0213ca6217ea", "20",tags);
+        Call<RandomRecipesResponse> call = randomRecipesCall.callRandomRecipe("ff893e5bdf64417fa3562b5aae5731d4", "30",tags);
 
         //enqueue to make call asynchronously
         call.enqueue(new Callback<RandomRecipesResponse>() {
@@ -50,7 +50,7 @@ public class RequestManager {
 
     public void getSearchRecipes(SearchRecipesListener listener, String query){
         SearchRecipesCall searchRecipesCall = retrofit.create(SearchRecipesCall.class);
-        Call<SearchRecipesResponse> call = searchRecipesCall.callSearchRecipes(query, null, null,null, null,"a0b47258ef634097812d0213ca6217ea");
+        Call<SearchRecipesResponse> call = searchRecipesCall.callSearchRecipes(query, null, null,null, null,"ff893e5bdf64417fa3562b5aae5731d4");
         //enqueue to make call asynchronously
         call.enqueue(new Callback<SearchRecipesResponse>() {
             @Override
@@ -71,7 +71,7 @@ public class RequestManager {
 
     public void getSearchRecipes(SearchRecipesListener listener, String query, List<String> intolerances, List<String> sort, List<String> sortDirection, String number){
         SearchRecipesCall searchRecipesCall = retrofit.create(SearchRecipesCall.class);
-        Call<SearchRecipesResponse> call = searchRecipesCall.callSearchRecipes(query, intolerances,sort, sortDirection, number, "a0b47258ef634097812d0213ca6217ea");
+        Call<SearchRecipesResponse> call = searchRecipesCall.callSearchRecipes(query, intolerances,sort, sortDirection, number, "ff893e5bdf64417fa3562b5aae5731d4");
         //enqueue to make call asynchronously
         call.enqueue(new Callback<SearchRecipesResponse>() {
             @Override
@@ -92,11 +92,11 @@ public class RequestManager {
 
     public void getQuickAnswer(QuickAnswerListener listener, String q){
         QuickAnswerCall quickAnswerCall = retrofit.create(QuickAnswerCall.class);
-        Call<QuickAnswerResponse> call = quickAnswerCall.callQuickAnswer(q, "a0b47258ef634097812d0213ca6217ea");
+        Call<QuickAnswerResponse> call = quickAnswerCall.callQuickAnswer(q, "ff893e5bdf64417fa3562b5aae5731d4");
         //enqueue to make call asynchronously
         call.enqueue(new Callback<QuickAnswerResponse>() {
             @Override
-            public void onResponse(Call<QuickAnswerResponse> call, Response<QuickAnswerResponse> response) {
+            public void onResponse(@NonNull Call<QuickAnswerResponse> call, @NonNull Response<QuickAnswerResponse> response) {
                 if (!response.isSuccessful()){
                     listener.diderror(response.message());
                     return;
@@ -105,7 +105,7 @@ public class RequestManager {
             }
 
             @Override
-            public void onFailure(Call<QuickAnswerResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<QuickAnswerResponse> call, @NonNull Throwable t) {
                 listener.diderror(t.getMessage());
             }
         });

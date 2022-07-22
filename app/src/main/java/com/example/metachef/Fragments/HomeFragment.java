@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.example.metachef.Adapters.OthersAdapter;
 import com.example.metachef.Adapters.SlideAdapter;
 import com.example.metachef.model.Items;
 import com.example.metachef.Adapters.ItemsAdapter;
@@ -48,8 +49,10 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView rvItems;
     private RecyclerView rvPopular;
+    private RecyclerView rvOthers;
     private List<Items> allItems;
     private List<Items> popularItems;
+    private List<Items> allOtherItems;
     private ViewPager slideViewPager;
     private LinearLayout dotLayout;
     private final List<String> tags = new ArrayList<>();
@@ -75,9 +78,13 @@ public class HomeFragment extends Fragment {
         manager.getRandomRecipes(responseListener, tags);
         rvItems = view.findViewById(R.id.rvItems);
         rvPopular = view.findViewById(R.id.rvPopular);
+        rvOthers = view.findViewById(R.id.rvOthers);
         ivProfilePic = view.findViewById(R.id.ivProfilePic);
+
         allItems = new ArrayList<>();
         popularItems = new ArrayList<>();
+        allOtherItems = new ArrayList<>();
+
         SlideAdapter slideAdapter = new SlideAdapter(getContext());
         slideViewPager.setAdapter(slideAdapter);
         addDotsIndicator(0);
@@ -127,6 +134,8 @@ public class HomeFragment extends Fragment {
         public void didfetch(RandomRecipesResponse response, String message) {
             ItemsAdapter itemsAdapter = new ItemsAdapter(getContext(), allItems);
             PopularAdapter popularAdapter = new PopularAdapter(getContext(), popularItems);
+            OthersAdapter othersAdapter = new OthersAdapter(getContext(), allOtherItems);
+            rvOthers.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
             rvItems.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
             rvPopular.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
 
@@ -137,8 +146,12 @@ public class HomeFragment extends Fragment {
             for(int i = 10; i < 20; i++){
                 popularItems.add(response.recipes.get(i));
             }
+            for(int i = 20; i < 30; i++){
+                allOtherItems.add(response.recipes.get(i));
+            }
             rvItems.setAdapter(itemsAdapter);
             rvPopular.setAdapter(popularAdapter);
+            rvOthers.setAdapter(othersAdapter);
         }
 
         @Override

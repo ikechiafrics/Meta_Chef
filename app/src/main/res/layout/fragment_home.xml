@@ -34,6 +34,7 @@
                     android:text="Menu"
                     android:textColor="#000000"
                     android:textSize="44sp"
+                    android:fontFamily="@font/font2"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/tvPromotions"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -55,9 +56,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Promotions"
+                    android:fontFamily="@font/font3"
                     android:textColor="#000000"
                     android:textSize="30sp"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
                     app:layout_constraintStart_toStartOf="@+id/constraintLayout" />
 
@@ -68,7 +69,7 @@
                     android:text="Categories"
                     android:textColor="#000000"
                     android:textSize="30sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/font3"
                     app:layout_constraintStart_toStartOf="@+id/tvMenu"
                     app:layout_constraintTop_toBottomOf="@+id/tvMenu" />
 
@@ -129,19 +130,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:text="Popular"
+                    android:fontFamily="@font/font3"
                     android:textColor="#000000"
                     android:textSize="30sp"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvPopular"
                     android:layout_width="362dp"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_height="155dp"
                     android:scrollbars="horizontal"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/rvItems"
                     app:layout_constraintStart_toStartOf="@+id/rvItems"
                     app:layout_constraintTop_toBottomOf="@+id/tvPopular" />
@@ -152,10 +151,9 @@
                     android:layout_height="40dp"
                     android:background="@color/white"
                     android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
                     app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.568"
+                    app:layout_constraintTop_toTopOf="@+id/constraintLayout"
                     app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
 
                 <ImageButton
@@ -177,12 +175,32 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
+                    android:fontFamily="@font/font2"
                     android:text="TextView"
                     android:textColor="#000000"
-                    android:textSize="20sp"
-                    android:textStyle="bold|italic"
+                    android:textSize="34sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvOthers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Others"
+                    android:fontFamily="@font/font3"
+                    android:textSize="30sp"
+                    app:layout_constraintStart_toStartOf="@+id/tvPopular"
+                    app:layout_constraintTop_toBottomOf="@+id/rvPopular" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvOthers"
+                    android:layout_width="362dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/rvPopular"
+                    app:layout_constraintStart_toStartOf="@+id/rvPopular"
+                    app:layout_constraintTop_toBottomOf="@+id/tvOthers" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -24,8 +24,9 @@
 
     <ImageView
         android:id="@+id/btnFilter"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="3dp"
         android:src="@drawable/btnfilter"
         app:layout_constraintBottom_toBottomOf="@+id/etSearch2"
         app:layout_constraintStart_toEndOf="@+id/etSearch2"

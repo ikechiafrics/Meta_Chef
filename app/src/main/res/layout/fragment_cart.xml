@@ -24,6 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Items in Cart"
+                android:fontFamily="@font/font2"
                 android:textColor="#000000"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -58,8 +59,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Items Total:"
+                    android:text="Items Total :"
                     android:textColor="#000000"
+                    android:fontFamily="@font/font2"
+
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -88,7 +91,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Delivery Services:"
+                    android:text="Delivery Services :"
+                    android:fontFamily="@font/font2"
                     android:textColor="#000000"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -118,7 +122,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tax:"
+                    android:text="Tax :"
+                    android:fontFamily="@font/font2"
                     android:textColor="#000000"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -148,7 +153,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Total:"
+                    android:text="Total :"
+                    android:fontFamily="@font/font2"
                     android:textColor="#000000"
                     android:textSize="20sp"
                     android:textStyle="bold" />
