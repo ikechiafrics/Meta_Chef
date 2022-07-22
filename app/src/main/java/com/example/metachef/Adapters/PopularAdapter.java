@@ -55,6 +55,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         final TextView tvPopular;
         final ImageView ivPopular;
+        TextView tvPrice;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -63,11 +64,15 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.ViewHold
             tvPopular.setEllipsize(TextUtils.TruncateAt.MARQUEE);
             tvPopular.setSelected(true);
             ivPopular = itemView.findViewById(R.id.ivpopular);
+            tvPrice = itemView.findViewById(R.id.tvPrice);
             itemView.setOnClickListener(this);
         }
 
         public void bind(Items items) {
             tvPopular.setText(items.getTitle());
+            double prices = (items.getPricePerServing() / 10);
+            String pricesStr = String.format("%.2f", prices);
+            tvPrice.setText(pricesStr);
             int roundingRadius = 50;
             Glide.with(context).load(items.getImage()).placeholder(R.drawable.placeholder).transform(new RoundedCorners(roundingRadius)).into(ivPopular);
         }

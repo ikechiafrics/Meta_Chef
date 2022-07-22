@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.example.metachef.Interface.QuickAnswerListener;
 import com.example.metachef.Interface.RandomRecipeListener;
 import com.example.metachef.Interface.SearchRecipesListener;
 
@@ -89,6 +90,27 @@ public class RequestManager {
         });
     }
 
+    public void getQuickAnswer(QuickAnswerListener listener, String q){
+        QuickAnswerCall quickAnswerCall = retrofit.create(QuickAnswerCall.class);
+        Call<QuickAnswerResponse> call = quickAnswerCall.callQuickAnswer(q, "a0b47258ef634097812d0213ca6217ea");
+        //enqueue to make call asynchronously
+        call.enqueue(new Callback<QuickAnswerResponse>() {
+            @Override
+            public void onResponse(Call<QuickAnswerResponse> call, Response<QuickAnswerResponse> response) {
+                if (!response.isSuccessful()){
+                    listener.diderror(response.message());
+                    return;
+                }
+                listener.didfetch(response.body(), response.message());
+            }
+
+            @Override
+            public void onFailure(Call<QuickAnswerResponse> call, Throwable t) {
+                listener.diderror(t.getMessage());
+            }
+        });
+    }
+
     private interface RandomRecipesCall{
 //        Get Call
         @GET("recipes/random")
@@ -99,5 +121,11 @@ public class RequestManager {
 //        Get Call
         @GET("recipes/complexSearch")
         Call<SearchRecipesResponse> callSearchRecipes(@Query("query") String query,@Query("intolerances") List<String> intolerances, @Query("sort") List<String> sort, @Query("sortDirection") List<String> sortDirection, @Query("number") String number, @Query("apiKey") String apiKey);
+    }
+
+    private interface QuickAnswerCall{
+//        Get call
+        @GET("recipes/quickAnswer")
+        Call<QuickAnswerResponse> callQuickAnswer(@Query("q") String q, @Query("apiKey") String apiKey);
     }
 }

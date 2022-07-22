@@ -69,14 +69,14 @@
 
             <ImageView
                 android:id="@+id/plusBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/numberOrderTxt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/numberOrderTxt"
                 app:layout_constraintTop_toTopOf="@+id/numberOrderTxt"
-                app:srcCompat="@drawable/ic_outline_add_circle_outline_24" />
+                app:srcCompat="@drawable/btnplus" />
 
             <TextView
                 android:id="@+id/descriptionTxt"
@@ -104,14 +104,14 @@
 
             <ImageView
                 android:id="@+id/MinusBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_marginStart="20dp"
                 app:layout_constraintBottom_toBottomOf="@+id/numberOrderTxt"
                 app:layout_constraintEnd_toStartOf="@+id/numberOrderTxt"
                 app:layout_constraintStart_toEndOf="@+id/titleTxt"
                 app:layout_constraintTop_toTopOf="@+id/numberOrderTxt"
-                app:srcCompat="@drawable/ic_outline_do_disturb_on_24" />
+                app:srcCompat="@drawable/btnminus" />
 
             <Button
                 android:id="@+id/addToCartBtn"

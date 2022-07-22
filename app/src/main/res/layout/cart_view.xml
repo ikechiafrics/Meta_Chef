@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/btnRemove"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="5dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,8 +19,8 @@
 
     <ImageView
         android:id="@+id/ivItemPic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,31 +44,30 @@
 
     <ImageView
         android:id="@+id/btnPlusItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/tvCartNum"
+        app:layout_constraintEnd_toEndOf="@+id/ivItemPic"
         app:layout_constraintStart_toEndOf="@+id/tvCartNum"
         app:layout_constraintTop_toTopOf="@+id/tvCartNum"
-        app:srcCompat="@drawable/ic_outline_add_circle_outline_24" />
+        app:srcCompat="@drawable/btnplus" />
 
     <ImageView
         android:id="@+id/btnMinusItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         app:layout_constraintBottom_toBottomOf="@+id/tvCartNum"
         app:layout_constraintEnd_toStartOf="@+id/tvCartNum"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ivItemPic"
         app:layout_constraintTop_toTopOf="@+id/tvCartNum"
-        app:srcCompat="@drawable/ic_outline_do_disturb_on_24" />
+        app:srcCompat="@drawable/btnminus" />
 
     <TextView
         android:id="@+id/tvCartNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="2dp"
         android:text="TextView"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnPlusItem"
         app:layout_constraintStart_toEndOf="@+id/btnMinusItem"
@@ -80,6 +79,7 @@
         android:layout_height="wrap_content"
         android:text="$"
         android:textColor="#C0A131"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvfeeEachItem"
         app:layout_constraintEnd_toStartOf="@+id/tvfeeEachItem"
         app:layout_constraintTop_toTopOf="@+id/tvfeeEachItem" />
@@ -91,6 +91,7 @@
         android:layout_marginEnd="16dp"
         android:text="TextView"
         android:textColor="#C0A131"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvCartItem"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvCartItem" />
@@ -101,21 +102,23 @@
         android:layout_height="wrap_content"
         android:text="$"
         android:textColor="#000000"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tvTotalEachItem"
         app:layout_constraintEnd_toStartOf="@+id/tvTotalEachItem" />
 
     <TextView
         android:id="@+id/tvTotalEachItem"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="2"
         android:text="TextView"
         android:textColor="#000000"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/btnPlusItem"
         app:layout_constraintEnd_toEndOf="@+id/tvfeeEachItem"
-        app:layout_constraintTop_toBottomOf="@+id/tvfeeEachItem"
-        android:layout_width="wrap_content" />
+        app:layout_constraintTop_toBottomOf="@+id/tvfeeEachItem" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

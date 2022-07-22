@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -28,9 +30,16 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.example.metachef.Adapters.ComplexSearchAdapter;
+import com.example.metachef.Adapters.QuickAnswerAdapter;
 import com.example.metachef.FavouritesActivity;
+import com.example.metachef.Interface.QuickAnswerListener;
+import com.example.metachef.Interface.SearchRecipesListener;
 import com.example.metachef.LoginActivity;
+import com.example.metachef.QuickAnswerResponse;
 import com.example.metachef.R;
+import com.example.metachef.RequestManager;
+import com.example.metachef.SearchRecipesResponse;
 import com.example.metachef.model.User;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -45,8 +54,11 @@ public class ProfileFragment extends Fragment {
     public static final String KEY_IMAGE = "profile_picture";
     public final User user = (User) User.getCurrentUser();
     protected File photoFile;
+    private RequestManager manager;
     private ImageView ivProfileImg;
-    private EditText updatePassword;
+    private RecyclerView rvAnswer;
+    private EditText updatePassword, etQuickAnswer;
+    private ImageView btnAnswer;
     private Dialog dialog;
     String newPassword;
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
@@ -86,8 +98,18 @@ public class ProfileFragment extends Fragment {
         ImageView btnLogout = view.findViewById(R.id.BtnLogout);
         ivProfileImg = view.findViewById(R.id.ivProfileImg);
         updatePassword = dialog.findViewById(R.id.etUpdatePassword);
+        btnAnswer = view.findViewById(R.id.btnAnswer);
+        etQuickAnswer = view.findViewById(R.id.etQuickAnswer);
         ParseUser user = ParseUser.getCurrentUser();
 
+
+//        btnAnswer.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String Question = etQuickAnswer.getText().toString();
+//                manager.getQuickAnswer(quickAnswerListener, Question);
+//            }
+//        });
 
 
 //        set profile picture
@@ -230,4 +252,19 @@ public class ProfileFragment extends Fragment {
             });
         }
     }
+
+//    private final QuickAnswerListener quickAnswerListener = new QuickAnswerListener() {
+//        @Override
+//        public void didfetch(QuickAnswerResponse response, String message) {
+//
+//            rvAnswer.setLayoutManager(new LinearLayoutManager(getContext()));
+//            QuickAnswerAdapter adapter = new QuickAnswerAdapter(getContext(), response.);
+//            rvAnswer.setAdapter(adapter);
+//        }
+//
+//        @Override
+//        public void diderror(String message) {
+//
+//        }
+//    };
 }

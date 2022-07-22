@@ -34,6 +34,7 @@
                     android:text="Menu"
                     android:textColor="#000000"
                     android:textSize="44sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/tvPromotions"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,6 +57,7 @@
                     android:text="Promotions"
                     android:textColor="#000000"
                     android:textSize="30sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
                     app:layout_constraintStart_toStartOf="@+id/constraintLayout" />
 
@@ -66,6 +68,7 @@
                     android:text="Categories"
                     android:textColor="#000000"
                     android:textSize="30sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/tvMenu"
                     app:layout_constraintTop_toBottomOf="@+id/tvMenu" />
 
@@ -74,14 +77,14 @@
                     android:layout_width="346dp"
                     android:layout_height="150dp"
                     android:layout_marginStart="30dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="30dp"
-                    android:background="#F1F1F1"
                     android:orientation="horizontal"
+                    android:scrollbars="horizontal"
                     app:layout_constraintBottom_toTopOf="@+id/tvPromotions"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvCategories"
-                    android:scrollbars="horizontal">
+                    app:layout_constraintTop_toBottomOf="@+id/tvCategories">
 
                 </androidx.recyclerview.widget.RecyclerView>
 
@@ -128,6 +131,7 @@
                     android:text="Popular"
                     android:textColor="#000000"
                     android:textSize="30sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
@@ -135,12 +139,12 @@
                     android:id="@+id/rvPopular"
                     android:layout_width="362dp"
                     android:layout_height="200dp"
-                    android:background="#F1F1F1"
+                    android:layout_marginTop="5dp"
+                    android:scrollbars="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/rvItems"
                     app:layout_constraintStart_toStartOf="@+id/rvItems"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPopular"
-                    android:scrollbars="horizontal"/>
+                    app:layout_constraintTop_toBottomOf="@+id/tvPopular" />
 
                 <ImageButton
                     android:id="@+id/btnPrevious"

@@ -22,21 +22,11 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:textSize="14sp" />
 
-<!--    <ImageView-->
-<!--        android:id="@+id/btnSearch"-->
-<!--        android:layout_width="35dp"-->
-<!--        android:layout_height="35dp"-->
-<!--        android:layout_marginStart="5dp"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:src="@drawable/ic_baseline_search_24"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/etSearch2"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
     <ImageView
         android:id="@+id/btnFilter"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:src="@drawable/ic_baseline_filter_alt_24"
+        android:src="@drawable/btnfilter"
         app:layout_constraintBottom_toBottomOf="@+id/etSearch2"
         app:layout_constraintStart_toEndOf="@+id/etSearch2"
         app:layout_constraintTop_toTopOf="@+id/etSearch2" />
