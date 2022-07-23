@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
     private final List<String> tags = new ArrayList<>();
     private TextView[] mDots;
     private ImageButton btnNext;
-    private ImageView ivProfilePic;
+    private ImageView ivProfilePic, btnPopLike, btnOthersLike;
     private ImageButton btnPrevious;
     private int currentPage;
 

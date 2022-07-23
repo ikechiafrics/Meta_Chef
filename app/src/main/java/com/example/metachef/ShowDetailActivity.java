@@ -3,6 +3,7 @@ package com.example.metachef;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -65,7 +66,7 @@ public class ShowDetailActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                    btnLike.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                    btnLike.setImageResource(R.drawable.white_ic_baseline_favorite_border_24);
                     likeBy.remove(ParseUser.getCurrentUser().getObjectId());
                     food.setLikedBy(likeBy);
                 food.deleteInBackground();
@@ -84,13 +85,13 @@ public class ShowDetailActivity extends AppCompatActivity {
                         food.setTitle(items.getTitle());
                         ParseUser user = ParseUser.getCurrentUser();
                         food.setUser(user);
-                        btnLike.setImageResource(R.drawable.ic_baseline_favorite_24);
+                        btnLike.setImageResource(R.drawable.white_ic_baseline_favorite_24);
                         food.saveInBackground();
                     }
                     else{
                         likeBy.remove(ParseUser.getCurrentUser().getObjectId());
                         food.setLikedBy(likeBy);
-                        btnLike.setImageResource(R.drawable.ic_baseline_favorite_24);
+                        btnLike.setImageResource(R.drawable.white_ic_baseline_favorite_24);
                     }
                     return super.onDoubleTap(e);
                 }

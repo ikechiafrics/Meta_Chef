@@ -44,6 +44,7 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.io.File;
+import java.util.Objects;
 
 //This class represents the profile page
 public class ProfileFragment extends Fragment {
@@ -82,9 +83,6 @@ public class ProfileFragment extends Fragment {
         manager = new RequestManager(getContext());
         dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.custom_dialog);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-
-        }
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(false);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
@@ -94,6 +92,8 @@ public class ProfileFragment extends Fragment {
         Button btnFav = view.findViewById(R.id.btnFav);
         Button btnUpdatePassword = view.findViewById(R.id.btnUpdatePassword);
         ImageView btnLogout = view.findViewById(R.id.BtnLogout);
+
+
         ivProfileImg = view.findViewById(R.id.ivProfileImg);
         updatePassword = dialog.findViewById(R.id.etUpdatePassword);
         etQuickAnswer = view.requireViewById(R.id.etQuickAnswer);
@@ -107,7 +107,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String Question = etQuickAnswer.getText().toString();
-                Log.i("OnSuccess", "This is the question" + Question);
                 manager.getQuickAnswer(quickAnswerListener, Question);
             }
         });
@@ -226,7 +225,6 @@ public class ProfileFragment extends Fragment {
                 // RESIZE BITMAP, see section below
                 // Load the taken image into a preview
                 Glide.with(getContext()).load(takenImage).circleCrop().into(ivProfileImg);
-//                profileImage.setImageBitmap(takenImage);
                 user.setImage(new ParseFile(photoFile));
                 user.saveInBackground();
             } else { // Result was a failure
@@ -259,6 +257,9 @@ public class ProfileFragment extends Fragment {
         public void didfetch(QuickAnswerResponse response, String message) {
             int roundingRadius = 40;
             tvAnswer.setText(response.answer);
+            if(response.image == null){
+                Toast.makeText(getContext(), "The answer cannot be found", Toast.LENGTH_SHORT).show();
+            }
             Glide.with(getContext()).load(response.image).transform(new RoundedCorners(roundingRadius)).into(ivAnswer);
         }
         @Override
