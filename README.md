@@ -1,29 +1,39 @@
 # Meta_Chef
+
 Description
+
 A food delivery app.
 Find Food delivery on your budget.
 Hungry? Find the food you crave and order from the restaurant easily with this app. Track your food in real time. Get your food delivered using this app.
 
 App Evaluation
 
-[Evaluation of your app across the following attributes]
-
 - Category:Food & Drinks
 - Habit: User get's rewarded discounts or coupons from time to time as the app is frequently being used.
+
+API - Spoonacular Api (https://spoonacular.com/food-api)
+
+Endpoints used 
+Get Random Recipes - Gets random recipes from the Api to display food items on the home page
+Search Recipes - Search through hundreds of thousands of recipes using advanced filtering and ranking.
+Quick Answer - Search through hundreds of thousands of recipes using advanced filtering and ranking.
+
+External Libraries
+Google Materials
+Glide Images
 
 1. User (Required and Optional)
 
 Required Must-have Stories
 
-- User can login
-- User can create a new account
-- User can view a food and drink items
-- User can explore the variety of food
-- User can view their profile information
-- User can like/favorite food
-- User can search for their food choice
+- User can login.
+- User can create a new account.
+- User can view a food and drink items.
+- User can explore the variety of food.
+- User can like/favorite food.
+- User can search for their food choice.
+- User can change profile picture.
 - User can filter out their searches.
-- User can see their profile page with their profile picture
 
 …
 2. Screen Archetypes
@@ -42,7 +52,7 @@ Required Must-have Stories
 - Profile Page
  * User can view their profile information
  * See the items liked/favorited
- * add/remove items in the cart
+ * A quick answer feature, which the user can ask a nutrition question.
 …
 
 3. Navigation
@@ -50,23 +60,30 @@ Required Must-have Stories
 Tab Navigation (Tab to Screen)
 - Home Tab
 - Search
-- cart
+- Cart
+- Profile
 Flow Navigation (Screen to Screen)
 - Login Screen
  => Home
 - Registration Screen
  => Home
 - Home Screen 
- => Profile Screen from a user's post 
+ => Details page to view the food details
 - Search Screen
- => Another screen to show posts related to the game selected
-- Creation Screen
- => Home (after you finish posting the photo)
-- Search Screen
- => Profile Screen of the user searched
-- Menu Item nav
- => user's profile
- => settings screen
+ => Details Screen to view the food details
+ - Search Screen
+ => Filter Bottom sheet to select the filter options on your search
+- Profile Screen
+ => Favourites screen to view the food items liked
+ - Profile Screen
+ => Update Password dialog to change the users password
+ 
+ …
+4. Animations
+A password shaking animation(This is triggered when the user enters an incorrect password).
+A fragment to fragment slide animation.
+A sliding transsition of texts in the home page.
+ 
 
 
 <img src="https://github.com/ikechiafrics/Meta_project/blob/main/Login%20Page.png" width=500><br> 
