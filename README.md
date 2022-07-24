@@ -13,7 +13,7 @@ App Evaluation
 
 API - Spoonacular Api (https://spoonacular.com/food-api)
 
-Endpoints used 
+Endpoints
 
 - Get Random Recipes - Gets random recipes from the Api to display food items on the home page
 - Search Recipes - Search through hundreds of thousands of recipes using advanced filtering and ranking.
