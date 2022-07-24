@@ -15,16 +15,16 @@ API - Spoonacular Api (https://spoonacular.com/food-api)
 
 Endpoints used 
 
-Get Random Recipes - Gets random recipes from the Api to display food items on the home page
-Search Recipes - Search through hundreds of thousands of recipes using advanced filtering and ranking.
-Quick Answer - Search through hundreds of thousands of recipes using advanced filtering and ranking.
+- Get Random Recipes - Gets random recipes from the Api to display food items on the home page
+- Search Recipes - Search through hundreds of thousands of recipes using advanced filtering and ranking.
+- Quick Answer - Search through hundreds of thousands of recipes using advanced filtering and ranking.
 
 External Libraries
 
-Google Materials
-Glide Images
+- Google Materials
+- Glide Images
 
-1. User (Required and Optional)
+1. User
 
 Required Must-have Stories
 
@@ -37,7 +37,7 @@ Required Must-have Stories
 - User can change profile picture.
 - User can filter out their searches.
 
-…
+
 2. Screen Archetypes
 
 [list first screen here]
@@ -80,7 +80,6 @@ Flow Navigation (Screen to Screen)
  - Profile Screen
  => Update Password dialog to change the users password
  
- …
 4. Animations
 A password shaking animation(This is triggered when the user enters an incorrect password).
 A fragment to fragment slide animation.
