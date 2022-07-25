@@ -36,7 +36,7 @@
                 android:id="@+id/btnUpdatePassword"
                 android:layout_width="318dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="46dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="50dp"
                 android:backgroundTint="#FFFFFF"
                 android:text="Update Password"
@@ -46,7 +46,7 @@
                 android:id="@+id/btnFav"
                 android:layout_width="318dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="46dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="65dp"
                 android:backgroundTint="#FFFFFF"
@@ -56,7 +56,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
+                android:layout_gravity="center_horizontal"
                 android:orientation="horizontal">
 
                 <EditText
@@ -80,6 +80,7 @@
                 android:id="@+id/ivAnswer"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
