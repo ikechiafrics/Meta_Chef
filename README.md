@@ -6,8 +6,6 @@ A food delivery app.
 Find Food delivery on your budget.
 Hungry? Find the food you crave and order from the restaurant easily with this app. Track your food in real time. Get your food delivered using this app.
 
-click this link to see demo - https://pxl.cl/28TlQ
-
 App Evaluation
 
 - Category:Food & Drinks
